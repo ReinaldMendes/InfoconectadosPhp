@@ -21,7 +21,7 @@
         <a href="index.php" class="navbar-brand">
         <img src="img/logo.png" class="img-fluid small-image" alt="Logo Infoconectados">
       
-        <strong> Infoconectados</strong>
+        <strong> Infoconectados.</strong>
         </a>
         <nav>
             <a href="#"class="text-white navbar-brand">login</a>
