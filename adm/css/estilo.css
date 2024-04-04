@@ -1,0 +1,15 @@
+.social{
+    position: relative;
+    float:right;
+    list-style-type: none;
+}
+.social li{
+    float: left;
+    margin-left: 25px;
+}
+.social a{
+    height: 32px;
+    width: 32px;
+    display: block;
+    text-indent: -9999px;
+}
