@@ -13,6 +13,11 @@
     float:right;
     list-style-type: none;
 }
+h4{
+
+    text-align: right; /* Centraliza o conteúdo na horizontal */
+  
+}
 
 </style>
 <div class="container">
@@ -32,7 +37,7 @@
         </ul>
       </div>
        <div class="col-12 col-md-7 text-left text-md-left">
-        <p class="mb-0">&copy; Design: <a href="index.php" class="text-white">Infoconectados</a></p>
+        <h4 class="mb-0">&copy; Design: <a href="index.php" class="text-white">Infoconectados</a></h4>
       </div>
     </div>
   </footer>
