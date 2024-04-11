@@ -25,7 +25,7 @@
         <strong> Infoconectados</strong>
         </a>
         <nav>
-            <a href="#"class="text-white navbar-brand">login</a>
+            <a href="login.php"class="text-white navbar-brand">login</a>
         </nav>
         </div>
         </div>

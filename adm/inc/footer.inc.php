@@ -3,6 +3,7 @@
     max-width: 50px; /* Alterado para um tamanho mais adequado */
     height: auto; /* Mantenha a proporção da imagem */
     margin-right: 10px; /* Adicionado um espaçamento entre a imagem e as redes sociais */
+    padding: auto;
   }
   .social li {
     display: inline;
@@ -13,9 +14,9 @@
     float:right;
     list-style-type: none;
 }
-h4{
+.h7{
 
-    text-align: right; /* Centraliza o conteúdo na horizontal */
+    text-align: left; /* Centraliza o conteúdo na horizontal */
   
 }
 
@@ -37,7 +38,7 @@ h4{
         </ul>
       </div>
        <div class="col-12 col-md-7 text-left text-md-left">
-        <h4 class="mb-0">&copy; Design: <a href="index.php" class="text-white">Infoconectados</a></h4>
+        <h7 class="mb-0">&copy; Design: <a href="index.php" class="text-white">Infoconectados</a></h7>
       </div>
     </div>
   </footer>
