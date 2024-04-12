@@ -15,7 +15,7 @@ if(!empty($_POST['email'])){
     $foto = $_POST['foto'];
 
     $contato->adicionar($email, $nome, $telefone, $cidade, $rua, $numero, $bairro, $cep, $profissao, $foto);
-    header('Location: index.php');
+    header('Location: cadastroTela.php');
 
 }else{
     echo '<script type= "text/javascript">alert("Email já cadastrado!!");</script>';

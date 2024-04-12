@@ -19,10 +19,15 @@
     text-align: left; /* Centraliza o conteúdo na horizontal */
   
 }
+footer{
+  position: relative;
+  clear:both;
+}
+
 
 </style>
 <div class="container">
-  <footer id="footer" class="py-3 mt-5 bg-dark text-white">
+  <footer id="footer" class="py-3 mt-5 bg-dark text-white" clear>
     <div class="row">
       <div class="col-12 col-md-6">
         <img src="img/logo.png" class="img-fluid small-image" alt="Logo Infoconectados">
