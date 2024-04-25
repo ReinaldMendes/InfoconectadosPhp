@@ -1,20 +1,18 @@
 <?php
 
 include 'classes/contatos.class.php';
-$contato = new Contatos();
+$contato = new Contatos(); //idUsuario	nome	email	senha	detalhesDoPerfil	cpf	Data_Nasc	telefone
 if(!empty($_POST['email'])){
     $nome = $_POST['nome'];
     $email = $_POST['email'];
-    $telefone = $_POST['telefone'];
-    $cidade = $_POST['cidade'];
-    $rua = $_POST['rua'];
-    $numero = $_POST['numero'];
-    $bairro = $_POST['bairro'];
-    $cep= $_POST['cep'];
-    $profissao = $_POST['profissao'];
-    $foto = $_POST['foto'];
+    $senha = $_POST['senha'];
+    $detalhesDoPerfil = $_POST['detalhesDoPerfil'];
+    $cpf = $_POST['cpf'];
+    $Data_Nasc = $_POST['Data_Nasc'];
+    $telefone= $_POST['telefone'];
 
-    $contato->adicionar($email, $nome, $telefone, $cidade, $rua, $numero, $bairro, $cep, $profissao, $foto);
+
+    $contato->adicionar($email, $nome, $senha, $detalhesDoPerfil, $cpf, $Data_Nasc, $telefone);
     header('Location: cadastroTela.php');
 
 }else{

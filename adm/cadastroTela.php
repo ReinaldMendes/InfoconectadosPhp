@@ -23,18 +23,15 @@ include 'inc/header.inc.php';
 <button> <a href = "adicionarContato.php"> Adicionar </a></button>
 <br><br>
 <table border ="2" width = 100% > 
-    <tr>
-      <th>ID </th>
+    <tr>//idUsuario	nome	email	senha	detalhesDoPerfil	cpf	Data_Nasc	telefone
+      <th>IDUsuario </th>
       <th>NOME </th>
       <th>EMAIL </th>
+      <th>SENHA </th>
+      <th>DETALHESDOPERFIL </th>
+      <th>CPF </th>
+      <th>DATA_NASC</th>
       <th>TELEFONE </th>
-      <th>CIDADE </th>
-      <th>RUA </th>
-      <th>NÚMERO </th>
-      <th>BAIRRO </th>
-      <th>CEP </th>
-      <th>PROFISSÃO </th>
-      <th>FOTO </th>
       <th>AÇÕES </th>
     </tr>
     <?php
@@ -43,20 +40,18 @@ include 'inc/header.inc.php';
     ?>
     <tbody>
         <tr>
-            <td><?php echo $item['id']; ?> </td>
+            <td><?php echo $item['idUsuario']; ?> </td>
             <td><?php echo $item['nome']; ?> </td>
             <td><?php echo $item['email']; ?> </td>
+            <td><?php echo $item['senha']; ?> </td>
+            <td><?php echo $item['detalhesDoPerfil']; ?> </td>
+            <td><?php echo $item['cpf']; ?> </td>
+            <td><?php echo $item['Data_Nasc']; ?> </td>
             <td><?php echo $item['telefone']; ?> </td>
-            <td><?php echo $item['cidade']; ?> </td>
-            <td><?php echo $item['rua']; ?> </td>
-            <td><?php echo $item['numero']; ?> </td>
-            <td><?php echo $item['bairro']; ?> </td>
-            <td><?php echo $item['cep']; ?> </td>
-            <td><?php echo $item['profissao']; ?> </td>
-            <td><?php echo $item['foto']; ?> </td>
+      
             <td>
-            <a href="editarContato.php?id=<?php echo $item ['id'];?>">EDITAR</a>
-                <a href="excluirContato.php?id=<?php echo $item ['id'];?>"onclick="return confirm('Tem certeza que quer excluir este contato?')">|EXCLUIR</a>
+            <a href="editarContato.php?idUsuario=<?php echo $item ['idUsuario'];?>">EDITAR</a>
+                <a href="excluirContato.php?idUsuario=<?php echo $item ['idUsuario'];?>"onclick="return confirm('Tem certeza que quer excluir este contato?')">|EXCLUIR</a>
         </tr>
     </tbody>
     <?php

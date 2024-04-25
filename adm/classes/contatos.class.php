@@ -1,18 +1,16 @@
 <?php
 require 'conexao.class.php';  //para poder usar a classe conexao pelo banco de dados
 class Contatos {
-
-    private $id;
+//idUsuario	nome	email	senha	detalhesDoPerfil	cpf	Data_Nasc	telefone	
+    private $idUsuario;
     private $nome ;
     private $email; 
-	private $telefone; 
-	private	$cidade; 
-	private	$rua; 
-	private $numero;
-	private	$bairro;
-	private	$cep; 
-	private	$profissao; 
-	private $foto;
+	private $senha; 
+	private	$detalhesDoPerfil; 
+	private	$cpf; 
+	private $Data_Nasc;
+	private	$telefone;
+
 
     private $con;
 
@@ -22,7 +20,7 @@ class Contatos {
     
     //vamos fazer uma validação pelo email, que é um atributo único, assim evitamos que haja duplicidade no cadastro de usuário
     private function existeEmail($email){
-        $sql = $this->con->conectar()->prepare("SELECT id FROM contatos WHERE email = :email");
+        $sql = $this->con->conectar()->prepare("SELECT idUsuario FROM usuario WHERE email = :email");
         $sql->bindParam(':email', $email, PDO::PARAM_STR);
         $sql->execute();
 
@@ -33,33 +31,29 @@ class Contatos {
             $array = array();
         }
         return $array;
-    }  
-    public function adicionar($email, $nome, $telefone, $cidade, $rua, $numero, $bairro, $cep, $profissao, $foto){
+    }  //idUsuario	nome	email	senha	detalhesDoPerfil	cpf	Data_Nasc	telefone
+    public function adicionar($email, $nome, $senha, $detalhesDoPerfil, $cpf, $Data_Nasc, $telefone){
         $emailExistente = $this->existeEmail($email);
         if(count($emailExistente) == 0){
             try{
                 $this->nome = $nome;
                 $this->email = $email;
+                $this->senha = $senha;
+                $this->detalhesDoPerfil = $detalhesDoPerfil;
+                $this->cpf = $cpf;
+                $this->Data_Nasc = $Data_Nasc;
                 $this->telefone = $telefone;
-                $this->cidade = $cidade;
-                $this->rua = $rua;
-                $this->numero = $numero;
-                $this->bairro = $bairro;
-                $this->cep = $cep;
-                $this->profissao = $profissao;
-                $this->foto = $foto;
-                $sql = $this->con->conectar()->prepare("INSERT INTO contatos(nome, email, telefone, cidade, rua, numero, bairro, cep, profissao, foto)
-                    VALUES(:nome, :email, :telefone, :cidade, :rua, :numero, :bairro, :cep, :profissao, :foto)");
+                
+                $sql = $this->con->conectar()->prepare("INSERT INTO usuario(nome, email, senha, detalhesDoPerfil, cpf, Data_Nasc, telefone)
+                    VALUES(:nome, :email, :senha, :detalhesDoPerfil, :cpf, :Data_Nasc, :telefone)");
                     $sql->bindParam(":nome", $this->nome, PDO::PARAM_STR);
                     $sql->bindParam(":email", $this->email, PDO::PARAM_STR);
+                    $sql->bindParam(":senha", $this->senha, PDO::PARAM_STR);
+                    $sql->bindParam(":detalhesDoPerfil", $this->detalhesDoPerfil, PDO::PARAM_STR);
+                    $sql->bindParam(":cpf", $this->cpf, PDO::PARAM_STR);
+                    $sql->bindParam(":Data_Nasc", $this->Data_Nasc, PDO::PARAM_STR);
                     $sql->bindParam(":telefone", $this->telefone, PDO::PARAM_STR);
-                    $sql->bindParam(":cidade", $this->cidade, PDO::PARAM_STR);
-                    $sql->bindParam(":rua", $this->rua, PDO::PARAM_STR);
-                    $sql->bindParam(":numero", $this->numero, PDO::PARAM_STR);
-                    $sql->bindParam(":bairro", $this->bairro, PDO::PARAM_STR);
-                    $sql->bindParam(":cep", $this->cep, PDO::PARAM_STR);
-                    $sql->bindParam(":profissao", $this->profissao, PDO::PARAM_STR);
-                    $sql->bindParam(":foto", $this->foto, PDO::PARAM_STR);
+                   
 
                     $sql->execute();
                 return TRUE;
@@ -75,8 +69,8 @@ class Contatos {
 
     }  
     public function listar(){
-        try{
-            $sql = $this->con->conectar()->prepare("SELECT id, nome, email, telefone, cidade, rua, numero, bairro, cep, profissao, foto FROM contatos");
+        try{ //idUsuario	nome	email	senha	detalhesDoPerfil	cpf	Data_Nasc	telefone
+            $sql = $this->con->conectar()->prepare("SELECT idUsuario, nome, email, senha, detalhesDoPerfil, cpf, Data_Nasc, telefone FROM usuario");
             $sql->execute(); 
             return $sql->fetchAll();           
 
@@ -84,12 +78,12 @@ class Contatos {
             return 'ERRO: '.$ex->getMessage();
         }
     }
-    public function buscar ($id){
+    public function buscar ($idUsuario){
         try{
-            $sql = $this->con->conectar()->prepare("SELECT * FROM contatos WHERE id = :id");
-            $sql->bindValue(':id',$id);
+            $sql = $this->con->conectar()->prepare("SELECT * FROM usuario WHERE idUsuario = :idUsuario");
+            $sql->bindValue(':idUsuario',$idUsuario);
             $sql->execute(); 
-            if($sql->rowCount()>0){
+            if($sql->rowCount()>=0){
                 return $sql->fetch(); 
             }else{
                 return array();
@@ -98,27 +92,23 @@ class Contatos {
         }catch(PDOException $ex){
             echo"ERRO";
         }
-    }
-    public function editar( $nome,$email, $telefone, $cidade, $rua, $numero, $bairro, $cep, $profissao, $foto,$id){
+    }//idUsuario	nome	email	senha	detalhesDoPerfil	cpf	Data_Nasc	telefone
+    public function editar( $nome,$email, $senha, $detalhesDoPerfil, $cpf, $Data_Nasc, $telefone,$idUsuario){
         $emailExistente = $this->existeEmail($email);
-        if(count ($emailExistente )> 0 && $emailExistente['id']!=$id){
+        if(count ($emailExistente )> 0 && $emailExistente['idUsuario']!=$idUsuario){
             return FALSE;
         }else{
-            try{
-                $sql = $this->con->conectar()->prepare("UPDATE contatos SET nome = :nome, email= :email, telefone = :telefone, 
-                cidade = :cidade, rua = :rua, numero= :numero, bairro = :bairro, cep = :cep,
-                profissao = :profissao, foto = :foto WHERE id = :id ");
+            try{//idUsuario	nome	email	senha	detalhesDoPerfil	cpf	Data_Nasc	telefone
+                $sql = $this->con->conectar()->prepare("UPDATE usuario SET nome = :nome, email= :email, senha = :senha, 
+                detalhesDoPerfil = :detalhesDoPerfil, cpf = :cpf, Data_Nasc= :Data_Nasc, telefone = :telefone WHERE idUsuario = :idUsuario ");
                 $sql->bindValue(':nome', $nome); 
                 $sql->bindValue(':email', $email); 
+                $sql->bindValue(':senha', $senha); 
+                $sql->bindValue(':detalhesDoPerfil', $detalhesDoPerfil); 
+                $sql->bindValue(':cpf', $cpf); 
+                $sql->bindValue(':Data_Nasc', $Data_Nasc); 
                 $sql->bindValue(':telefone', $telefone); 
-                $sql->bindValue(':cidade', $cidade); 
-                $sql->bindValue(':rua', $rua); 
-                $sql->bindValue(':numero', $numero); 
-                $sql->bindValue(':bairro', $bairro); 
-                $sql->bindValue(':cep', $cep); 
-                $sql->bindValue(':profissao', $profissao); 
-                $sql->bindValue(':foto', $foto); 
-                $sql->bindValue(':id', $id); 
+                $sql->bindValue(':idUsuario', $idUsuario); 
                 $sql->execute();
                 return TRUE;           
     
@@ -128,9 +118,9 @@ class Contatos {
         }
 
     }
-    public function excluir($id){
-        $sql = $this->con->conectar()->prepare("DELETE FROM contatos WHERE id = :id");
-        $sql->bindValue(':id', $id);
+    public function excluir($idUsuario){
+        $sql = $this->con->conectar()->prepare("DELETE FROM usuario WHERE idUsuario = :idUsuario");
+        $sql->bindValue(':idUsuario', $idUsuario);
         $sql->execute();
 
     }

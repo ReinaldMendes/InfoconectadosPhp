@@ -25,30 +25,24 @@ include 'inc/header.inc.php';
   .container-fluid {
     padding-top: 50px; /* Ajuste para afastar o conteúdo do topo, para que não fique escondido pela imagem de fundo */
   }
-</style>
+</style> //idUsuario	nome	email	senha	detalhesDoPerfil	cpf	Data_Nasc	telefone
 <h1>Cadastrar Usuario</h1>
  <form method="POST" action="adicionarContatoSubmit.php">
     Nome: <br>
     <input type="text" name="nome"/><br><br>
     Email: <br>
     <input type="text" name="email"/><br><br>
-    Telefone: <br>
+    senha: <br>
+    <input type="text" name="senha"/><br><br>
+    detalhesDoPerfil: <br>
+    <input type="text" name="detalhesDoPerfil"/><br><br>
+    cpf: <br>
+    <input type="text" name="cpf"/><br><br>
+    Data_Nasc: <br>
+    <input type="text" name="Data_Nasc"/><br><br>
+    telefone: <br>
     <input type="text" name="telefone"/><br><br>
-    Cidade: <br>
-    <input type="text" name="cidade"/><br><br>
-    Rua: <br>
-    <input type="text" name="rua"/><br><br>
-    Número: <br>
-    <input type="text" name="numero"/><br><br>
-    Bairro: <br>
-    <input type="text" name="bairro"/><br><br>
-    Cep: <br>
-    <input type="text" name="cep"/><br><br>
-    Profissão: <br>
-    <input type="text" name="profissao"/><br><br>
-    Foto: <br>
-    <input type="text" name="foto"/><br><br>
-   
+    
     <input type="submit" name="btCadastrar" value="ADICIONAR"/>
  </form>
  

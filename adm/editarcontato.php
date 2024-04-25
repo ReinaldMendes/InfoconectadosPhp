@@ -2,15 +2,15 @@
     include 'classes/contatos.class.php';
     $contato = new Contatos();
 
-    if(!empty($_GET['id'])){
-        $id = $_GET['id'];
-        $info = $contato->buscar($id);
+    if(!empty($_GET['idUsuario'])){
+        $id = $_GET['idUsuario'];
+        $info = $contato->buscar($idUsuario);
         if(empty($info['email'])){
-            header("Location: /infoconectadosPhp");
+            header("Location: /adm/index.php");
             exit;
         }
     }else{
-        header("Location: /infoconectadorPhp");
+        header("Location: /adm/index.php");
             exit;
     }
 ?>
@@ -42,27 +42,21 @@ include 'inc/header.inc.php';
   </style>
 <h1>EDITAR CONTATO</h1>
  <form method="POST" action="editarContatoSubmit.php">
-    <input type ="hidden" name="id" value="<?php echo $info ['id']?>">
+    <input type ="hidden" name="idUsuario" value="<?php echo $info ['idUsuario']?>">
     Nome: <br>
     <input type="text" name="nome" value="<?php echo $info ['nome']?>"/><br><br>
     Email: <br>
     <input type="text" name="email" value="<?php echo $info ['email']?>"/><br><br>
+    Senha: <br>
+    <input type="text" name="telefone" value="<?php echo $info ['senha']?>"/><br><br>
+    DetalhesDoPerfil: <br>
+    <input type="text" name="cidade" value="<?php echo $info ['detalhesDoPerfil']?>"/><br><br>
+    Cpf: <br>
+    <input type="text" name="rua" value="<?php echo $info ['cpf']?>"/><br><br>
+    Data_Nasc: <br>
+    <input type="text" name="numero" value="<?php echo $info ['Data_Nasc']?>"/><br><br>
     Telefone: <br>
-    <input type="text" name="telefone" value="<?php echo $info ['telefone']?>"/><br><br>
-    Cidade: <br>
-    <input type="text" name="cidade" value="<?php echo $info ['cidade']?>"/><br><br>
-    Rua: <br>
-    <input type="text" name="rua" value="<?php echo $info ['rua']?>"/><br><br>
-    Número: <br>
-    <input type="text" name="numero" value="<?php echo $info ['numero']?>"/><br><br>
-    Bairro: <br>
-    <input type="text" name="bairro" value="<?php echo $info ['bairro']?>"/><br><br>
-    Cep: <br>
-    <input type="text" name="cep" value="<?php echo $info ['cep']?>"/><br><br>
-    Profissão: <br>
-    <input type="text" name="profissao" value="<?php echo $info ['profissao']?>"/><br><br>
-    Foto: <br>
-    <input type="text" name="foto" value="<?php echo $info ['foto']?>"/><br><br>
+    <input type="text" name="bairro" value="<?php echo $info ['telefone']?>"/><br><br>
    
     <input type="submit" name="btCadastrar" value="SALVAR"/>
  </form>
