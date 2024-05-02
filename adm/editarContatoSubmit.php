@@ -6,10 +6,10 @@ if(!empty($_POST['idUsuario'])){
     $email = $_POST['email'];
     $senha = $_POST['senha'];
     $detalhesDoPerfil = $_POST['detalhesDoPerfil'];
-    $rua = $_POST['cpf'];
+    $cpf = $_POST['cpf'];
     $numero = $_POST['Data_Nasc'];
-    $bairro = $_POST['telefone'];
-    $id = $_POST['idUsuario'];
+    $telefone = $_POST['telefone'];
+    $idUsuario = $_POST['idUsuario'];
     if(!empty($email)){
         $contato->editar( $nome, $email, $senha, $detalhesDoPerfil, $cpf, $Data_Nasc, $telefone, $idUsuario);
     }
@@ -19,3 +19,5 @@ if(!empty($_POST['idUsuario'])){
 }
 
 ?>
+
+ 

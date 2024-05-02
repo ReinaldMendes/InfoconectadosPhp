@@ -3,7 +3,7 @@ include 'classes/contatos.class.php';
 $contato = new Contatos();
 
 if(!empty($_GET['idUsuario'])){
-    $id = $_GET['idUsuario'];
+    $idUsuario = $_GET['idUsuario'];
     $contato->excluir($idUsuario);
     header("Location: cadastroTela.php");
 }else{

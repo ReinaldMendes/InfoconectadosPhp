@@ -1,7 +1,7 @@
 <?php
 
 include 'classes/contatos.class.php';
-$contato = new Contatos(); //idUsuario	nome	email	senha	detalhesDoPerfil	cpf	Data_Nasc	telefone
+$contato = new Contatos(); 
 if(!empty($_POST['email'])){
     $nome = $_POST['nome'];
     $email = $_POST['email'];

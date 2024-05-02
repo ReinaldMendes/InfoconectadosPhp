@@ -1,17 +1,8 @@
-
-
 <?php
 include 'inc/header.inc.php';
 ?>
 <style>
-  body {
-    background-color: #ccc;
-    background-image: url('img/logo.png'); /* substitua 'caminho/para/sua/imagem.jpg' pelo caminho correto para sua imagem */
-    background-size: small; /* garante que a imagem cubra todo o fundo */
-    background-position: center; /* centraliza a imagem no fundo */
-    background-repeat: no-repeat; /* evita repetição da imagem */
-    color: white; /* define a cor do texto como branca para melhor legibilidade */
-  }
+ 
 
   h1 {
     text-align: center; /* Centraliza o conteúdo na horizontal */
@@ -25,27 +16,54 @@ include 'inc/header.inc.php';
   .container-fluid {
     padding-top: 50px; /* Ajuste para afastar o conteúdo do topo, para que não fique escondido pela imagem de fundo */
   }
-</style> //idUsuario	nome	email	senha	detalhesDoPerfil	cpf	Data_Nasc	telefone
-<h1>Cadastrar Usuario</h1>
- <form method="POST" action="adicionarContatoSubmit.php">
-    Nome: <br>
-    <input type="text" name="nome"/><br><br>
-    Email: <br>
-    <input type="text" name="email"/><br><br>
-    senha: <br>
-    <input type="text" name="senha"/><br><br>
-    detalhesDoPerfil: <br>
-    <input type="text" name="detalhesDoPerfil"/><br><br>
-    cpf: <br>
-    <input type="text" name="cpf"/><br><br>
-    Data_Nasc: <br>
-    <input type="text" name="Data_Nasc"/><br><br>
-    telefone: <br>
-    <input type="text" name="telefone"/><br><br>
-    
-    <input type="submit" name="btCadastrar" value="ADICIONAR"/>
- </form>
- 
- <?php
+</style> 
+<br> <br>
+<form method="POST" action="adicionarContatoSubmit.php">
+  <div class="form-group row">
+    <label for="nome" class="col-sm-2 col-form-label"><h4>Nome: </h4></label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="nome" placeholder="Nome">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="email" class="col-sm-2 col-form-label"><h4>Email: </h4></label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" name="email" placeholder="Email">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="senha" class="col-sm-2 col-form-label"><h4>Senha: </h4></label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" name="senha" placeholder="Digite uma senha">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label"><h4>Detalhes do Perfil:</h4></label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="detalhesDoPerfil" placeholder="Detalhes do Perfil">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="cpf" class="col-sm-2 col-form-label"><h4>Cpf: </h4></label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="cpf" placeholder="Cpf">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="data_nasc" class="col-sm-2 col-form-label"><h4>Data de Nascimento: </h4></label>
+    <div class="col-sm-10">
+      <input type="date" class="form-control" name="Data_Nasc" placeholder="Data Nascimento">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="telefone" class="col-sm-2 col-form-label"><h4>Telefone: </h4></label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="telefone" placeholder="Telefone">
+    </div>
+    <button type="submit" class="btn btn-primary" name="btCadastrar" value = "Adicionar">Adicionar</button>
+   
+  </div>
+</form>
+<?php
 include 'inc/footer.inc.php';
 ?>

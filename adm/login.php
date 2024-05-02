@@ -19,13 +19,11 @@ body {
     <h1> SEJA BEM VINDO A PARTE ADMINISTRATIVA </h1>
     <h1> ESCOLHA UMA DAS OPÇÕES </h1>
 </div>
-    <button><a href="adicionarContato.php">Cadastrar Usuário</a></button>
-    <button><a href="cadastroTela.php">Editar Usuario</a></button>
-  <ul>
-  <li><a href="#">Gestão de Área</a> </li>
-  <li><a href="#">Gestão de Sub-Área</a> </li>
-  <li><a href="#">Gestão de Usuário</a> </li>
-  <li><a href="#">Gestão de Conteúdos</a> </li>
+<ul>
+    <li> <button><a href="cadastroTela.php">Gestão de Usuário</a></button> </li>
+    <li> <button><a href="#">Gestão de Área</a> </button></li>
+    <li><button> <a href="#">Gestão de Sub-Área</a> </button></li>
+    <li><button><a href="#">Gestão de Conteúdos</a> </button></li>
   </ul>
     
   </div>
