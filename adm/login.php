@@ -20,7 +20,7 @@ body {
     <h1> ESCOLHA UMA DAS OPÇÕES </h1>
 </div>
 <ul>
-    <li> <button><a href="cadastroTela.php">Gestão de Usuário</a></button> </li>
+    <li> <button><a href="gestaoUsuario.php">Gestão de Usuário</a></button> </li>
     <li> <button><a href="#">Gestão de Área</a> </button></li>
     <li><button> <a href="#">Gestão de Sub-Área</a> </button></li>
     <li><button><a href="#">Gestão de Conteúdos</a> </button></li>

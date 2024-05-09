@@ -13,7 +13,7 @@ if(!empty($_POST['email'])){
 
 
     $contato->adicionar($email, $nome, $senha, $detalhesDoPerfil, $cpf, $Data_Nasc, $telefone);
-    header('Location: cadastroTela.php');
+    header('Location: gestaoUsuario.php');
 
 }else{
     echo '<script type= "text/javascript">alert("Email já cadastrado!!");</script>';
