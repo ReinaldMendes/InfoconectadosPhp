@@ -49,8 +49,8 @@ class Cliente {
                 
                 
                             //idCliente	nome	sobrenome	data_nasc	endereco	qualServicoNecessita	telefone	email	senha
-                $sql = $this->con->conectar()->prepare("INSERT INTO cliente (nome,sobrenome,data_nasc, endereco, qualServicoNecessita,telefone, email, senha)
-                    VALUES(:nome, :sobrenome, :data_nasc,:qualServicoPrecisa, :endereco, :telefone, :email, :senha)");
+                $sql = $this->con->conectar()->prepare("INSERT INTO cliente (nome, sobrenome, data_nasc, endereco, qualServicoNecessita, telefone, email, senha)
+                    VALUES(:nome, :sobrenome, :data_nasc, :qualServicoNecessita, :endereco, :telefone, :email, :senha)");
                     $sql->bindParam(":nome", $this->nome, PDO::PARAM_STR);
                     $sql->bindParam(":sobrenome", $this->sobrenome, PDO::PARAM_STR);
                     $sql->bindParam(":data_nasc", $this->data_nasc, PDO::PARAM_STR);
@@ -76,7 +76,7 @@ class Cliente {
     }  
     public function listar(){
         try{ //idUsuario	nome	email	senha	detalhesDoPerfil	cpf	Data_Nasc	telefone
-            $sql = $this->con->conectar()->prepare("SELECT idCliente, nome, sobrenome, data_nasc, qualServicoNecessita,endereco, telefone, email, senha FROM cliente");
+            $sql = $this->con->conectar()->prepare("SELECT idCliente, nome, sobrenome, data_nasc, qualServicoNecessita, endereco, telefone, email, senha FROM cliente");
             $sql->execute(); 
             return $sql->fetchAll();           
 

@@ -16,6 +16,7 @@ include 'inc/header.inc.php';
   .container-fluid {
     padding-top: 50px; /* Ajuste para afastar o conteúdo do topo, para que não fique escondido pela imagem de fundo */
   }
+
 </style> 
 <br> <br>
 <form method="POST" action="adicionarClienteSubmit.php">

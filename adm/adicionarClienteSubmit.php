@@ -12,7 +12,8 @@ if(!empty($_POST['email'])){
     $email = $_POST['email'];
     $senha = $_POST['senha'];
 
-    
+   
+
 
 
     $cliente->adicionar( $nome, $sobrenome, $data_nasc, $endereco, $qualServicoNecessita, $telefone, $email, $senha );

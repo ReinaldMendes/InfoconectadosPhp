@@ -31,7 +31,8 @@ include 'inc/header.inc.php';
                         <div class="table-responsive">
                               <table class="table table-bordered table-dark">
                                 <thead class="thead-dark">
-                                    <tr>
+                                    <tr>    /* private $idCliente;
+  
                                       <!--<th>IdCliente </th>-->
                                       <th>NOME </th>
                                       <th>SOBRENOME </th>
@@ -49,7 +50,7 @@ include 'inc/header.inc.php';
                                     ?>
                                     <tbody>
                                         <tr>
-                                            <!--<td><?php //echo $item['idUsuario']; ?> </td>-->
+                                            <!--<td><?php //echo $item['idCliente']; ?> </td>-->
                                             <td><?php echo $item['nome']; ?> </td>
                                             <td><?php echo $item['sobrenome']; ?> </td>
                                             <td><?php echo implode ("/",array_reverse (explode("-",$item['data_nasc'])));?></td>
