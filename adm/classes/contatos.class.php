@@ -17,6 +17,12 @@ class Contatos {
     public function __construct(){  // underline duplo considerado um comando mágico, ou seja, tem uma carta na manga pra facilitar a programação
         $this->con = new Conexao();
     }
+    public function __set($atributo,$valor){
+        $this->atributo = $valor;
+    }
+    public function __get($atributo){
+        return $this->atributo;
+    }
     
     //vamos fazer uma validação pelo email, que é um atributo único, assim evitamos que haja duplicidade no cadastro de usuário
     private function existeEmail($email){
@@ -124,4 +130,41 @@ class Contatos {
         $sql->execute();
 
     }
+    public function fazerLogin($email,$senha){
+        $sql = $this->con->conectar()->prepare("SELECT * FROM usuario WHERE email = :email AND senha = :senha");
+        $sql->bindValue(":email", $email);
+        $sql->bindValue(":senha", $senha);
+        $sql->execute();
+
+        if ($sql->rowCount () > 0){
+            $sql = $sql->fetch();
+            $_SESSION["logado"]= $sql['idUsuario'];
+
+            return TRUE;
+        }
+        return FALSE;
+    }
+    public function setUsers($idUsuario){
+        $this->idUsuario = $idUsuario;
+        $sql = $this->con->conectar()->prepare("SELECT * FROM usuario WHERE idUsuario= :idUsuario");
+        $sql ->bindValue(':idUsuario', $idUsuario);
+        $sql->execute();
+
+        if($sql->rowCount()>0){
+            $sql = $sql->fetch();
+            $this->detalhesDoPerfil = explode(',',$sql['detalhesDoPerfil']);//transforma em array (add,edit,del,super)
+        }
+    }
+    public function getPermissoes(){
+        return $this->detalhesDoPerfil;
+
+    }
+    public function temPermissoes($p){
+         if(in_array($p, $this->detalhesDoPerfil)){
+            return TRUE;
+         }else{
+                return FALSE;
+            }
+    }
 }
+
