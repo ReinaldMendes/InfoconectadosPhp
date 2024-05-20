@@ -1,16 +1,16 @@
 <?php
 session_start(); 
 require_once 'inc/header.inc.php';
-require 'classes/contatos.class.php';
+require 'classes/users.class.php';
 
 if(!empty($_POST ['email'])){
     $email = addslashes($_POST ['email']);
     $senha = md5($_POST['senha']);
 
-    $contato = new Contatos();
+    $users = new Users();
 
 
-    if($contato->fazerLogin($email,$senha)){
+    if($users->fazerLogin($email,$senha)){
         header("Location: index.php");
         exit;
     }else{
