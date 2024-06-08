@@ -24,7 +24,7 @@ $users->setUsers($_SESSION['logado']);
         </div>
     </section>
         <?php if ($users->temPermissoes('add')):?><a class="btn btn-primary" href="adicionarUsers.php">Adicionar </a> <?php endif;?> <br><br>
-        <a class="btn btn-primary" href="index.php">Voltar</a>
+        <a class="btn btn-primary" href="login.php">Voltar</a>
         <br><br>
             <div class="container">
                 <div class ="row align-items-center justify-content-center">

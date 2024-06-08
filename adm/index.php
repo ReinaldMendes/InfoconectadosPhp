@@ -7,11 +7,10 @@ if(!empty($_POST ['email'])){
     $email = addslashes($_POST ['email']);
     $senha = md5($_POST['senha']);
 
-    $users = new Users();
-
+    $users = new Users ();
 
     if($users->fazerLogin($email,$senha)){
-        header("Location: index.php");
+        header("Location: login.php");
         exit;
     }else{
         echo '<span style="color: green">'."Usuário e/ou senha incorretos!".'</span>';
@@ -19,6 +18,8 @@ if(!empty($_POST ['email'])){
 
 }
 ?>
+<br> <br>
+<link rel="stylesheet" href="css/style-login.css">
 <style>
   body {
     background-color: #ccc;

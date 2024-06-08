@@ -19,7 +19,7 @@
         
         <div class="navbar navbar-dark bg-dark">
         <div class="container d-flex justify-content-between">   
-        <a href="index.php" class="navbar-brand">
+        <a href="login.php" class="navbar-brand">
         <img src="img/logo.png" class="img-fluid small-image" alt="Logo Infoconectados">
       
         <strong> Infoconectados</strong>

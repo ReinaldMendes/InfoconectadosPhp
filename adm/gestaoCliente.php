@@ -1,10 +1,25 @@
 <?php
-include 'classes/clients.class.php';
-$cliente = new Cliente();
-?>
-<?php
+session_start(); 
+require 'classes/clients.class.php';
 include 'inc/header.inc.php';
+
+$cliente = new Cliente();
+
+
+
+if(!isset($_SESSION['logado'])){
+    header("Location: login.php");
+    exit;
+}
+
 ?>
+
+<style type="text/css">
+    .row{
+        background-color: #ddc;
+        padding:10px;
+    }
+</style>
 <style>
   body {
     background-color: #ccc;
@@ -31,7 +46,7 @@ include 'inc/header.inc.php';
                         <div class="table-responsive">
                               <table class="table table-bordered table-dark">
                                 <thead class="thead-dark">
-                                    <tr>    /* private $idCliente;
+                                    <tr>   
   
                                       <!--<th>IdCliente </th>-->
                                       <th>NOME </th>
