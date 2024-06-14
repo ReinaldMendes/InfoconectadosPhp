@@ -16,7 +16,12 @@ include 'inc/header.inc.php';
         header("Location: editarCliente.php");
             exit;
     }
+    if(!isset($_SESSION['logado'])){
+      header("Location: index.php");
+      exit;
+  }
 ?>
+
  
 <h1>EDITAR CLIENTE</h1>
 <br> <br>

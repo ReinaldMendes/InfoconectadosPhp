@@ -1,6 +1,6 @@
 <?php
-include 'classes/contatos.class.php';
-$contato = new Contatos();
+  include 'classes/clients.class.php';
+  $cliente = new Cliente();
 if(!empty($_POST['idUsuario'])){
     $nome = $_POST['nome'];
     $email = $_POST['email'];

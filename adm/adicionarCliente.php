@@ -1,5 +1,11 @@
 <?php
-include 'inc/header.inc.php';
+
+require_once 'inc/header.inc.php';
+session_start(); 
+if(!isset($_SESSION['logado'])){
+  header("Location: index.php");
+  exit;
+}
 ?>
 <style>
  

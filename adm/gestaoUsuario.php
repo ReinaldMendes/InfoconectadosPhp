@@ -6,7 +6,7 @@ include 'inc/header.inc.php';
 
 $users = new Users();
 if(!isset($_SESSION['logado'])){
-    header("Location: login.php");
+    header("Location: index.php");
     exit;
 }
 $users->setUsers($_SESSION['logado']);
@@ -33,10 +33,10 @@ $users->setUsers($_SESSION['logado']);
                         <table class="table table-bordered table-dark">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>ID</th>
+                                    <!-- <th>ID</th>-->
                                     <th>NOME</th>
                                     <th>EMAIL</th>
-                                    <th>SENHA</th>
+                                     <!--<th>SENHA</th>-->
                                     <th>PERMISSOES</th>
                                     <th>AÇÕES</th>
                                 </tr>
@@ -47,10 +47,10 @@ $users->setUsers($_SESSION['logado']);
                                 foreach ($lista as $item):
                                 ?>
                                 <tr>
-                                    <td><?php echo $item['id']; ?></td>
+                                    <!--<td><?php echo $item['id']; ?></td>-->
                                     <td><?php echo $item['nome']; ?></td>
                                     <td><?php echo $item['email']; ?></td>
-                                    <td><?php echo $item['senha']; ?></td>
+                                    <!--<td><?php //echo $item['senha']; ?> </td>-->
                                     <td><?php echo $item['permissoes']; ?></td>
                                     <td>
                                     <?php if ($users->temPermissoes('edit')):?> <a href="editarUsers.php?id=<?php echo $item['id']; ?>" class="btn btn-warning">EDITAR</a><?php endif;?>

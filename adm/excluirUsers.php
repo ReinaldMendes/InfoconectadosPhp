@@ -9,5 +9,5 @@ if(!empty($_GET['id'])){
     header("Location: /infoconectadosPhp/gestaoUsuario.php");
 }else{
     echo '<script type="text/javascript">alert("Erro ao excluir contato!");</script>';
-    header("Location: /infoconectadosPhp");
+    header("Location: /infoconectadosPhp/gestaoUsuario.php");
 }

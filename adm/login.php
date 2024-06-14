@@ -3,7 +3,7 @@ session_start();
 require_once 'classes/users.class.php';
 $users = new Users();
 if(!isset($_SESSION['logado'])){
-    header("Location: login.php");
+    header("Location: index.php");
     exit;
 }
 
