@@ -19,7 +19,7 @@ if (!empty($_POST['id'])) {
         $users->editar($nome, $email, $senha, $permissoes, $id);
     }
 
-    header('Location: /InfoconectadosPhp/gestaoUsuario.php');
+    header('Location:/InfoconectadosPHP/adm/gestaoUsuario.php');
     exit; // Certifique-se de chamar exit após o redirecionamento para parar a execução do script
 } else {
     echo '<script type="text/javascript">alert("ID do usuário não fornecido!");</script>';
