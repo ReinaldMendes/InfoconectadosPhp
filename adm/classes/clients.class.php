@@ -34,7 +34,7 @@ class Cliente {
         }
         return $array;
     }  //idCliente	Nome	Sobrenome	Endereço, telefone	$qualServicoPrecisa , telefone, email, senha
-    public function adicionar($email, $nome, $sobrenome, $data_nasc, $endereco, $qualServicoNecessita, $telefone,$senha){
+    public function adicionar( $nome, $sobrenome, $data_nasc, $endereco, $qualServicoNecessita, $telefone,$email,$senha){
         $emailExistente = $this->existeEmail($email);
         if(count($emailExistente) == 0){
             try{
@@ -76,7 +76,7 @@ class Cliente {
     }  
     public function listar(){
         try{ //idUsuario	nome	email	senha	detalhesDoPerfil	cpf	Data_Nasc	telefone
-            $sql = $this->con->conectar()->prepare("SELECT idCliente, nome, sobrenome, data_nasc, qualServicoNecessita, endereco, telefone, email, senha FROM cliente");
+            $sql = $this->con->conectar()->prepare("SELECT idCliente, nome, sobrenome, data_nasc, endereco,qualServicoNecessita, telefone, email, senha FROM cliente");
             $sql->execute(); 
             return $sql->fetchAll();           
 

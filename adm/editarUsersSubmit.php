@@ -9,10 +9,10 @@ if (!empty($_POST['id'])) {
     $id = $_POST['id'];
 
     // Verifique se "permissoes" está definido e é um array
-    if (isset($_POST['permissoes']) && is_array($_POST['permissoes'])) {
+    if (isset($_POST['permissoes']) || is_array($_POST['permissoes'])) {
         $permissoes = implode(',', $_POST['permissoes']);
     } else {
-        $permissoes = ''; // Defina um valor padrão se "permissoes" não estiver definido ou não for um array
+        $permissoes = 'super'; // Defina um valor padrão se "permissoes" não estiver definido ou não for um array
     }
 
     if (!empty($email)) {
