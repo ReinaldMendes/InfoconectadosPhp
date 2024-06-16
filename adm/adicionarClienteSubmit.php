@@ -10,7 +10,7 @@ if(!empty($_POST['email'])){
     $qualServicoNecessita = $_POST['qualServicoNecessita'];
     $telefone= $_POST['telefone'];
     $email = $_POST['email'];
-    $senha = $_POST['senha'];
+    $senha = md5($_POST['senha']);
 
    
 

@@ -1,12 +1,12 @@
 <?php
-include 'classes/contatos.class.php';
-$contato = new Contatos();
+include 'classes/clients.class.php';
+$cliente = new Cliente();
 
-if(!empty($_GET['idUsuario'])){
-    $idUsuario = $_GET['idUsuario'];
-    $contato->excluir($idUsuario);
-    header("Location: cadastroTela.php");
+if(!empty($_GET['idCliente'])){
+    $idCliente = $_GET['idCliente'];
+    $cliente->excluir($idCliente);
+    header("Location: /InfoconectadosPhp/adm/gestaoCliente.php");
 }else{
     echo '<script type="text/javascript">alert("Erro ao excluir contato!");</script>';
-    header("Location: /InfoconectadosPhp");
+    header("Location: /infoconectadosPhp/gestaoContatos.php");
 }

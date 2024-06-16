@@ -8,22 +8,25 @@ session_start();
         $id = $_GET['id'];
         $info = $users->buscar($id);
         if(empty($info['email'])){
-            header("Location: /infoconectadosPhp");
+            header("Location: /InfoconectadosPhp");
             exit;
         }
+
+        $arrayperm = explode(",", $info['permissoes']);
+
     }else{
-        header("Location: /infoconectadosPhp");
+        header("Location: /InfoconectadosPhp");
             exit;
     }
 
     if(!isset($_SESSION['logado'])){
-        header("Location: login.php");
+        header("Location: index.php");
         exit;
     }
 ?>
 
  
- <br><br>
+<br><br>
         <div class="container">
             <h1 class="jumbotron-heading">Editar Contato</h1>
         </div>
@@ -51,13 +54,61 @@ session_start();
         </div>
     </div>
     <div class="form-group row">
-        <label for="permissoes" class="col-sm-2 col-form-label"><h5>Permissoes: </h5></label>
-        <div class="col-sm-10">
-         <input type="text" class="form-control" name="permissoes" value="<?php echo $info ['permissoes']?>"/>
+        <label for ="permissoes" class="col-sm-2 col-form-label"><h5> Permissões: </h5> </label><br>
+        <div class="checkbox">
+        <?php if($users->buscaPermissaoAdd($arrayperm)):?>
+        <input type="checkbox" name="pemissoes[]" id="add" value="add" checked/>
+        <label for="add" ><h5>Adicionar: </h5></label>
+        <?php endif;?>
         </div>
+        <div class="checkbox">
+        <?php if(empty($users->buscaPermissaoAdd($arrayperm))):?>
+        <input type="checkbox" name="pemissoes[]" id="add" value="add"/>
+        <label for="add" ><h5>Adicionar: </h5></label>
+        <?php endif;?>        
+        </div>
+        <div class="checkbox">
+        <?php if($users->buscaPermissaoEdit($arrayperm)):?>
+        <input type="checkbox" name="pemissoes[]" id="edit" value="edit" checked/>
+        <label for="edit" ><h5>Editar: </h5></label>
+        <?php endif;?>
+        </div>
+        <div class="checkbox">
+        <?php if(empty($users->buscaPermissaoEdit($arrayperm))):?>
+        <input type="checkbox" name="pemissoes[]" id="edit" value="edit"/>
+        <label for="edit" ><h5>Editar: </h5></label>
+        <?php endif;?>
+        <div>
+        
+        
+        <div class="checkbox">
+        <?php if($users->buscaPermissaoDel($arrayperm)):?>
+        <input type="checkbox" name="pemissoes[]" id="del" value="del" checked/>
+        <label for="del"><h5>Deletar: </h5></label>
+        <?php endif;?>
+        </div>
+        <div class="checkbox">
+        <?php if(empty($users->buscaPermissaoDel($arrayperm))):?>
+        <input type="checkbox" name="pemissoes[]" id="del" value="del"/>
+        <label for="del"><h5>Deletar: </h5></label>
+        <?php endif;?>
+        </div>
+       
+        <div class="checkbox">
+        <?php if($users->buscaPermissaoSuper($arrayperm)):?>
+        <input type="checkbox" name="pemissoes[]" id="super" value="super" checked/>
+        <label for="super" ><h5>Super: </h5></label>
+        <?php endif;?>
+        </div>
+        <div class="checkbox">
+        <?php if(empty($users->buscaPermissaoSuper($arrayperm))):?>
+        <input type="checkbox" name="pemissoes[]" id="super" value="super"/>
+        <label for="super" ><h5>Super: </h5></label>
+        <?php endif;?>
+        </div>
+       
     </div>
+    
+  <br> <br>
     <input type="submit" name="btCadastrar" class="btn btn-primary" value="SALVAR"/>
  </form>
- <?php
-include 'inc/footer.inc.php';
-?>
