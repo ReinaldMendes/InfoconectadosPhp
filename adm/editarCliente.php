@@ -6,7 +6,7 @@ include 'inc/header.inc.php';
     $cliente = new Cliente();
 
     if(!empty($_GET['idCliente'])){
-        $idUsuario = $_GET['idCliente'];
+        $idCliente = $_GET['idCliente'];
         $info = $cliente->buscar($idCliente);
         if(empty($info['email'])){
             header("Location: editarCliente.php");
@@ -17,7 +17,7 @@ include 'inc/header.inc.php';
             exit;
     }
     if(!isset($_SESSION['logado'])){
-      header("Location: index.php");
+      header("Location: login.php");
       exit;
   }
 ?>

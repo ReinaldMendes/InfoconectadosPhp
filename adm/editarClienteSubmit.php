@@ -1,7 +1,7 @@
 <?php
   include 'classes/clients.class.php';
   $cliente = new Cliente();
-if(!empty($_POST['idUsuario'])){
+if(!empty($_POST['idCliente'])){
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $senha = $_POST['senha'];
@@ -9,7 +9,7 @@ if(!empty($_POST['idUsuario'])){
     $cpf = $_POST['cpf'];
     $numero = $_POST['Data_Nasc'];
     $telefone = $_POST['telefone'];
-    $idUsuario = $_POST['idUsuario'];
+    $idCliente = $_POST['idCliente'];
     if(!empty($email)){
         $contato->editar( $nome, $email, $senha, $detalhesDoPerfil, $cpf, $Data_Nasc, $telefone, $idUsuario);
     }
