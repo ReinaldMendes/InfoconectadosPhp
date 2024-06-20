@@ -1,66 +1,87 @@
 <?php
 session_start();
 require 'classes/prestadores.class.php';
+include 'inc/header.inc.php';
 
 $prestador = new Prestador();
 
-if (!isset($_SESSION['logado'])) {
-    header("Location: index.php");
+if(!isset($_SESSION['logado'])){
+    header("Location: login.php");
     exit;
 }
-
-$lista = $prestador->listar();
 ?>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Gestão de Prestadores</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Seu arquivo CSS para estilos -->
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <?php include 'caminho_para_seu_header.php'; ?>
 
-    <div class="container mt-4">
-        <h2>Gestão de Prestadores</h2>
-        <a href="adicionarPrestador.php" class="btn btn-success mb-3">Adicionar Prestador</a>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Sobrenome</th>
-                    <th scope="col">Data de Nascimento</th>
-                    <th scope="col">Endereço</th>
-                    <th scope="col">CPF</th>
-                    <th scope="col">Telefone</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($lista as $prestador) : ?>
-                    <tr>
-                        <th scope="row"><?php echo $prestador['idPrestador']; ?></th>
-                        <td><?php echo $prestador['nome']; ?></td>
-                        <td><?php echo $prestador['sobrenome']; ?></td>
-                        <td><?php echo $prestador['data_nasc']; ?></td>
-                        <td><?php echo $prestador['endereco']; ?></td>
-                        <td><?php echo $prestador['cpf']; ?></td>
-                        <td><?php echo $prestador['telefone']; ?></td>
-                        <td><?php echo $prestador['email']; ?></td>
-                        <td>
-                            <a href="editarPrestador.php?idPrestador=<?php echo $prestador['idPrestador']; ?>" class="btn btn-primary btn-sm">Editar</a>
-                            <a href="excluirPrestador.php?idPrestador=<?php echo $prestador['idPrestador']; ?>" class="btn btn-danger btn-sm">Excluir</a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
+<style type="text/css">
+    .row{
+        background-color: #ddc;
+        padding:10px;
+    }
+</style>
+<style>
+  body {
+    background-color: #ccc;
+  }
 
-    <?php include 'inc/footer.inc.php'; ?>
-</body>
-</html>
+  h1 {
+    text-align: center;
+  }
+</style>
+
+<main>
+    <section class="jumbotron text-black-50 text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Gestão de Prestadores</h1>
+        </div>
+    </section>
+    <a class="btn btn-primary" href="adicionarPrestador.php">Adicionar</a>
+    <br><br>
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-dark">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>NOME</th>
+                                <th>SOBRENOME</th>
+                                <th>DATA_NASC</th>
+                                <!--<th>ENDERECO</th>-->
+                               <!-- <th>CPF</th>-->
+                                <th>TELEFONE</th>
+                                <th>EMAIL</th>
+                               <!-- <th>SENHA</th>-->
+                                <th>AÇÕES</th>
+                            </tr>
+                            <?php
+                            $lista = $prestador->listar();
+                            foreach ($lista as $item):
+                            ?>
+                            <tbody>
+                                <tr>
+                                    <td><?php echo $item['nome']; ?></td>
+                                    <td><?php echo $item['sobrenome']; ?></td>
+                                    <td><?php echo implode("/", array_reverse(explode("-", $item['data_nasc']))); ?></td>
+                                    <!--<td><?php echo $item['endereco']; ?></td>-->
+                                    <!--<td><?php echo $item['cpf']; ?></td>-->
+                                    <td><?php echo $item['telefone']; ?></td>
+                                    <td><?php echo $item['email']; ?></td>
+                                    <!--<td><?php echo $item['senha']; ?></td>-->
+                                    <td>
+                                        <a href="verPrestadores.php?idPrestador=<?php echo $item['idPrestador'];?>" class="btn btn-info">VER</a>
+                                        <a href="editarPrestador.php?idPrestador=<?php echo $item['idPrestador'];?>" class="btn btn-warning">EDITAR</a>
+                                        <a href="excluirPrestador.php?idPrestador=<?php echo $item['idPrestador'];?>" class="btn btn-danger" onclick="return confirm('Tem certeza que quer excluir este prestador?')">EXCLUIR</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <?php
+                            endforeach;
+                            ?>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>             
+</main>
+<?php
+include 'inc/footer.inc.php';
+?>

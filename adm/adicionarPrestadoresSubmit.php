@@ -1,7 +1,13 @@
 <?php
-require_once 'classes/prestadores.class.php';
+session_start();
+include 'classes/prestadores.class.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (!isset($_SESSION['logado'])) {
+    header("Location: index.php");
+    exit;
+}
+
+if (isset($_POST['nome']) && !empty($_POST['nome'])) {
     $nome = $_POST['nome'];
     $sobrenome = $_POST['sobrenome'];
     $data_nasc = $_POST['data_nasc'];
@@ -9,13 +15,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cpf = $_POST['cpf'];
     $telefone = $_POST['telefone'];
     $email = $_POST['email'];
+    $senha = md5($_POST['senha']); // Criptografia MD5 da senha
 
     $prestador = new Prestador();
-    $prestador->adicionar($nome, $sobrenome, $data_nasc, $endereco, $cpf, $telefone, $email);
 
-    header("Location: gestaoPrestadores.php");
-    exit;
+    if ($prestador->adicionar($nome, $sobrenome, $data_nasc, $endereco, $cpf, $telefone, $email, $senha)) {
+        header("Location: gestaoPrestadores.php");
+    } else {
+        echo '<script type="text/javascript">alert("Erro ao adicionar prestador.");</script>';
+    }
 } else {
-    echo "Erro ao processar requisição.";
+    echo '<script type="text/javascript">alert("Preencha todos os campos.");</script>';
 }
 ?>

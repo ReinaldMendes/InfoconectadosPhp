@@ -1,86 +1,71 @@
 <?php
 session_start();
-require 'classes/prestadores.class.php';
-
-$prestador = new Prestador();
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome = $_POST['nome'];
-    $sobrenome = $_POST['sobrenome'];
-    $data_nasc = $_POST['data_nasc'];
-    $endereco = $_POST['endereco'];
-    $cpf = $_POST['cpf'];
-    $telefone = $_POST['telefone'];
-    $email = $_POST['email'];
-    $senha = md5($_POST['senha']);
-
-    if ($prestador->adicionar($nome, $sobrenome, $data_nasc, $endereco, $cpf, $telefone, $email, $senha)) {
-        header('Location: gestaoPrestadores.php');
-        exit;
-    } else {
-        echo '<script>alert("Erro ao adicionar prestador!");</script>';
-    }
+require_once 'inc/header.inc.php';
+if (!isset($_SESSION['logado'])) {
+    header("Location: index.php");
+    exit;
 }
 ?>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Adicionar Prestador</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Seu arquivo CSS para estilos -->
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <?php include 'caminho_para_seu_header.php'; ?>
-    
-    <div class="container mt-4">
-        <h2>Adicionar Prestador</h2>
-        <form method="POST" action="">
-            <div class="form-group">
-                <label for="nome">Nome:</label>
-                <input type="text" class="form-control" id="nome" name="nome" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="sobrenome">Sobrenome:</label>
-                <input type="text" class="form-control" id="sobrenome" name="sobrenome" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="data_nasc">Data de Nascimento:</label>
-                <input type="date" class="form-control" id="data_nasc" name="data_nasc" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="endereco">Endereço:</label>
-                <input type="text" class="form-control" id="endereco" name="endereco" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="cpf">CPF:</label>
-                <input type="text" class="form-control" id="cpf" name="cpf" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="telefone">Telefone:</label>
-                <input type="text" class="form-control" id="telefone" name="telefone" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="senha">Senha:</label>
-                <input type="password" class="form-control" id="senha" name="senha" required>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Adicionar Prestador</button>
-        </form>
-    </div>
 
-    <?php include 'caminho_para_seu_footer.php'; ?>
-</body>
-</html>
+<br><br>
+<div class="container">
+    <h1 class="jumbotron-heading">Adicionar Prestador</h1>
+</div>
+<br><br>
+
+<form method="POST" action="adicionarPrestadoresSubmit.php">
+    <div class="form-group row">
+        <label for="nome" class="col-sm-2 col-form-label"><h5>Nome: </h5></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="nome" placeholder="Nome">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="sobrenome" class="col-sm-2 col-form-label"><h5>Sobrenome: </h5></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="sobrenome" placeholder="Sobrenome">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="data_nasc" class="col-sm-2 col-form-label"><h5>Data de Nascimento: </h5></label>
+        <div class="col-sm-10">
+            <input type="date" class="form-control" name="data_nasc">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="endereco" class="col-sm-2 col-form-label"><h5>Endereço: </h5></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="endereco" placeholder="Endereço">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="cpf" class="col-sm-2 col-form-label"><h5>CPF: </h5></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="cpf" placeholder="CPF">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="telefone" class="col-sm-2 col-form-label"><h5>Telefone: </h5></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="telefone" placeholder="Telefone">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="email" class="col-sm-2 col-form-label"><h5>Email: </h5></label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" name="email" placeholder="Email">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="senha" class="col-sm-2 col-form-label"><h5>Senha: </h5></label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" name="senha" placeholder="Senha">
+        </div>
+    </div>
+    <br><br>
+    <input type="submit" name="btCadastrar" class="btn btn-primary" value="Adicionar">
+</form>
+
+<?php
+include 'inc/footer.inc.php';
+?>

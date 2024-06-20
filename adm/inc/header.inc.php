@@ -47,9 +47,9 @@
               </a>
             </li>
             <li>
-              <a href="gestaoContatos.php" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="gestaoContatos.php"></use></svg>
-                Gestão Contatos
+              <a href="gestaoCliente.php" class="nav-link text-white">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="gestaoCliente.php"></use></svg>
+                Gestão Cliente
               </a>
             </li>
             <li>
@@ -61,7 +61,7 @@
             </li>
             <li>
               <a href="gestaoUsuario.php" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="gestaoUsuario.php"></use></svg>
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="gestaoPrestadores.php"></use></svg>
                 Gestão Prestadores
               </a>
               

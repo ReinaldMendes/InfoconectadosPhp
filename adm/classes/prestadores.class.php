@@ -1,74 +1,118 @@
 <?php
-require_once 'conexao.class.php'; // Classe para conexão com o banco de dados
+require 'conexao.class.php';
 
 class Prestador {
-    private $conn; // Conexão com o banco de dados
+    private $idPrestador;
+    private $nome;
+    private $sobrenome;
+    private $data_nasc;
+    private $endereco;
+    private $cpf;
+    private $telefone;
+    private $email;
+    private $senha; // Novo atributo para a senha
+    private $con;
 
-    public function __construct(){  // underline duplo considerado um comando mágico, ou seja, tem uma carta na manga pra facilitar a programação
+    public function __construct() {
         $this->con = new Conexao();
     }
 
-    // Função para adicionar um novo prestador
+    private function existeEmail($email) {
+        try {
+            $sql = $this->con->conectar()->prepare("SELECT idPrestador FROM prestadores WHERE email = :email");
+            $sql->bindParam(':email', $email, PDO::PARAM_STR);
+            $sql->execute();
+
+            return $sql->rowCount() > 0;
+        } catch (PDOException $ex) {
+            echo 'ERRO: ' . $ex->getMessage();
+            return false;
+        }
+    }
+
     public function adicionar($nome, $sobrenome, $data_nasc, $endereco, $cpf, $telefone, $email, $senha) {
-        try {
-            $sql = "INSERT INTO prestadores (nome, sobrenome, data_nasc, endereco, cpf, telefone, email, senha) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([$nome, $sobrenome, $data_nasc, $endereco, $cpf, $telefone, $email, $senha]);
-            return true; // Retorna verdadeiro se inserido com sucesso
-        } catch (PDOException $e) {
-            echo "Erro ao adicionar prestador: " . $e->getMessage();
-            return false; // Retorna falso em caso de erro
+        if ($this->existeEmail($email)) {
+            return false; // Email já existe, não pode adicionar
         }
-    }
 
-    // Função para buscar informações de um prestador pelo ID
-    public function buscar($idPrestador) {
         try {
-            $sql = "SELECT * FROM prestadores WHERE idPrestador = ?";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([$idPrestador]);
-            return $stmt->fetch(PDO::FETCH_ASSOC); // Retorna os dados do prestador como um array associativo
-        } catch (PDOException $e) {
-            echo "Erro ao buscar prestador: " . $e->getMessage();
+            // Criptografa a senha em MD5
+            $senha = md5($senha);
+
+            $sql = $this->con->conectar()->prepare("INSERT INTO prestadores (nome, sobrenome, data_nasc, endereco, cpf, telefone, email, senha)
+                VALUES (:nome, :sobrenome, :data_nasc, :endereco, :cpf, :telefone, :email, :senha)");
+            $sql->bindParam(":nome", $nome, PDO::PARAM_STR);
+            $sql->bindParam(":sobrenome", $sobrenome, PDO::PARAM_STR);
+            $sql->bindParam(":data_nasc", $data_nasc, PDO::PARAM_STR);
+            $sql->bindParam(":endereco", $endereco, PDO::PARAM_STR);
+            $sql->bindParam(":cpf", $cpf, PDO::PARAM_STR);
+            $sql->bindParam(":telefone", $telefone, PDO::PARAM_STR);
+            $sql->bindParam(":email", $email, PDO::PARAM_STR);
+            $sql->bindParam(":senha", $senha, PDO::PARAM_STR);
+
+            $sql->execute();
+            return true;
+        } catch (PDOException $ex) {
+            echo 'ERRO: ' . $ex->getMessage();
             return false;
         }
     }
 
-    // Função para editar informações de um prestador
-    public function editar($nome, $sobrenome, $data_nasc, $endereco, $cpf, $telefone, $email, $senha, $idPrestador) {
-        try {
-            $sql = "UPDATE prestadores SET nome = ?, sobrenome = ?, data_nasc = ?, endereco = ?, cpf = ?, telefone = ?, email = ?, senha = ? WHERE idPrestador = ?";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([$nome, $sobrenome, $data_nasc, $endereco, $cpf, $telefone, $email, $senha, $idPrestador]);
-            return true; // Retorna verdadeiro se atualizado com sucesso
-        } catch (PDOException $e) {
-            echo "Erro ao editar prestador: " . $e->getMessage();
-            return false;
-        }
-    }
-
-    // Função para listar todos os prestadores
     public function listar() {
         try {
-            $sql = "SELECT * FROM prestadores";
-            $stmt = $this->conn->query($sql);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retorna todos os prestadores como um array de arrays associativos
-        } catch (PDOException $e) {
-            echo "Erro ao listar prestadores: " . $e->getMessage();
-            return [];
+            $sql = $this->con->conectar()->prepare("SELECT idPrestador, nome, sobrenome, data_nasc, endereco, cpf, telefone, email,senha FROM prestadores");
+            $sql->execute();
+            return $sql->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            echo 'ERRO: ' . $ex->getMessage();
+            return array();
         }
     }
 
-    // Função para excluir um prestador pelo ID
+    public function buscar($idPrestador) {
+        try {
+            $sql = $this->con->conectar()->prepare("SELECT * FROM prestadores WHERE idPrestador = :idPrestador");
+            $sql->bindValue(':idPrestador', $idPrestador, PDO::PARAM_INT);
+            $sql->execute();
+            return $sql->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            echo 'ERRO: ' . $ex->getMessage();
+            return array();
+        }
+    }
+
+    public function editar($nome, $sobrenome, $data_nasc, $endereco, $cpf, $telefone, $email, $idPrestador) {
+        if ($this->existeEmail($email) && $this->buscar($idPrestador)['email'] !== $email) {
+            return false; // Email já existe e não pertence ao prestador atual
+        }
+
+        try {
+            $sql = $this->con->conectar()->prepare("UPDATE prestadores SET nome = :nome, sobrenome = :sobrenome, data_nasc = :data_nasc, endereco = :endereco, cpf = :cpf, telefone = :telefone, email = :email
+                WHERE idPrestador = :idPrestador");
+            $sql->bindParam(':nome', $nome, PDO::PARAM_STR);
+            $sql->bindParam(':sobrenome', $sobrenome, PDO::PARAM_STR);
+            $sql->bindParam(':data_nasc', $data_nasc, PDO::PARAM_STR);
+            $sql->bindParam(':endereco', $endereco, PDO::PARAM_STR);
+            $sql->bindParam(':cpf', $cpf, PDO::PARAM_STR);
+            $sql->bindParam(':telefone', $telefone, PDO::PARAM_STR);
+            $sql->bindParam(':email', $email, PDO::PARAM_STR);
+            $sql->bindParam(':idPrestador', $idPrestador, PDO::PARAM_INT);
+
+            $sql->execute();
+            return true;
+        } catch (PDOException $ex) {
+            echo 'ERRO: ' . $ex->getMessage();
+            return false;
+        }
+    }
+
     public function excluir($idPrestador) {
         try {
-            $sql = "DELETE FROM prestadores WHERE idPrestador = ?";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([$idPrestador]);
-            return true; // Retorna verdadeiro se excluído com sucesso
-        } catch (PDOException $e) {
-            echo "Erro ao excluir prestador: " . $e->getMessage();
-            return false;
+            $sql = $this->con->conectar()->prepare("DELETE FROM prestadores WHERE idPrestador = :idPrestador");
+            $sql->bindParam(':idPrestador', $idPrestador, PDO::PARAM_INT);
+            $sql->execute();
+        } catch (PDOException $ex) {
+            echo 'ERRO: ' . $ex->getMessage();
         }
     }
 }
