@@ -11,7 +11,7 @@ if(!empty($_POST['idCliente'])){
     $telefone = $_POST['telefone'];
     $idCliente = $_POST['idCliente'];
     if(!empty($email)){
-        $contato->editar( $nome, $email, $senha, $detalhesDoPerfil, $cpf, $Data_Nasc, $telefone, $idUsuario);
+        $contato->editar( $nome, $email, $senha, $detalhesDoPerfil, $cpf, $Data_Nasc, $telefone, $idCliente);
     }
 
     header('Location: gestaoUsuario.php');

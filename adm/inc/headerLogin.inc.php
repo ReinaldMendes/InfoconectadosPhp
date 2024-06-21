@@ -38,42 +38,6 @@
           <img src="img/logo.png" class="img-fluid small-image" width="100" height="82" alt="Logo Agenda"><use xlink:href="login.php"></use>
         </a>
        
-
-          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-            <li>
-              <a href="login.php" class="nav-link text-secondary">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="login.php"></use></svg>
-                Inicio
-              </a>
-            </li>
-            <li>
-              <a href="gestaoCliente.php" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="gestaoCliente.php"></use></svg>
-                Gestão Cliente
-              </a>
-            </li>
-            <li>
-              <a href="gestaoUsuario.php" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="gestaoUsuario.php"></use></svg>
-                Gestão Usuario
-              </a>
-
-            </li>
-            <li>
-              <a href="gestaoPrestadores.php" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="gestaoPrestadores.php"></use></svg>
-                Gestão Prestadores
-              </a>
-              
-            </li>
-            <li>
-              <a href="gestaoUsuario.php" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="gestaoUsuario.php"></use></svg>
-                Gestão Sistema
-              </a>
-              
-            </li>
-          </ul>
         </div>
       </div>
     </div>

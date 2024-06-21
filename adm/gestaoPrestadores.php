@@ -35,6 +35,8 @@ if(!isset($_SESSION['logado'])){
     </section>
     <a class="btn btn-primary" href="adicionarPrestador.php">Adicionar</a>
     <br><br>
+    <a class="btn btn-primary" href="login.php">Voltar</a>
+    <br><br>
     <div class="container">
         <div class="row align-items-center justify-content-center">
             <div class="col-12">

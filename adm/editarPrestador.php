@@ -1,103 +1,84 @@
 <?php
-session_start();
-require 'classes/prestadores.class.php';
+include 'inc/header.inc.php';
 
-$prestador = new Prestador();
+include 'classes/prestadores.class.php';
+$prestador = new Prestador(); // Supondo que você tenha uma classe Prestador para manipular os dados dos prestadores
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['idPrestador'])) {
+if(!empty($_GET['idPrestador'])){
     $idPrestador = $_GET['idPrestador'];
-    $info = $prestador->buscar($idPrestador);
-
-    if (empty($info['email'])) {
+    $info = $prestador->buscar($idPrestador); // Função para buscar informações do prestador por ID
+    if(empty($info['email'])){
         header("Location: editarPrestador.php");
         exit;
     }
-} else {
+}else{
     header("Location: editarPrestador.php");
     exit;
 }
 
-if (!isset($_SESSION['logado'])) {
-    header("Location: index.php");
+if(!isset($_SESSION['logado'])){
+    header("Location: login.php");
     exit;
 }
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome = $_POST['nome'];
-    $sobrenome = $_POST['sobrenome'];
-    $data_nasc = $_POST['data_nasc'];
-    $endereco = $_POST['endereco'];
-    $cpf = $_POST['cpf'];
-    $telefone = $_POST['telefone'];
-    $email = $_POST['email'];
-    $senha = md5($_POST['senha']);
-
-    if (!empty($email)) {
-        $prestador->editar($nome, $sobrenome, $data_nasc, $endereco, $cpf, $telefone, $email, $senha, $idPrestador);
-        header('Location: gestaoPrestadores.php');
-        exit;
-    }
-}
 ?>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Editar Prestador</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Seu arquivo CSS para estilos -->
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <?php include 'caminho_para_seu_header.php'; ?>
 
-    <div class="container mt-4">
-        <h2>Editar Prestador</h2>
-        <form method="POST" action="">
-            <div class="form-group">
-                <label for="nome">Nome:</label>
-                <input type="text" class="form-control" id="nome" name="nome" value="<?php echo $info['nome']; ?>" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="sobrenome">Sobrenome:</label>
-                <input type="text" class="form-control" id="sobrenome" name="sobrenome" value="<?php echo $info['sobrenome']; ?>" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="data_nasc">Data de Nascimento:</label>
-                <input type="date" class="form-control" id="data_nasc" name="data_nasc" value="<?php echo $info['data_nasc']; ?>" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="endereco">Endereço:</label>
-                <input type="text" class="form-control" id="endereco" name="endereco" value="<?php echo $info['endereco']; ?>" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="cpf">CPF:</label>
-                <input type="text" class="form-control" id="cpf" name="cpf" value="<?php echo $info['cpf']; ?>" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="telefone">Telefone:</label>
-                <input type="text" class="form-control" id="telefone" name="telefone" value="<?php echo $info['telefone']; ?>" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" value="<?php echo $info['email']; ?>" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="senha">Senha:</label>
-                <input type="password" class="form-control" id="senha" name="senha" value="<?php echo $info['senha']; ?>" required>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-        </form>
+<h1>EDITAR PRESTADOR</h1>
+<br><br>
+<form method="POST" action="editarPrestadorSubmit.php">
+    <input type ="hidden" name="idPrestador" value="<?php echo $info['idPrestador']; ?>">
+    <div class="form-group row">
+        <label for="nome" class="col-sm-2 col-form-label"><h4>Nome: </h4></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="nome" value="<?php echo $info['nome']; ?>"/>
+        </div>
     </div>
+    <div class="form-group row">
+        <label for="sobrenome" class="col-sm-2 col-form-label"><h4>Sobrenome: </h4></label>
+        <div class="col-sm-10">
+            <input type="sobrenome" class="form-control" name="sobrenome" value="<?php echo $info['sobrenome']; ?>"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="data_nasc" class="col-sm-2 col-form-label"><h4>Data Nascimento: </h4></label>
+        <div class="col-sm-10">
+            <input type="data" class="form-control" name="data_nasc" value="<?php echo $info['data_nasc']; ?>"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="endereco" class="col-sm-2 col-form-label"><h4>Endereço: </h4></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="endereco" value="<?php echo $info['endereco']; ?>"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="cpf" class="col-sm-2 col-form-label"><h4>CPF: </h4></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="cpf" value="<?php echo $info['cpf']; ?>"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="telefone" class="col-sm-2 col-form-label"><h4>Telefone: </h4></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="telefone" value="<?php echo $info['telefone']; ?>"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="email" class="col-sm-2 col-form-label"><h4>Email: </h4></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="email" value="<?php echo $info['email']; ?>"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="telefone" class="col-sm-2 col-form-label"><h4>Senha: </h4></label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" name="senha" value="<?php echo $info['senha']; ?>"/>
+        </div>
+    </div>
+    
+    
+    <button type="submit" class="btn btn-primary" name="btCadastrar" value="SALVAR">Salvar</button>
+</form>
 
-    <?php include 'inc/footer.inc.php'; ?>
-</body>
-</html>
+<?php
+include 'inc/footer.inc.php';
+?>

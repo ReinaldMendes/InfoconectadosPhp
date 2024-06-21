@@ -40,7 +40,9 @@ if(!isset($_SESSION['logado'])){
     </section>
         <a class="btn btn-primary" href="adicionarCliente.php">Adicionar</a>
         <br><br>
+        <a class="btn btn-primary" href="login.php">Voltar</a>
             <div class="container">
+                <br><br>
                 <div class ="row align-items-center justify-content-center">
                     <div class="col-12">
                         <div class="table-responsive">
