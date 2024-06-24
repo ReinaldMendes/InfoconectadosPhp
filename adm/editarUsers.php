@@ -27,7 +27,7 @@ if (!isset($_SESSION['logado'])) {
 
 <br><br>
 <div class="container">
-    <h1 class="jumbotron-heading">Editar Contato</h1>
+    <h1 class="jumbotron-heading">Editar Usuario</h1>
 </div>
 <br><br>
 

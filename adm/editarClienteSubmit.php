@@ -3,21 +3,31 @@
   $cliente = new Cliente();
 if(!empty($_POST['idCliente'])){
     $nome = $_POST['nome'];
+    $sobrenome = $_POST['sobrenome'];
+    $data_nasc = $_POST['data_nasc'];
+    $endereco = $_POST['endereco'];
+    $qualServicoNecessita = $_POST['qualServicoNecessita'];
+    $telefone = $_POST['telefone'];
     $email = $_POST['email'];
     $senha = $_POST['senha'];
-    $detalhesDoPerfil = $_POST['detalhesDoPerfil'];
-    $cpf = $_POST['cpf'];
-    $numero = $_POST['Data_Nasc'];
-    $telefone = $_POST['telefone'];
     $idCliente = $_POST['idCliente'];
-    if(!empty($email)){
-        $contato->editar( $nome, $email, $senha, $detalhesDoPerfil, $cpf, $Data_Nasc, $telefone, $idCliente);
+  
+
+
+ if (!empty($senha)) {
+        $senha = md5($senha);
+    } else {
+        // Caso a senha esteja vazia, mantenha a senha existente no banco de dados
+        $currentInfo = $prestador->buscar($idPrestador);
+        $senha = $currentInfo['senha'];
     }
 
-    header('Location: gestaoUsuario.php');
+    // Executa a edição do prestador
+    $cliente->editar( $nome, $sobrenome, $data_nasc, $endereco, $qualServicoNecessita, $telefone, $data_nasc, $email, $senha, $idCliente);
+    
 
-}
-
+    // Redireciona de volta para a página de gestão de prestadores
+    header('Location: gestaoCliente.php');
+    exit;
+  }
 ?>
-
- 

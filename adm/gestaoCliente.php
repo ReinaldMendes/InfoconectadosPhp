@@ -52,12 +52,12 @@ if(!isset($_SESSION['logado'])){
   
                                       <!--<th>IdCliente </th>-->
                                       <th>NOME </th>
-                                      <th>SOBRENOME </th>
+                                     <!-- <th>SOBRENOME </th>-->
                                       <th>DATA_NASC</th>
                                       <th>ENDERECO </th>
                                       <th>QUAL SERVICO NECESSITA</th>
                                       <th>TELEFONE </th>
-                                      <th>EMAIL </th>
+                                     <!-- <th>EMAIL </th>-->
                                       <!--<th>SENHA </th>-->
                                       <th>AÇÕES </th>
                                     </tr>
@@ -69,15 +69,16 @@ if(!isset($_SESSION['logado'])){
                                         <tr>
                                             <!--<td><?php //echo $item['idCliente']; ?> </td>-->
                                             <td><?php echo $item['nome']; ?> </td>
-                                            <td><?php echo $item['sobrenome']; ?> </td>
+                                           <!-- <td><?php echo $item['sobrenome']; ?> </td>-->
                                             <td><?php echo implode ("/",array_reverse (explode("-",$item['data_nasc'])));?></td>
                                             <td><?php echo $item['endereco']; ?> </td>
                                             <td><?php echo $item['qualServicoNecessita']; ?> </td>
                                             <td><?php echo $item['telefone']; ?> </td>
-                                            <td><?php echo $item['email']; ?> </td>
+                                            <!--<td><?php echo $item['email']; ?> </td>-->
                                              <!--<td><?php //echo $item['senha']; ?> </td>-->
                           
                                             <td>
+                                                <a href="verClientes.php?idCliente=<?php echo $item['idCliente'];?>" class="btn btn-info">VER</a>
                                                 <a href="editarCliente.php?idCliente=<?php echo $item ['idCliente'];?>"class="btn btn-warning">EDITAR</a>
                                                 <a href="excluirCliente.php?idCliente=<?php echo $item ['idCliente'];?>" class="btn btn-danger" onclick="return confirm('Tem certeza que quer excluir este contato?')">EXCLUIR</a>
                                             </td>

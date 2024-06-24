@@ -97,6 +97,14 @@ class Cliente {
         }
 
         try {
+            // Criptografa a senha em MD5 se houver alteração
+            if (!empty($senha)) {
+                $senha = md5($senha);
+            } else {
+                // Mantém a senha existente se não houver alteração
+                $currentInfo = $this->buscar($idCliente);
+                $senha = $currentInfo['senha'];
+            }
             $sql = $this->con->conectar()->prepare("UPDATE cliente SET nome = :nome, sobrenome = :sobrenome, data_nasc = :data_nasc, endereco = :endereco, qualServicoNecessita = :qualServicoNecessita, telefone = :telefone, email = :email, senha = :senha
                 WHERE idCliente = :idCliente");
             $sql->bindParam(':nome', $nome, PDO::PARAM_STR);

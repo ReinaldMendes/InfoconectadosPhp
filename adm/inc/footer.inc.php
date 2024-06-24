@@ -1,31 +1,6 @@
- <style>
-    .small-image {
-      max-width: 100px; /* Ajuste conforme necessário */
-      height: auto; /* Mantém a proporção da imagem */
-      margin-right: 20px; /* Espaçamento entre a logo e os ícones */
-    }
-    .social {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      text-align: right; /* Alinha os ícones à direita */
-    }
-    .social li {
-      display: inline-block;
-      margin-right: 10px; /* Espaçamento entre os ícones das redes sociais */
-    }
-    .design-info {
-      text-align: left;
-      margin-top: 10px; /* Espaçamento superior */
-    }
-    footer {
-      background-color: #343a40; /* Cor de fundo */
-      color: white; /* Cor do texto */
-      padding: 20px 0; /* Espaçamento interno */
-    }
-  </style>
+<link rel="stylesheet" href="css/style-footer.css">
 </head>
-<body>
+
   <div class="container">
     <footer id="footer">
       <div class="row">
@@ -50,3 +25,13 @@
   </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+

@@ -81,14 +81,33 @@ class Prestador {
         }
     }
 
-    public function editar($nome, $sobrenome, $data_nasc, $endereco, $cpf, $telefone, $email, $idPrestador) {
+    public function editar($nome, $sobrenome, $data_nasc, $endereco, $cpf, $telefone, $email, $senha, $idPrestador) {
+        // Verifica se o e-mail já existe para outro prestador
         if ($this->existeEmail($email) && $this->buscar($idPrestador)['email'] !== $email) {
             return false; // Email já existe e não pertence ao prestador atual
         }
-
+    
         try {
-            $sql = $this->con->conectar()->prepare("UPDATE prestadores SET nome = :nome, sobrenome = :sobrenome, data_nasc = :data_nasc, endereco = :endereco, cpf = :cpf, telefone = :telefone, email = :email
+            // Criptografa a senha em MD5 se houver alteração
+            if (!empty($senha)) {
+                $senha = md5($senha);
+            } else {
+                // Mantém a senha existente se não houver alteração
+                $currentInfo = $this->buscar($idPrestador);
+                $senha = $currentInfo['senha'];
+            }
+    
+            $sql = $this->con->conectar()->prepare("UPDATE prestadores SET 
+                nome = :nome, 
+                sobrenome = :sobrenome, 
+                data_nasc = :data_nasc, 
+                endereco = :endereco, 
+                cpf = :cpf, 
+                telefone = :telefone, 
+                email = :email, 
+                senha = :senha
                 WHERE idPrestador = :idPrestador");
+    
             $sql->bindParam(':nome', $nome, PDO::PARAM_STR);
             $sql->bindParam(':sobrenome', $sobrenome, PDO::PARAM_STR);
             $sql->bindParam(':data_nasc', $data_nasc, PDO::PARAM_STR);
@@ -96,8 +115,9 @@ class Prestador {
             $sql->bindParam(':cpf', $cpf, PDO::PARAM_STR);
             $sql->bindParam(':telefone', $telefone, PDO::PARAM_STR);
             $sql->bindParam(':email', $email, PDO::PARAM_STR);
+            $sql->bindParam(':senha', $senha, PDO::PARAM_STR);
             $sql->bindParam(':idPrestador', $idPrestador, PDO::PARAM_INT);
-
+    
             $sql->execute();
             return true;
         } catch (PDOException $ex) {
@@ -105,6 +125,7 @@ class Prestador {
             return false;
         }
     }
+    
 
     public function excluir($idPrestador) {
         try {

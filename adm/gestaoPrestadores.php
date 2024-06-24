@@ -54,36 +54,38 @@ if(!isset($_SESSION['logado'])){
                                <!-- <th>SENHA</th>-->
                                 <th>AÇÕES</th>
                             </tr>
+                        </thead>
+                        <tbody>
                             <?php
                             $lista = $prestador->listar();
                             foreach ($lista as $item):
                             ?>
-                            <tbody>
-                                <tr>
-                                    <td><?php echo $item['nome']; ?></td>
-                                    <td><?php echo $item['sobrenome']; ?></td>
-                                    <td><?php echo implode("/", array_reverse(explode("-", $item['data_nasc']))); ?></td>
-                                    <!--<td><?php echo $item['endereco']; ?></td>-->
-                                    <!--<td><?php echo $item['cpf']; ?></td>-->
-                                    <td><?php echo $item['telefone']; ?></td>
-                                    <td><?php echo $item['email']; ?></td>
-                                    <!--<td><?php echo $item['senha']; ?></td>-->
-                                    <td>
-                                        <a href="verPrestadores.php?idPrestador=<?php echo $item['idPrestador'];?>" class="btn btn-info">VER</a>
-                                        <a href="editarPrestador.php?idPrestador=<?php echo $item['idPrestador'];?>" class="btn btn-warning">EDITAR</a>
-                                        <a href="excluirPrestador.php?idPrestador=<?php echo $item['idPrestador'];?>" class="btn btn-danger" onclick="return confirm('Tem certeza que quer excluir este prestador?')">EXCLUIR</a>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <tr>
+                                <td><?php echo $item['nome']; ?></td>
+                                <td><?php echo $item['sobrenome']; ?></td>
+                                <td><?php echo implode("/", array_reverse(explode("-", $item['data_nasc']))); ?></td>
+                                <!--<td><?php echo $item['endereco']; ?></td>-->
+                                <!--<td><?php echo $item['cpf']; ?></td>-->
+                                <td><?php echo $item['telefone']; ?></td>
+                                <td><?php echo $item['email']; ?></td>
+                                <!--<td><?php echo $item['senha']; ?></td>-->
+                                <td>
+                                    <a href="verPrestadores.php?idPrestador=<?php echo $item['idPrestador'];?>" class="btn btn-info">VER</a>
+                                    <a href="editarPrestador.php?idPrestador=<?php echo $item['idPrestador'];?>" class="btn btn-warning">EDITAR</a>
+                                    <a href="excluirPrestador.php?idPrestador=<?php echo $item['idPrestador'];?>" class="btn btn-danger" onclick="return confirm('Tem certeza que quer excluir este prestador?')">EXCLUIR</a>
+                                </td>
+                            </tr>
                             <?php
                             endforeach;
                             ?>
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>             
 </main>
+
 <?php
 include 'inc/footer.inc.php';
 ?>
