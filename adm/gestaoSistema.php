@@ -33,7 +33,7 @@ if(!isset($_SESSION['logado'])){
             <h1 class="jumbotron-heading">Gestão de Sistemas</h1>
         </div>
     </section>
-    <a class="btn btn-primary" href="adicionarSistema.php">Adicionar</a>
+   
     <br><br>
     <a class="btn btn-primary" href="login.php">Voltar</a>
     <br><br>
@@ -60,7 +60,6 @@ if(!isset($_SESSION['logado'])){
                                 <td><?php echo $item['versao']; ?></td>
                                 <td><?php echo $item['descricao']; ?></td>
                                 <td>
-                                    <a href="verSistema.php?idSistema=<?php echo $item['idSistema'];?>" class="btn btn-info">VER</a>
                                     <a href="editarSistema.php?idSistema=<?php echo $item['idSistema'];?>" class="btn btn-warning">EDITAR</a>
                                     <a href="excluirSistema.php?idSistema=<?php echo $item['idSistema'];?>" class="btn btn-danger" onclick="return confirm('Tem certeza que quer excluir este sistema?')">EXCLUIR</a>
                                 </td>
