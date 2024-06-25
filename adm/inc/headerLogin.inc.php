@@ -47,10 +47,7 @@
           
         </form>
 
-        <div class="text-end">
-          
-          <a class="btn btn-primary" href="sair.php">Sair</a>
-      </div>
+       
     </div>
   </header>
     

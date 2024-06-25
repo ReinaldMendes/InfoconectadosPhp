@@ -9,6 +9,7 @@
           <img src="img/logo.png" class="img-fluid small-image" alt="Logo Infoconectados">
         </div>
         <div class="col-12 col-md-8 text-right">
+          <br><br>
           <ul class="social">
             <li><a href="https://www.facebook.com/ReinaldMendes18" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/facebook.svg" width="32" height="32" /></a></li>
             <li><a href="https://www.github.com/reinaldmendes" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/github.svg" width="32" height="32" /></a></li>
