@@ -22,7 +22,7 @@ $users->setUsers($_SESSION['logado']);
             <h1 class="jumbotron-heading">Usuários</h1>
         </div>
     </section>
-    <?php if ($users->temPermissoes('add')): ?>
+    <?php if ($users->temPermissoes('add')||$users->temPermissoes('super')): ?>
         <a class="btn btn-primary" href="adicionarUsers.php">Adicionar Usuário</a>
     <?php endif; ?>
     <br><br>
@@ -49,13 +49,13 @@ $users->setUsers($_SESSION['logado']);
                                     <td><?php echo $item['nome']; ?></td>
                                     <td><?php echo $item['email']; ?></td>
                                     <td>
-                                        <?php if ($users->temPermissoes('super')): ?>
+                                        <?php if ($users->temPermissoes('super') ||$users->temPermissoes('add') ): ?>
                                             <a href="verUsers.php?id=<?php echo $item['id']; ?>" class="btn btn-info">VER</a>
                                         <?php endif; ?>
-                                        <?php if ($users->temPermissoes('edit') || $users->temPermissoes('add')  ): ?>
+                                        <?php if ($users->temPermissoes('edit') || $users->temPermissoes('add') ||  $users->temPermissoes('super') ): ?>
                                             <a href="editarUsers.php?id=<?php echo $item['id']; ?>" class="btn btn-warning">EDITAR</a>
                                         <?php endif; ?>
-                                        <?php if ($users->temPermissoes('del')): ?>
+                                        <?php if ($users->temPermissoes('del')||$users->temPermissoes('super') ): ?>
                                             <a href="excluirUsers.php?id=<?php echo $item['id']; ?>" class="btn btn-danger" onclick="return confirm('Tem certeza que quer excluir este contato?')">EXCLUIR</a>
                                         <?php endif; ?>
                                     </td>
@@ -68,7 +68,7 @@ $users->setUsers($_SESSION['logado']);
         </div> 
     </div>           
 </main>
-
+<br> <br>
 <?php
 include 'inc/footer.inc.php';
 ?>

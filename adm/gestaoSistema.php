@@ -75,7 +75,7 @@ if(!isset($_SESSION['logado'])){
         </div>
     </div>             
 </main>
-
+<br> <br>
 <?php
 include 'inc/footer.inc.php';
 ?>

@@ -7,23 +7,7 @@ if(!isset($_SESSION['logado'])){
   exit;
 }
 ?>
-<style>
  
-
-  h1 {
-    text-align: center; /* Centraliza o conteúdo na horizontal */
-  }
-
-  .loll-image {
-    display: block; /* Garante que a imagem será tratada como um bloco */
-    margin: 0 auto; /* Centraliza a imagem na horizontal */
-  }
-
-  .container-fluid {
-    padding-top: 50px; /* Ajuste para afastar o conteúdo do topo, para que não fique escondido pela imagem de fundo */
-  }
-
-</style> 
 <br> <br>
 <form method="POST" action="adicionarClienteSubmit.php">
   <div class="form-group row">
@@ -73,11 +57,10 @@ if(!isset($_SESSION['logado'])){
       <input type="password" class="form-control" name="senha" placeholder="Digite uma senha">
     </div>
   </div>
- 
-    <button type="submit" class="btn btn-primary" name="btCadastrar" value = "Adicionar">Adicionar</button>
-   
-  </div>
+  <br><br>
+  <input type="submit" name="btCadastrar" class="btn btn-primary" value="Adicionar">
 </form>
+
 <?php
 include 'inc/footer.inc.php';
 ?>
