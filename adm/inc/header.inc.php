@@ -11,6 +11,7 @@
       max-width: 10%; /* Defina o tamanho máximo desejado */
       height: auto; /* Mantenha a proporção da imagem */
     }
+    
   </style>
 
 

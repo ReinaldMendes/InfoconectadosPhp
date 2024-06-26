@@ -3,13 +3,13 @@ body {
 }
 
 .jumbotron {
-    background-color: #355E3B;
+    background-color: #5e5d35;
     color: white;
     text-align: center;
 }
 
 h1 {
-    color: #000; /* Cor do texto alterada para preto */
+    color: #007bff; /* Cor do texto alterada para preto */
 }
 h4 {
     color: white; /* Cor do texto alterada para preto */

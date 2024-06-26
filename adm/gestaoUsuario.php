@@ -10,12 +10,7 @@ if(!isset($_SESSION['logado'])){
 }
 $users->setUsers($_SESSION['logado']);
 ?>
-<style type="text/css">
-    .row {
-        background-color: #ddc;
-        padding: 10px;
-    }
-</style>
+<link rel="stylesheet" href="css/style-gestao.css">
 <main>
     <section class="jumbotron text-black-50 text-center">
         <div class="container">

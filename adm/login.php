@@ -12,20 +12,16 @@ $nomeUsuario = $users->getNomeUsuario(); // Obtendo o nome do usuário logado
 
 include 'inc/header.inc.php';
 ?>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <link href="css/bootstrap.min.css" rel="stylesheet"> 
     <link rel="stylesheet" href="css/styleLogin.css">
-    
-</head>
+ 
+  
 <body>
     <div class="container">
         <div class="jumbotron mt-5">
-            <h1>SEJA BEM VINDO <?php echo htmlspecialchars($nomeUsuario); ?>, À PARTE ADMINISTRATIVA</h1>
-            <h4>ESCOLHA UMA DAS OPÇÕES</h4>
+            <h1>SEJA BEM VINDO, <?php echo htmlspecialchars($nomeUsuario); ?> :) <br> ESSA É A GESTÃO ADMINISTRATIVA </h1>
+            <h4>ESCOLHA UMA DAS OPÇÕES : </h4>
         </div>
         <div class="options">
             <ul>
@@ -56,7 +52,7 @@ include 'inc/header.inc.php';
     <script src="js/bootstrap.min.js"></script> <!-- Link local para o JS do Bootstrap -->
 </body>
 </html>
-
+<link rel="stylesheet" href="css/style-gestao.css">
 <?php
 include 'inc/footer.inc.php';
 ?>

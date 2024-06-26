@@ -14,24 +14,7 @@ if(!isset($_SESSION['logado'])){
 
 ?>
 
-<style type="text/css">
-    .row{
-        background-color: #ddc;
-        padding:10px;
-    }
-</style>
-<style>
-  body {
-    background-color: #ccc;
-    
-  }
-
-  h1 {
-    text-align: center; /* Centraliza o conteúdo na horizontal */
-  }
-
-  
-</style>
+<link rel="stylesheet" href="css/style-gestao.css">
 <main>
     <section class="jumbotron text-black-50 text-center">
         <div class="container">
