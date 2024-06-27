@@ -18,6 +18,8 @@ if(!empty($_POST ['email'])){
 
 }
 ?>
+
+
 <br> <br>
 <link rel="stylesheet" href="css/style-index.css">
 <style>
