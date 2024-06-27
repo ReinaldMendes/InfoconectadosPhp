@@ -8,13 +8,13 @@
       }
     h1 {
         text-align: center;
-        color:#035a3d
+        color:#f7fdfb
     }
     h4 {
-        color: black; /* Cor do texto alterada para preto */
+        color: rgb(248, 245, 245); /* Cor do texto alterada para preto */
     }
     .jumbotron {
-        background-color: #faf43d;
+        background-color: #161605;
         color: white;
         text-align: center;
     }
