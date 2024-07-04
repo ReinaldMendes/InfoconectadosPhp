@@ -1,0 +1,21 @@
+
+    .row {
+        background-color: #343a40;
+        padding: 10px;
+    }
+    body {
+        background-color: #ccc;
+      }
+    h1 {
+        text-align: center;
+        color:#f7fdfb
+    }
+    h4 {
+        color: rgb(248, 245, 245); /* Cor do texto alterada para preto */
+    }
+    .jumbotron {
+        background-color: #161605;
+        color: white;
+        text-align: center;
+    }
+      

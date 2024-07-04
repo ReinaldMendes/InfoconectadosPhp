@@ -11,7 +11,6 @@
       max-width: 10%; /* Defina o tamanho máximo desejado */
       height: auto; /* Mantenha a proporção da imagem */
     }
-    
   </style>
 
 
@@ -39,16 +38,6 @@
           <img src="img/logo.png" class="img-fluid small-image" width="100" height="82" alt="Logo Agenda"><use xlink:href="login.php"></use>
         </a>
        
-
-          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-            <li>
-              <a href="login.php" class="nav-link text-secondary">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="login.php"></use></svg>
-                Inicio
-              </a>
-            </li>
-            
-          </ul>
         </div>
       </div>
     </div>
@@ -58,14 +47,7 @@
           
         </form>
 
-        <div class="text-end">
-          
-          <a class="btn btn-primary" href="sair.php">Sair</a>
-      </div>
+       
     </div>
   </header>
-   
-
-
-
-   
+    

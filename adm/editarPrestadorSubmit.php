@@ -1,20 +1,21 @@
 <?php
-  include 'classes/clients.class.php';
-  $cliente = new Cliente();
-if(!empty($_POST['idCliente'])){
+include 'classes/prestadores.class.php';
+
+$prestador = new Prestador();
+
+if(!empty($_POST['idPrestador'])){
+    $idPrestador = $_POST['idPrestador'];
     $nome = $_POST['nome'];
     $sobrenome = $_POST['sobrenome'];
-    $data_nasc = $_POST['data_nasc'];
     $endereco = $_POST['endereco'];
-    $qualServicoNecessita = $_POST['qualServicoNecessita'];
+    $data_nasc = $_POST['data_nasc'];
+    $cpf = $_POST['cpf'];
     $telefone = $_POST['telefone'];
     $email = $_POST['email'];
     $senha = $_POST['senha'];
-    $idCliente = $_POST['idCliente'];
-  
 
-
- if (!empty($senha)) {
+    // Verifica se o campo de senha não está vazio para atualizar
+    if (!empty($senha)) {
         $senha = md5($senha);
     } else {
         // Caso a senha esteja vazia, mantenha a senha existente no banco de dados
@@ -23,11 +24,10 @@ if(!empty($_POST['idCliente'])){
     }
 
     // Executa a edição do prestador
-    $cliente->editar( $nome, $sobrenome, $data_nasc, $endereco, $qualServicoNecessita, $telefone, $data_nasc, $email, $senha, $idCliente);
-    
+    $prestador->editar($nome, $sobrenome, $endereco, $data_nasc, $cpf, $telefone, $email, $senha, $idPrestador);
 
     // Redireciona de volta para a página de gestão de prestadores
-    header('Location: gestaoCliente.php');
+    header('Location: gestaoPrestadores.php');
     exit;
-  }
+}
 ?>

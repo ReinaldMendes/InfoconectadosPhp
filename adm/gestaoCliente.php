@@ -14,24 +14,7 @@ if(!isset($_SESSION['logado'])){
 
 ?>
 
-<style type="text/css">
-    .row{
-        background-color: #ddc;
-        padding:10px;
-    }
-</style>
-<style>
-  body {
-    background-color: #ccc;
-    
-  }
-
-  h1 {
-    text-align: center; /* Centraliza o conteúdo na horizontal */
-  }
-
-  
-</style>
+<link rel="stylesheet" href="css/style-gestao.css">
 <main>
     <section class="jumbotron text-black-50 text-center">
         <div class="container">
@@ -40,7 +23,9 @@ if(!isset($_SESSION['logado'])){
     </section>
         <a class="btn btn-primary" href="adicionarCliente.php">Adicionar</a>
         <br><br>
+        <a class="btn btn-primary" href="login.php">Voltar</a>
             <div class="container">
+                <br><br>
                 <div class ="row align-items-center justify-content-center">
                     <div class="col-12">
                         <div class="table-responsive">
@@ -50,12 +35,12 @@ if(!isset($_SESSION['logado'])){
   
                                       <!--<th>IdCliente </th>-->
                                       <th>NOME </th>
-                                      <th>SOBRENOME </th>
+                                     <!-- <th>SOBRENOME </th>-->
                                       <th>DATA_NASC</th>
                                       <th>ENDERECO </th>
                                       <th>QUAL SERVICO NECESSITA</th>
                                       <th>TELEFONE </th>
-                                      <th>EMAIL </th>
+                                     <!-- <th>EMAIL </th>-->
                                       <!--<th>SENHA </th>-->
                                       <th>AÇÕES </th>
                                     </tr>
@@ -67,15 +52,16 @@ if(!isset($_SESSION['logado'])){
                                         <tr>
                                             <!--<td><?php //echo $item['idCliente']; ?> </td>-->
                                             <td><?php echo $item['nome']; ?> </td>
-                                            <td><?php echo $item['sobrenome']; ?> </td>
+                                           <!-- <td><?php echo $item['sobrenome']; ?> </td>-->
                                             <td><?php echo implode ("/",array_reverse (explode("-",$item['data_nasc'])));?></td>
                                             <td><?php echo $item['endereco']; ?> </td>
                                             <td><?php echo $item['qualServicoNecessita']; ?> </td>
                                             <td><?php echo $item['telefone']; ?> </td>
-                                            <td><?php echo $item['email']; ?> </td>
+                                            <!--<td><?php echo $item['email']; ?> </td>-->
                                              <!--<td><?php //echo $item['senha']; ?> </td>-->
                           
                                             <td>
+                                                <a href="verClientes.php?idCliente=<?php echo $item['idCliente'];?>" class="btn btn-info">VER</a>
                                                 <a href="editarCliente.php?idCliente=<?php echo $item ['idCliente'];?>"class="btn btn-warning">EDITAR</a>
                                                 <a href="excluirCliente.php?idCliente=<?php echo $item ['idCliente'];?>" class="btn btn-danger" onclick="return confirm('Tem certeza que quer excluir este contato?')">EXCLUIR</a>
                                             </td>

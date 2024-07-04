@@ -6,7 +6,7 @@ include 'inc/header.inc.php';
     $cliente = new Cliente();
 
     if(!empty($_GET['idCliente'])){
-        $idUsuario = $_GET['idCliente'];
+        $idCliente = $_GET['idCliente'];
         $info = $cliente->buscar($idCliente);
         if(empty($info['email'])){
             header("Location: editarCliente.php");
@@ -16,13 +16,14 @@ include 'inc/header.inc.php';
         header("Location: editarCliente.php");
             exit;
     }
-    if(!isset($_SESSION['logado'])){
-      header("Location: index.php");
+    if(isset($_SESSION['logado'])){
+      header("Location: login.php");
       exit;
   }
 ?>
 
- 
+
+
 <h1>EDITAR CLIENTE</h1>
 <br> <br>
 <form method="POST" action="editarClienteSubmit.php">
@@ -36,7 +37,7 @@ include 'inc/header.inc.php';
   <div class="form-group row">
     <label for="email" class="col-sm-2 col-form-label"><h4>Sobrenome: </h4></label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" name="sobrenome" value="<?php echo $info ['sobrenome']?> "/>
+      <input type="text" class="form-control" name="sobrenome" value="<?php echo $info ['sobrenome']?> "/>
     </div>
   </div>
   <div class="form-group row">
@@ -52,15 +53,9 @@ include 'inc/header.inc.php';
     </div>
   </div>
   <div class="form-group row">
-    <label for="cpf" class="col-sm-2 col-form-label"><h4>Cpf: </h4></label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="cpf" value="<?php echo $info ['cpf']?> "/>
-    </div>
-  </div>
-  <div class="form-group row">
     <label for="qualServicoNecessita" class="col-sm-2 col-form-label"><h4>Qual serviço necessita: </h4></label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="qualServicoNecessita" value="<?php echo $info ['qualServicoNecessitac']?> "/>
+      <input type="text" class="form-control" name="qualServicoNecessita" value="<?php echo $info ['qualServicoNecessita']?> "/>
     </div>
   </div>
   <div class="form-group row">
@@ -81,6 +76,7 @@ include 'inc/header.inc.php';
     <button type="submit" class="btn btn-primary" name="btCadastrar" value = "SALVAR">Salvar</button>
    
   </div>
+  <br><br>
 </form>
 <?php
 include 'inc/footer.inc.php';
