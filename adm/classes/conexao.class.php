@@ -10,7 +10,7 @@ class Conexao {  //no php a classe é criada com letra maíuscula por padrão
     
     public function __construct(){
         $this->servidor = "localhost";  //o this está chamando os atributos definidos na classe
-        $this->banco = "agendasenac";
+        $this->banco = "infoconectadosfinal";
         $this->usuario = "root";
         $this->senha = "";
 

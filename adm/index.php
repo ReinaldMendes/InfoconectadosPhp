@@ -1,6 +1,25 @@
 <?php
-include 'inc/header.inc.php';
+session_start(); 
+require_once 'inc/header.inc.php';
+require 'classes/users.class.php';
+
+if(!empty($_POST ['email'])){
+    $email = addslashes($_POST ['email']);
+    $senha = md5($_POST['senha']);
+
+    $users = new Users ();
+
+    if($users->fazerLogin($email,$senha)){
+        header("Location: login.php");
+        exit;
+    }else{
+        echo '<span style="color: green">'."Usuário e/ou senha incorretos!".'</span>';
+    }
+
+}
 ?>
+<br> <br>
+<link rel="stylesheet" href="css/style-login.css">
 <style>
   body {
     background-color: #ccc;
@@ -21,11 +40,6 @@ include 'inc/header.inc.php';
     display: block; /* Garante que a imagem será tratada como um bloco */
     margin: 0 auto; /* Centraliza a imagem na horizontal */
   }
-
- 
-</style>
-
-<style>
     
 .login-container {
         max-width: 400px;
@@ -68,18 +82,19 @@ include 'inc/header.inc.php';
 </style>
 
 <br> <br>
+
 <head>
 <div class="login-container">
-    <h1>Login</h1>
+    <h1>LOGIN</h1>
 
-    <form method="post" action="login.php">
+    <form method="POST">
         <div>
-            <label for="username">Usuário:</label>
-            <input type="text" id="username" name="username" required>
+            <label for="email"> Usuário: </label>
+            <input type="text" name="email" placeholder="Digite seu email">
         </div>
         <div>
-            <label for="password">Senha:</label>
-            <input type="password" id="password" name="password" required>
+            <label for="senha">Senha: </label>
+            <input type="password"  name="senha" placeholder="Digite sua senha">
         </div>
         <div>
             <button type="submit">Entrar</button>
@@ -92,4 +107,3 @@ include 'inc/header.inc.php';
 <?php
 include 'inc/footer.inc.php';
 ?>
-   
