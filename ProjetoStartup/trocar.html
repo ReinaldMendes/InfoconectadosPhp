@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Formulario</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+  </head>
+  <body class="is-preload">
+
+   
+    <div class="fields>
+      <br />
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1 class="title-login">Login</h1>
+        </div>
+        <div class="panel-body">
+          <form method="post">
+  
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"> <i
+                      class="glyphicon glyphicon-user" style="width: auto"></i>
+  
+                    </span> <input id="txtUsuario" runat="server" type="text" class="form-control" name="username" placeholder="Usuário" required="" />
+  
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"> <i
+                      class="glyphicon glyphicon-lock" style="width: auto"></i>
+                    </span> <input id="txtSenha" runat="server" type="password" class="form-control" name="password" placeholder="Senha" required="" />
+              </div>
+            </div>
+            <!--div class="alert alert-danger">
+                  <strong>Atenção!</strong> Usuário e/ou senha incorretos.
+                </div-->
+            <div>
+              <input class="btn btn-xm btn-block btn-entrar" type="submit" value="Entrar" onclick="Login()" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p id="demo"></p>
+  <script>
+    let Usuario=document.getElementById ("txtUsuario").value;
+      let Dados = '{ "Dados" : [' +
+'{ "Usuario":"Reinald" , "Senha":"40401Rei" },' +
+'{ "firstName":"Anna" , "lastName":"Smith" },' +
+'{ "firstName":"Peter" , "lastName":"Jones" } ]}';
+
+
+const obj = JSON.parse(text);
+if(Dados.employees[0].Usuario==Usuario){
+  console.log("Usuario ok");
+}
+document.getElementById("txtUsuario").innerHTML =
+Dados.employees[1].Usuario + " " + Dados.employees[0].Senha;
+</script>
+
+
+
+</body>
+</html>
