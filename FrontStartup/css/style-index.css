@@ -1,0 +1,166 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333333;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #017f63;
+    color: #ffffff;
+}
+
+.logo img {
+    width: 100px;
+    cursor: pointer;
+}
+
+.login-options {
+    display: flex;
+    gap: 20px;
+}
+
+.login-option a:hover {
+    background-color: #004a00;
+    color: #ffffff;
+}
+.login-buttons {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+}
+
+.login-buttons a {
+    color: #ffffff;
+    background-color: #017f63;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
+
+.login-buttons a:hover {
+    background-color: #043d04;
+}
+
+h1 {
+    font-size: 36px;
+    color: #017f63;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+p {
+    color: #666666;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.services-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 0 20px 50px;
+    flex-wrap: wrap;
+}
+
+.service-card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.service-card img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.service-card h3 {
+    color: #017f63;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.service-card p {
+    color: #666666;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.service-card a {
+    color: #ffffff;
+    background-color: #017f63;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.service-card a:hover {
+    background-color: #004a00;
+}
+
+
+footer {
+    font-size: 14px;
+    color: #b0bec5;
+    padding: 20px;
+    background-color: #017f63;
+    text-align: center;
+}
+
+footer p {
+    margin: 0 0 20px 0;
+    color: #ffffff;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 15px;
+}
+
+.social li {
+    display: inline-block;
+}
+
+.social li img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.social li img:hover {
+    transform: scale(1.2);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}

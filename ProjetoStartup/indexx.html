@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infoconectados</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #017f63;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #ffffff;
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 150px;
+            cursor: pointer;
+        }
+
+        .login-buttons {
+            display: flex;
+            gap: 10px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .login-buttons a {
+            color: #ffffff;
+            background-color: #017f63;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+
+        .login-buttons a:hover {
+            background-color: #004a00;
+        }
+
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            flex-direction: column;
+            color: #0d0e0d;
+        }
+
+        .main-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .main-content p {
+            font-size: 24px;
+            margin-bottom: 40px;
+        }
+
+        .services {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background-color: #ffffff;
+            color: #017f63;
+            border-radius: 20px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .service-card a {
+            color: #ffffff;
+            background-color: #017f63;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .service-card a:hover {
+            background-color: #004a00;
+        }
+
+        footer {
+            font-size: 14px;
+            color: #b0bec5;
+            padding: 20px;
+            background-color: #017f63;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho com Logo e Botões de Login -->
+    <div class="header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo.png" alt="Infoconectados Logo">
+            </a>
+        </div>
+        <div class="login-buttons">
+            <a href="login-cliente.html">Login Cliente</a>
+            <a href="login-profissional.html">Login Profissional</a>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="main-content">
+        <h1>Conectando Soluções com Profissionais</h1>
+        <p>Estamos aqui para facilitar sua vida. Conheça Nossos Serviços.</p>
+    </div>
+
+    <!-- Seção de Serviços -->
+    <div class="services">
+        <div class="service-card">
+            <h3>Serviço 1</h3>
+            <p>Descrição breve do serviço.</p>
+            <a href="#">Saiba Mais</a>
+        </div>
+        <div class="service-card">
+            <h3>Serviço 2</h3>
+            <p>Descrição breve do serviço.</p>
+            <a href="#">Saiba Mais</a>
+        </div>
+        <div class="service-card">
+            <h3>Serviço 3</h3>
+            <p>Descrição breve do serviço.</p>
+            <a href="#">Saiba Mais</a>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2024 Infoconectados. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
