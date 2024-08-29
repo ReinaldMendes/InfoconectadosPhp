@@ -1,7 +1,7 @@
 <div class="header">
     <div class="logo">
-        <a href="index.html">
-            <img src="logo.png" alt="Infoconectados Logo">
+        <a href="index.php">
+            <img src="img/logo.png" alt="Infoconectados Logo">
         </a>
     </div>
     <div class="login-buttons">
