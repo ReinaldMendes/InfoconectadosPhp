@@ -21,7 +21,7 @@
         <div class="logo-container">
             <img src="img/logo.png" alt="Infoconectados">
             <h1>INFOCONECTADOS</h1>
-            <p class="subtitle">CONECTADOS EM BUSCA DE SOLUÇÕES DE PROBLEMAS</p>
+            <p class="subtitle">CONECTANDO SOLUÇÕES PARA CLIENTES E PRESTADORES </p>
         </div>
         <nav class="nav-buttons">
             <a href="#">INÍCIO</a>
