@@ -164,11 +164,7 @@ footer p {
     transform: scale(1.2);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
-p.subtitle {
-    color: #666666;
-    font-size: 18px;
-    z-index: 2;
-}
+
 /* Background for 'Serviços' and other pages */
 .hero {
     display: flex;

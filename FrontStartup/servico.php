@@ -7,7 +7,13 @@
     <link rel="stylesheet" href="./css/style-index.css">
 </head>
 <body>
-
+<style>
+p.subtitle {
+    color: #666666;
+    font-size: 18px;
+    z-index: 2;
+}
+</style>
     <!-- Incluindo o cabeçalho -->
     <?php include 'inc/header.php'; ?>
 
