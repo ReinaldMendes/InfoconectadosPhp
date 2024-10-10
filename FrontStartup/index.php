@@ -13,7 +13,7 @@
         </div>
         <div class="login-buttons">
             <a href="login-cliente.php">Login Cliente</a>
-            <a href="#">Login Profissional</a>
+            <a href="login-prestador.php">Login Profissional</a>
         </div>
     </header>
 

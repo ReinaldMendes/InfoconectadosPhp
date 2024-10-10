@@ -10,7 +10,7 @@ require_once './inc/header.php';
 
 <!-- Container para o formulário de login -->
 <div class="login-container">
-    <h1>Login do Cliente</h1>
+    <h1>Login do Prestador</h1>
 
     <!-- Formulário de login -->
     <form method="POST">
