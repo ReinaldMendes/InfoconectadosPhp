@@ -1,4 +1,20 @@
 <footer>
+<a href="https://wa.me/5542991562593" class="whatsapp-button" target="_blank">
+    <img src="img/174879.png" alt="WhatsApp">
+</a>
+
+<style>
+.whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+.whatsapp-button img {
+    width: 60px;
+    height: 60px;
+}
+</style>
     <p>&copy; 2024 Infoconectados. Todos os direitos reservados.</p>
     <div class="social-icons">
         <ul class="social">

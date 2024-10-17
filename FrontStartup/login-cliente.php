@@ -40,6 +40,5 @@ require_once './inc/header.php';
 
 <br><br>
 
-<?php
-include './inc/footer.php';
-?>
+<!-- Incluindo o rodapé -->
+<?php include 'inc/footer.php'; ?>

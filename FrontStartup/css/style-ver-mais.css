@@ -1,0 +1,112 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #2c6f4f;
+}
+
+h2, h3 {
+    font-size: 1.8rem;
+    color: #4b9c69;
+    margin-top: 20px;
+}
+
+p, ul {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+.examples {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.example-item {
+    width: 45%;
+    text-align: center;
+}
+
+.example-item img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.example-item p {
+    margin-top: 10px;
+    font-size: 1.1rem;
+}
+
+footer {
+    font-size: 14px;
+    color: #b0bec5;
+    padding: 20px;
+    background-color: #017f63;
+    text-align: center;
+}
+
+footer p {
+    margin: 0 0 20px 0;
+    color: #ffffff;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 15px;
+}
+
+.social li {
+    display: inline-block;
+}
+
+.social li img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.social li img:hover {
+    transform: scale(1.2);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+.button-container {
+    text-align: center; /* Centraliza o conteúdo */
+    margin-top: 30px; /* Espaçamento acima do botão */
+}
+
+.cta-button {
+    display: inline-block; /* Para aplicar padding */
+    padding: 15px 30px; /* Tamanho do botão */
+    font-size: 18px; /* Tamanho da fonte */
+    color: #ffffff; /* Cor do texto */
+    background-color: #017f63; /* Cor de fundo do botão */
+    border-radius: 25px; /* Bordas arredondadas */
+    text-decoration: none; /* Remove o sublinhado */
+    transition: background-color 0.3s, transform 0.3s; /* Efeitos de transição */
+}
+
+.cta-button:hover {
+    background-color: #004a00; /* Cor ao passar o mouse */
+    transform: scale(1.05); /* Aumenta o botão ao passar o mouse */
+}

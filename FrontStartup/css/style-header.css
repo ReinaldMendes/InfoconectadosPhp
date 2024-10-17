@@ -1,0 +1,135 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333333;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 15px; /* Reduzir ainda mais o padding para deixar o cabeçalho mais fino */
+    background-color: #017f63;
+    color: #ffffff;
+    position: relative;
+    z-index: 1000;
+}
+
+.logo img {
+    width: 60px; /* Reduzir o tamanho da logo */
+    cursor: pointer;
+}
+
+.menu-icon {
+    font-size: 24px; /* Reduzir o ícone de menu */
+    color: #ffffff;
+    cursor: pointer;
+    display: block;
+}
+
+/* Menu de navegação */
+.nav-menu {
+    display: none; /* Ocultar o menu por padrão */
+    flex-direction: column;
+    gap: 8px;
+    background-color: rgba(254, 255, 255, 0.9);
+    padding: 10px;
+    position: absolute;
+    top: 40px; /* Ajustar o alinhamento com o cabeçalho */
+    right: 0;
+    width: 100%; /* O menu vai ocupar toda a largura da tela */
+    max-width: 200px; /* Ajustar a largura do menu */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Botões de login no final do menu */
+.login-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.login-buttons a {
+    background-color: #f39c12;
+    color: white;
+    padding: 6px 12px; /* Reduzir o padding dos botões */
+    text-align: center;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 13px; /* Reduzir o tamanho da fonte */
+}
+
+.login-buttons a:hover {
+    background-color: #e67e22;
+}
+
+/* Estilo para os links do menu */
+.nav-menu a {
+    color: #017f63;
+    background-color: transparent;
+    text-decoration: none;
+    padding: 6px 10px; /* Reduzir o padding */
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    font-size: 14px; /* Reduzir o tamanho da fonte */
+    border: 2px solid transparent;
+    display: block;
+}
+
+.nav-menu a:hover {
+    background-color: #faf609;
+    border-color: #ffffff;
+}
+
+/* Exibir o menu com transição suave */
+.nav-menu.show {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Responsividade: Ajuste para telas menores */
+@media (max-width: 768px) {
+    .nav-menu {
+        width: 100%;
+        max-width: 100%; /* Ocupa toda a largura da tela em dispositivos menores */
+        top: 40px;
+        right: 0;
+        padding: 15px;
+    }
+
+    .nav-menu a {
+        font-size: 12px; /* Diminuir o tamanho da fonte para melhor encaixe */
+        padding: 8px; /* Ajustar o padding para telas menores */
+    }
+
+    .login-buttons a {
+        font-size: 12px; /* Ajustar tamanho da fonte dos botões */
+        padding: 8px;
+    }
+}
+
+/* Responsividade: Ajuste para telas muito pequenas (celulares) */
+@media (max-width: 480px) {
+    .nav-menu {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .menu-icon {
+        font-size: 22px; /* Reduzir o tamanho do ícone em telas menores */
+    }
+
+    .logo img {
+        width: 50px; /* Reduzir ainda mais o logo em telas pequenas */
+    }
+}

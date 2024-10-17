@@ -7,15 +7,9 @@
     <link rel="stylesheet" href="css/style-indexx.css">
 </head>
 <body>
-    <header class="header">
-        <div class="logo">
-            <img src="img/logo.png" alt="Infoconectados" onclick="window.location.href='index.html'">
-        </div>
-        <div class="login-buttons">
-            <a href="login-cliente.php">Login Cliente</a>
-            <a href="login-prestador.php">Login Profissional</a>
-        </div>
-    </header>
+
+    <!-- Incluindo a header -->
+    <?php include 'inc/header.php'; ?>
 
     <section class="hero">
         <div class="logo-container">
@@ -32,6 +26,8 @@
         </nav>
     </section>
 
+    <!-- Incluindo o footer -->
     <?php include 'inc/footer.php'; ?>
+
 </body>
 </html>

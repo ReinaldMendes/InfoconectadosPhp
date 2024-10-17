@@ -29,13 +29,13 @@ p.subtitle {
                     <img src="img/cliente.png" alt="Sou Cliente">
                     <h3>Sou Cliente</h3>
                     <p>Preciso de um serviço.</p>
-                    <a href="#">Ver Mais</a>
+                    <a href="ver-mais-cliente.php">Detalhes</a>
                 </div>
                 <div class="service-card">
                     <img src="img/profissional.png" alt="Sou Profissional">
                     <h3>Sou Profissional</h3>
                     <p>Busco novos clientes.</p>
-                    <a href="#">Ver Mais</a>
+                    <a href="ver-mais-profissional.php">Detalhes</a>
                 </div>
             </div>
         </div>
