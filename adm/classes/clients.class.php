@@ -134,5 +134,18 @@ class Cliente {
             echo 'ERRO: ' . $ex->getMessage();
         }
     }
+    public function fazerLogin($email, $senha) {
+        $sql = $this->con->conectar()->prepare("SELECT * FROM cliente WHERE email = :email AND senha = :senha");
+        $sql->bindValue(":email", $email);
+        $sql->bindValue(":senha", $senha);
+        $sql->execute();
+
+        if ($sql->rowCount() > 0) {
+            $sql = $sql->fetch();
+            $_SESSION["logado"] = $sql['id'];
+            return TRUE;
+        }
+        return FALSE;
+    }
 }
 ?>
