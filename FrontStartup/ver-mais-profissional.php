@@ -33,7 +33,7 @@
     
     <!-- Botão centralizado -->
     <div class="button-container">
-        <a href="cadastroPrestadores.php" class="cta-button">Quero me cadastrar</a>
+        <a href="cadastroPrestador.php" class="cta-button">Quero me cadastrar</a>
     </div>
 </div>
 

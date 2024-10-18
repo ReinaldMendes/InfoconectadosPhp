@@ -1,83 +1,137 @@
-/* Estilo para a página de login */
+/* Container principal */
 .login-container {
     max-width: 400px;
-    margin: 100px auto;
+    margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: #f9f9f9;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.login-container h1 {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     text-align: center;
-    color: #017f63;
+}
+
+/* Título */
+.login-container h1 {
     margin-bottom: 20px;
-}
-
-.login-container form div {
-    margin-bottom: 15px;
-}
-
-.login-container label {
-    display: block;
-    font-size: 14px;
     color: #333;
 }
 
-.login-container input[type="text"],
-.login-container input[type="password"] {
+/* Estilização dos grupos de input */
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
+    box-sizing: border-box;
 }
 
-.login-container button {
+/* Botão principal */
+.button-group {
+    margin-top: 20px;
+}
+
+.button-group button {
     width: 100%;
     padding: 10px;
-    background-color: #017f63;
+    background-color: #28a745;
     color: #fff;
+    font-weight: bold;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.login-container button:hover {
-    background-color: #004a00;
+.button-group button:hover {
+    background-color: #218838;
 }
 
-/* Certifique-se de que não está afetando o header e footer */
-.header, footer {
-    z-index: 80; /* Para garantir que o header e footer fiquem visíveis */
-    position: relative;
-    width: 80;
+/* Login com Google */
+.google-login {
+    margin-top: 15px;
+}
+
+.google-login button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4285F4;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.google-login button img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.google-login button:hover {
+    background-color: #357ae8;
+}
+
+/* Links adicionais */
+.extra-links {
+    margin-top: 20px;
+}
+
+.extra-links a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.extra-links a:hover {
+    text-decoration: underline;
+}
+
+.extra-links span {
+    color: #666;
+}
+
+/* Mensagem de erro */
+.message {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
 }
 footer {
     font-size: 14px;
-    color: #b0bec5;
-    padding: 20px;
+    color: #ffffff;
     background-color: #017f63;
+    padding: 20px;
     text-align: center;
 }
 
 footer p {
-    margin: 0 0 20px 0;
-    color: #ffffff;
-}
-
-.social-icons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 0;
 }
 
 .social {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 20px 0 0 0;
     display: flex;
+    justify-content: center;
     gap: 15px;
 }
 
