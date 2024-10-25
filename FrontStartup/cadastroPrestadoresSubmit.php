@@ -2,8 +2,6 @@
 session_start();
 include '../adm/classes/prestadores.class.php';
 
-
-
 if (isset($_POST['nome']) && !empty($_POST['nome'])) {
     $nome = $_POST['nome'];
     $sobrenome = $_POST['sobrenome'];
@@ -12,12 +10,13 @@ if (isset($_POST['nome']) && !empty($_POST['nome'])) {
     $cpf = $_POST['cpf'];
     $telefone = $_POST['telefone'];
     $email = $_POST['email'];
-    $senha = md5($_POST['senha']); // Criptografia MD5 da senha
+    $senha = $_POST['senha'];
 
     $prestador = new Prestador();
 
     if ($prestador->adicionar($nome, $sobrenome, $data_nasc, $endereco, $cpf, $telefone, $email, $senha)) {
         header("Location: login-prestador.php");
+        exit();
     } else {
         echo '<script type="text/javascript">alert("Erro ao adicionar prestador.");</script>';
     }

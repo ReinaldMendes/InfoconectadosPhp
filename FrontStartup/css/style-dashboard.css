@@ -1,0 +1,282 @@
+/* CSS para o Dashboard do Prestador */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* Cor de fundo suave */
+}
+
+.wrapper {
+    max-width: 1200px; /* Largura máxima do conteúdo */
+    margin: 20px auto; /* Centraliza o wrapper */
+    padding: 20px;
+    background: #fff; /* Fundo branco para o dashboard */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.header {
+    display: flex; /* Flexbox para layout do cabeçalho */
+    justify-content: space-between; /* Espaço entre logo e botão de logout */
+    align-items: center;
+    padding: 20px 0;
+}
+
+.header h1 {
+    font-size: 24px;
+    margin: 0;
+    color: #333; /* Cor do texto do cabeçalho */
+}
+
+.logout-button {
+    background-color: #e63946; /* Cor do botão de logout */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Transição suave */
+    font-size: 16px; /* Tamanho da fonte do botão */
+}
+
+.logout-button:hover {
+    background-color: #d62839; /* Cor ao passar o mouse */
+}
+
+.dashboard-content {
+    margin-top: 20px;
+}
+
+.card {
+    background: #f8f9fa; /* Fundo do cartão */
+    border: 1px solid #e0e0e0; /* Borda suave */
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px 0;
+    transition: transform 0.3s, box-shadow 0.3s; /* Transição suave */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Elevação ao passar o mouse */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra mais intensa ao passar o mouse */
+}
+
+.card h2 {
+    margin: 0;
+    font-size: 20px; /* Tamanho do título do cartão */
+    color: #007BFF; /* Cor do título */
+}
+
+.card p {
+    font-size: 16px; /* Tamanho do texto */
+    color: #555; /* Cor do texto */
+}
+
+/* Estilos para a barra de pesquisa */
+.search-container {
+    display: flex;
+    justify-content: space-between; /* Alinha os itens da barra de pesquisa */
+    margin-bottom: 20px;
+}
+
+.search-container input {
+    padding: 10px;
+    width: 80%; /* Largura do campo de busca */
+    border: 1px solid #ccc; /* Borda do campo */
+    border-radius: 5px; /* Bordas arredondadas */
+    transition: border-color 0.3s; /* Transição suave na borda */
+}
+
+.search-container input:focus {
+    border-color: #017f63; /* Cor da borda ao focar */
+    outline: none; /* Remove o contorno padrão */
+}
+
+.search-container button {
+    padding: 10px 15px;
+    background-color: #017f63; /* Cor do botão de busca */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Transição suave */
+}
+
+.search-container button:hover {
+    background-color: #005f50; /* Cor ao passar o mouse */
+}
+
+/* Estilos do slideshow */
+.slideshow-container {
+    position: relative; /* Para posicionamento absoluto dos controles */
+    margin-bottom: 30px;
+    border-radius: 8px; /* Bordas arredondadas na caixa do slideshow */
+    overflow: hidden; /* Oculta o conteúdo que sai da borda */
+}
+
+.mySlides {
+    display: none; /* Oculta os slides */
+}
+
+.mySlides img {
+    width: 100%; /* Faz com que a imagem preencha o slide */
+    border-radius: 8px; /* Bordas arredondadas nas imagens do slide */
+}
+
+.text {
+    padding: 10px;
+    text-align: center;
+    font-size: 18px; /* Tamanho do texto */
+}
+
+/* Estilos para a lista de clientes */
+.client-list-container {
+    margin-top: 20px;
+}
+
+.client-list {
+    list-style-type: none; /* Remove marcadores da lista */
+    padding: 0; /* Remove padding */
+}
+
+.client-item {
+    display: flex; /* Flexbox para os itens da lista */
+    justify-content: space-between; /* Espaço entre informações do cliente e botão */
+    align-items: center; /* Alinha verticalmente os itens */
+    border: 1px solid #e0e0e0; /* Borda suave */
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0; /* Margem entre os itens */
+    background-color: #fff; /* Fundo branco */
+    transition: box-shadow 0.3s; /* Transição suave */
+}
+
+.client-item:hover {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra ao passar o mouse */
+}
+
+.client-avatar {
+    border-radius: 50%; /* Torna a imagem redonda */
+    width: 60px; /* Largura do avatar */
+    height: 60px; /* Altura do avatar */
+    object-fit: cover; /* Corta a imagem para se ajustar ao espaço */
+}
+
+footer {
+    font-size: 14px;
+    color: #b0bec5;
+    padding: 20px;
+    background-color: #017f63;
+    text-align: center;
+}
+
+footer p {
+    margin: 0 0 20px 0;
+    color: #ffffff;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 15px;
+}
+
+.social li {
+    display: inline-block;
+}
+
+.social li img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.social li img:hover {
+    transform: scale(1.2);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column; /* Cabeçalho em coluna em telas menores */
+        align-items: flex-start;
+    }
+
+    .logout-button {
+        margin-top: 10px; /* Margem no botão de logout */
+    }
+
+    .card {
+        padding: 15px; /* Menos padding nos cartões em telas pequenas */
+    }
+
+    .search-container {
+        flex-direction: column; /* Barra de pesquisa em coluna */
+        align-items: stretch; /* Alinha os itens ao longo do eixo principal */
+    }
+
+    .search-container input {
+        width: 100%; /* Campo de busca ocupa toda a largura */
+        margin-bottom: 10px; /* Margem abaixo do campo de busca */
+    }
+
+    .client-item {
+        flex-direction: column; /* Itens em coluna em telas menores */
+        align-items: flex-start; /* Alinha à esquerda */
+    }
+
+    .client-item button {
+        margin-top: 10px; /* Margem acima do botão */
+    }
+}
+.search-container {
+    margin-top: 20px; /* Ajuste a margem conforme necessário */
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Estilos do slideshow */
+.slideshow-container {
+    display: flex;
+    overflow-x: auto; /* Permite rolagem horizontal */
+    scroll-snap-type: x mandatory; /* Permite o efeito de "snap" ao rolar */
+}
+
+.mySlides {
+    min-width: 300px; /* Largura mínima dos slides */
+    margin-right: 20px; /* Margem entre os slides */
+    scroll-snap-align: start; /* Alinha o início do slide */
+    flex-shrink: 0; /* Impede que o slide encolha */
+}
+.client-list .client-item form button {
+    background-color: #007bff; /* Cor de fundo azul */
+    color: white; /* Cor do texto branca */
+    border: none; /* Remove a borda padrão */
+    padding: 10px 15px; /* Espessura e espaçamento interno do botão */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+    transition: background-color 0.3s, transform 0.2s; /* Efeito suave ao passar o mouse */
+}
+
+.client-list .client-item form button:hover {
+    background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+    transform: scale(1.05); /* Leve aumento de tamanho ao passar o mouse */
+}
+
+.client-list .client-item form button:active {
+    transform: scale(0.95); /* Leve redução de tamanho ao clicar */
+}

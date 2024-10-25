@@ -32,7 +32,7 @@
     </div>
     <!-- Botão centralizado -->
     <div class="button-container">
-        <a href="cadastroCliente.php" class="cta-button">Quero me cadastrar</a>
+        <a href="cadastrarCliente.php" class="cta-button">Quero me cadastrar</a>
     </div>
 </div>
 
