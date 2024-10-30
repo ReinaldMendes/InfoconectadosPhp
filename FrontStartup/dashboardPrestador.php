@@ -10,61 +10,83 @@ if (!isset($_SESSION["logado"])) {
 
 $prestador = new Prestador();
 $idPrestador = $_SESSION["logado"];
-$clientesDisponiveis = $prestador->listarClientesDisponiveis($idPrestador);
+
+// Verifica se há uma pesquisa e chama o método correspondente
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["searchService"])) {
+    $searchService = trim($_POST["searchService"]);
+    $clientesDisponiveis = $prestador->buscarClientesPorServico($idPrestador, $searchService);
+} else {
+    $clientesDisponiveis = $prestador->listarClientesDisponiveis($idPrestador);
+}
+
 $clientesRecentes = $prestador->listarClientesRecentes($idPrestador); // Implementar esta função
 ?>
 
 <!-- Estilo específico para o dashboard -->
 <link rel="stylesheet" href="css/style-dashboard.css">
 
-<div class="dashboard-container">
-    <div class="header">
-        <h1>Bem-vindo, Prestador!</h1>
-        <!-- Botão de Logout -->
-        <form method="POST" action="logout.php" style="margin-bottom: 20px;">
-            <button type="submit" class="logout-button">Logout</button>
-        </form>
-    </div>
+<div class="dashboard-container d-flex">
+    <!-- Menu Lateral -->
+    <nav class="sidebar">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Clientes</a></li>
+            <li><a href="#">Serviços</a></li>
+            <li><a href="#">Perfil</a></li>
+            <li><a href="logout.php">Logout</a></li>
+        </ul>
+    </nav>
 
-    <!-- Barra de pesquisa (com margem adicional) -->
-    <div class="search-container" style="margin-top: 20px;">
-        <input type="text" id="search" placeholder="Buscar clientes por categoria...">
-        <button type="button">Buscar</button>
-    </div>
+    <div class="content">
+        <div class="header d-flex justify-content-between align-items-center">
+            <h1>Bem-vindo, Prestador!</h1>
+        </div>
 
-    <h2>Clientes Recentes</h2>
-    <div class="slideshow-container">
-        <?php foreach ($clientesRecentes as $cliente): ?>
-            <div class="mySlides">
-                <img src="img/<?php echo htmlspecialchars($cliente['foto']); ?>" alt="Avatar do Cliente">
-                <div class="text"><?php echo htmlspecialchars($cliente['nome'] . ' ' . $cliente['sobrenome']); ?></div>
+        <!-- Barra de pesquisa -->
+        <div class="search-container">
+            <form method="POST" action="" class="d-flex">
+                <input type="text" name="searchService" id="search" placeholder="Buscar clientes por categoria..." class="form-control">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+
+        <h2>Clientes Recentes</h2>
+        <div class="slideshow-container">
+            <?php foreach ($clientesRecentes as $cliente): ?>
+                <div class="mySlides">
+                    <img src="img/<?php echo htmlspecialchars($cliente['foto']); ?>" alt="Avatar do Cliente" class="client-image">
+                    <div class="text"><?php echo htmlspecialchars($cliente['nome'] . ' ' . $cliente['sobrenome']); ?></div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <h2>Clientes Disponíveis</h2>
+        <div class="client-list-container">
+            <div class="container">
+                <?php if (!empty($clientesDisponiveis)): ?>
+                    <ul class="client-list">
+                        <?php foreach ($clientesDisponiveis as $cliente): ?>
+                            <li class="client-item">
+                                <div class="client-info d-flex align-items-center">
+                                    <img src="img/<?php echo !empty($cliente['foto']) ? htmlspecialchars($cliente['foto']) : 'avatar.png'; ?>" alt="Avatar do Cliente" class="client-avatar">
+                                    <div>
+                                        <h3><?php echo htmlspecialchars($cliente['nome']); ?> <?php echo htmlspecialchars($cliente['sobrenome']); ?></h3>
+                                        <p>Serviço Necessário: <?php echo htmlspecialchars($cliente['qualServicoNecessita']); ?></p>
+                                    </div>
+                                </div>
+                                <form method="POST" action="contatarCliente.php">
+                                    <input type="hidden" name="idCliente" value="<?php echo $cliente['idCliente']; ?>">
+                                    <button type="submit" class="btn btn-success">Entrar em Contato</button>
+                                </form>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php else: ?>
+                    <p>Nenhum cliente disponível no momento.</p>
+                <?php endif; ?>
             </div>
-        <?php endforeach; ?>
-    </div>
-
-    <h2>Clientes Disponíveis</h2>
-    <div class="client-list-container">
-        <?php if (!empty($clientesDisponiveis)): ?>
-            <ul class="client-list">
-                <?php foreach ($clientesDisponiveis as $cliente): ?>
-                    <li class="client-item">
-                        <div class="client-info">
-                            <img src="img/<?php echo !empty($cliente['foto']) ? htmlspecialchars($cliente['foto']) : 'avatar.png'; ?>" alt="Avatar do Cliente" class="client-avatar">
-                            <div>
-                                <h3><?php echo htmlspecialchars($cliente['nome']); ?> <?php echo htmlspecialchars($cliente['sobrenome']); ?></h3>
-                                <p>Serviço Necessário: <?php echo htmlspecialchars($cliente['qualServicoNecessita']); ?></p>
-                            </div>
-                        </div>
-                        <form method="POST" action="contatarCliente.php">
-                            <input type="hidden" name="idCliente" value="<?php echo $cliente['idCliente']; ?>">
-                            <button type="submit">Entrar em Contato</button>
-                        </form>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        <?php else: ?>
-            <p>Nenhum cliente disponível no momento.</p>
-        <?php endif; ?>
+        </div>
     </div>
 </div>
 

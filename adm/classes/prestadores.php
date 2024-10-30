@@ -161,6 +161,21 @@ class Prestador {
             return [];
         }
     }
+    public function buscarClientesPorServico($idPrestador, $servicoNecessitado) {
+        try {
+            $sql = "SELECT * FROM cliente WHERE prestador_id = :idPrestador AND qualServicoNecessita LIKE :servico";
+            $stmt = $this->con->conectar()->prepare($sql);
+            $stmt->bindValue(":idPrestador", $idPrestador, PDO::PARAM_INT);
+            $stmt->bindValue(":servico", '%' . $servicoNecessitado . '%', PDO::PARAM_STR);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            echo json_encode(['error' => 'ERRO: ' . $ex->getMessage()]);
+            return [];
+        }
+    }
+    
+    
     
     
     public function loginJSON($email, $senha) {
