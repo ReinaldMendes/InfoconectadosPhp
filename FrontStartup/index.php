@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -23,6 +26,20 @@
             <a href="missaoValores.php">MISSÃO, VISÃO E VALORES</a>
             <a href="#">SOBRE</a>
             <a href="#">CONTATO</a>
+            
+            <?php if (isset($_SESSION['tipo_usuario'])): ?>
+                <!-- Exibe o dashboard conforme o tipo de usuário logado -->
+                <?php if ($_SESSION['tipo_usuario'] === 'prestador'): ?>
+                    <a href="dashboardPrestador.php">DASHBOARD PRESTADOR</a>
+                <?php elseif ($_SESSION['tipo_usuario'] === 'cliente'): ?>
+                    <a href="dashboardCliente.php">DASHBOARD CLIENTE</a>
+                <?php endif; ?>
+                <!-- Opção de logout -->
+                <a href="logout.php">SAIR</a>
+            <?php else: ?>
+                <!-- Opções de login e cadastro para visitantes -->
+                <a href="cadastroPrestador.php">CADASTRO</a>
+            <?php endif; ?>
         </nav>
     </section>
 

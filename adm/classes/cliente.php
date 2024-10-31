@@ -25,14 +25,14 @@ class Cliente {
 
             return $sql->rowCount() > 0;
         } catch (PDOException $ex) {
-            echo 'ERRO: ' . $ex->getMessage();
+            error_log('ERRO: ' . $ex->getMessage());
             return false;
         }
     }
 
     public function adicionar($nome, $sobrenome, $data_nasc, $endereco, $qualServicoNecessita, $telefone, $email, $senha) {
         if ($this->existeEmail($email)) {
-            return false;
+            return false; // Email já existe
         }
 
         try {
@@ -42,7 +42,7 @@ class Cliente {
             $this->endereco = $endereco;
             $this->qualServicoNecessita = $qualServicoNecessita;
             $this->telefone = $telefone;
-            $this->email = $email;
+            $this->email = filter_var($email, FILTER_SANITIZE_EMAIL);
             $this->senha = password_hash($senha, PASSWORD_DEFAULT);
 
             $sql = $this->con->conectar()->prepare("INSERT INTO cliente (nome, sobrenome, data_nasc, endereco, qualServicoNecessita, telefone, email, senha) VALUES (:nome, :sobrenome, :data_nasc, :endereco, :qualServicoNecessita, :telefone, :email, :senha)");
@@ -58,7 +58,7 @@ class Cliente {
             $sql->execute();
             return true;
         } catch (PDOException $ex) {
-            echo 'ERRO: ' . $ex->getMessage();
+            error_log('ERRO: ' . $ex->getMessage());
             return false;
         }
     }
@@ -69,7 +69,18 @@ class Cliente {
             $sql->execute();
             return $sql->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $ex) {
-            echo 'ERRO: ' . $ex->getMessage();
+            error_log('ERRO: ' . $ex->getMessage());
+            return array();
+        }
+    }
+
+    public function listarPrestadoresDisponiveis() {
+        try {
+            $sql = $this->con->conectar()->prepare("SELECT idPrestador, nome, sobrenome, endereco, foto FROM prestador WHERE status = 'disponivel'");
+            $sql->execute();
+            return $sql->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            error_log('ERRO: ' . $ex->getMessage());
             return array();
         }
     }
@@ -81,7 +92,7 @@ class Cliente {
             $sql->execute();
             return $sql->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $ex) {
-            echo 'ERRO: ' . $ex->getMessage();
+            error_log('ERRO: ' . $ex->getMessage());
             return array();
         }
     }
@@ -108,7 +119,7 @@ class Cliente {
             $sql->execute();
             return true;
         } catch (PDOException $ex) {
-            echo 'ERRO: ' . $ex->getMessage();
+            error_log('ERRO: ' . $ex->getMessage());
             return false;
         }
     }
@@ -119,14 +130,14 @@ class Cliente {
             $sql->bindParam(':idCliente', $idCliente, PDO::PARAM_INT);
             $sql->execute();
         } catch (PDOException $ex) {
-            echo 'ERRO: ' . $ex->getMessage();
+            error_log('ERRO: ' . $ex->getMessage());
         }
     }
 
     public function fazerLogin($email, $senha) {
         try {
             $sql = $this->con->conectar()->prepare("SELECT idCliente, senha FROM cliente WHERE email = :email");
-            $sql->bindValue(":email", $email);
+            $sql->bindValue(":email", filter_var($email, FILTER_SANITIZE_EMAIL));
             $sql->execute();
 
             $cliente = $sql->fetch(PDO::FETCH_ASSOC);
@@ -136,7 +147,7 @@ class Cliente {
             }
             return false;
         } catch (PDOException $ex) {
-            echo 'ERRO: ' . $ex->getMessage();
+            error_log('ERRO: ' . $ex->getMessage());
             return false;
         }
     }

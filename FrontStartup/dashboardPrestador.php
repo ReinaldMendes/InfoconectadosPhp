@@ -3,6 +3,7 @@ session_start();
 require_once 'inc/header.php';
 require_once '../adm/classes/prestadores.php';
 
+// Verificação de Sessão
 if (!isset($_SESSION["logado"])) {
     header("Location: login-prestador.php");
     exit;
@@ -11,7 +12,7 @@ if (!isset($_SESSION["logado"])) {
 $prestador = new Prestador();
 $idPrestador = $_SESSION["logado"];
 
-// Verifica se há uma pesquisa e chama o método correspondente
+// Lógica de busca e listagem
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["searchService"])) {
     $searchService = trim($_POST["searchService"]);
     $clientesDisponiveis = $prestador->buscarClientesPorServico($idPrestador, $searchService);
@@ -19,10 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["searchService"])) {
     $clientesDisponiveis = $prestador->listarClientesDisponiveis($idPrestador);
 }
 
-$clientesRecentes = $prestador->listarClientesRecentes($idPrestador); // Implementar esta função
+$clientesRecentes = $prestador->listarClientesRecentes($idPrestador);
 ?>
 
-<!-- Estilo específico para o dashboard -->
 <link rel="stylesheet" href="css/style-dashboard.css">
 
 <div class="dashboard-container d-flex">
@@ -30,10 +30,11 @@ $clientesRecentes = $prestador->listarClientesRecentes($idPrestador); // Impleme
     <nav class="sidebar">
         <h2>Menu</h2>
         <ul>
-            <li><a href="#">Início</a></li>
-            <li><a href="#">Clientes</a></li>
-            <li><a href="#">Serviços</a></li>
-            <li><a href="#">Perfil</a></li>
+            <li><a href="index.php">Início</a></li>
+            <li><a href="verClientes.php">Clientes</a></li>
+            <li><a href="historicoServicos.php">Serviços</a></li>
+            <li><a href="perfilPrestador.php">Perfil</a></li>
+            <li><a href="contato.php">Ajuda</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </nav>
@@ -46,7 +47,7 @@ $clientesRecentes = $prestador->listarClientesRecentes($idPrestador); // Impleme
         <!-- Barra de pesquisa -->
         <div class="search-container">
             <form method="POST" action="" class="d-flex">
-                <input type="text" name="searchService" id="search" placeholder="Buscar clientes por categoria..." class="form-control">
+                <input type="text" name="searchService" id="search" placeholder="Buscar clientes por servico..." class="form-control">
                 <button type="submit" class="btn btn-primary">Buscar</button>
             </form>
         </div>
@@ -71,7 +72,7 @@ $clientesRecentes = $prestador->listarClientesRecentes($idPrestador); // Impleme
                                 <div class="client-info d-flex align-items-center">
                                     <img src="img/<?php echo !empty($cliente['foto']) ? htmlspecialchars($cliente['foto']) : 'avatar.png'; ?>" alt="Avatar do Cliente" class="client-avatar">
                                     <div>
-                                        <h3><?php echo htmlspecialchars($cliente['nome']); ?> <?php echo htmlspecialchars($cliente['sobrenome']); ?></h3>
+                                        <h3><?php echo htmlspecialchars($cliente['nome'] . ' ' . $cliente['sobrenome']); ?></h3>
                                         <p>Serviço Necessário: <?php echo htmlspecialchars($cliente['qualServicoNecessita']); ?></p>
                                     </div>
                                 </div>
@@ -90,8 +91,7 @@ $clientesRecentes = $prestador->listarClientesRecentes($idPrestador); // Impleme
     </div>
 </div>
 
-<!-- Inclui o rodapé -->
-<?php include 'inc/footer.php'; ?>
+
 
 <!-- Script do slideshow -->
 <script>
@@ -101,11 +101,11 @@ $clientesRecentes = $prestador->listarClientesRecentes($idPrestador); // Impleme
     function showSlides() {
         const slides = document.getElementsByClassName("mySlides");
         for (let i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none"; // Esconde todos os slides
+            slides[i].style.display = "none";
         }
         slideIndex++;
-        if (slideIndex > slides.length) { slideIndex = 1 } // Reseta o índice se exceder o número de slides
-        slides[slideIndex - 1].style.display = "block"; // Mostra o slide atual
-        setTimeout(showSlides, 3000); // Muda de slide a cada 3 segundos
+        if (slideIndex > slides.length) { slideIndex = 1; }
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 3000);
     }
 </script>
