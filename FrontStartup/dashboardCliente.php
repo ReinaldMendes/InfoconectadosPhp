@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 require_once 'inc/header.php';
 require_once '../adm/classes/cliente.php';
@@ -21,6 +21,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["searchService"])) {
 }
 
 $prestadoresRecentes = $cliente->listarPrestadoresRecentes();
+
+// Processar avaliação
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["avaliacao"])) {
+    $idPrestador = $_POST["idPrestador"];
+    $avaliacao = $_POST["avaliacao"];
+    $comentario = trim($_POST["comentario"]);
+    $cliente->avaliarPrestador($idCliente, $idPrestador, $avaliacao, $comentario);
+    echo "<script>alert('Avaliação enviada com sucesso!');</script>";
+    // Atualizar a lista de prestadores para refletir a avaliação
+    $prestadoresDisponiveis = $cliente->listarPrestadoresDisponiveis();
+}
 ?>
 
 <link rel="stylesheet" href="css/style-dashboard.css">
@@ -79,6 +90,22 @@ $prestadoresRecentes = $cliente->listarPrestadoresRecentes();
                                 <form method="POST" action="contatarPrestador.php">
                                     <input type="hidden" name="idPrestador" value="<?php echo $prestador['idPrestador']; ?>">
                                     <button type="submit" class="btn btn-success">Entrar em Contato</button>
+                                </form>
+                                <!-- Formulário de Avaliação -->
+                                <form method="POST" action="" class="avaliacao-form">
+                                    <input type="hidden" name="idPrestador" value="<?php echo $prestador['idPrestador']; ?>">
+                                    <label for="avaliacao">Avaliação:</label>
+                                    <select name="avaliacao" required>
+                                        <option value="">Escolha uma nota</option>
+                                        <option value="1">1 - Péssimo</option>
+                                        <option value="2">2 - Ruim</option>
+                                        <option value="3">3 - Regular</option>
+                                        <option value="4">4 - Bom</option>
+                                        <option value="5">5 - Excelente</option>
+                                    </select>
+                                    <label for="comentario">Comentário:</label>
+                                    <textarea name="comentario" rows="2" placeholder="Escreva seu comentário..."></textarea>
+                                    <button type="submit" class="btn btn-primary">Enviar Avaliação</button>
                                 </form>
                             </li>
                         <?php endforeach; ?>

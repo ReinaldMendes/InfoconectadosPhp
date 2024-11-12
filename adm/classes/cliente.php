@@ -11,6 +11,7 @@ class Cliente {
     private $telefone;
     private $email;
     private $senha;
+    private $fotoPerfil; // Novo atributo para a foto de perfil do cliente
     private $con;
 
     public function __construct() {
@@ -30,7 +31,7 @@ class Cliente {
         }
     }
 
-    public function adicionar($nome, $sobrenome, $data_nasc, $endereco, $qualServicoNecessita, $telefone, $email, $senha) {
+    public function adicionar($nome, $sobrenome, $data_nasc, $endereco, $qualServicoNecessita, $telefone, $email, $senha, $fotoPerfil) {
         if ($this->existeEmail($email)) {
             return false; // Email já existe
         }
@@ -44,8 +45,9 @@ class Cliente {
             $this->telefone = $telefone;
             $this->email = filter_var($email, FILTER_SANITIZE_EMAIL);
             $this->senha = password_hash($senha, PASSWORD_DEFAULT);
+            $this->fotoPerfil = $fotoPerfil; // Salva a foto de perfil
 
-            $sql = $this->con->conectar()->prepare("INSERT INTO cliente (nome, sobrenome, data_nasc, endereco, qualServicoNecessita, telefone, email, senha) VALUES (:nome, :sobrenome, :data_nasc, :endereco, :qualServicoNecessita, :telefone, :email, :senha)");
+            $sql = $this->con->conectar()->prepare("INSERT INTO cliente (nome, sobrenome, data_nasc, endereco, qualServicoNecessita, telefone, email, senha, fotoPerfil) VALUES (:nome, :sobrenome, :data_nasc, :endereco, :qualServicoNecessita, :telefone, :email, :senha, :fotoPerfil)");
             $sql->bindParam(":nome", $this->nome);
             $sql->bindParam(":sobrenome", $this->sobrenome);
             $sql->bindParam(":data_nasc", $this->data_nasc);
@@ -54,6 +56,7 @@ class Cliente {
             $sql->bindParam(":telefone", $this->telefone);
             $sql->bindParam(":email", $this->email);
             $sql->bindParam(":senha", $this->senha);
+            $sql->bindParam(":fotoPerfil", $this->fotoPerfil);
 
             $sql->execute();
             return true;
@@ -65,7 +68,7 @@ class Cliente {
 
     public function listar() {
         try {
-            $sql = $this->con->conectar()->prepare("SELECT idCliente, nome, sobrenome, data_nasc, endereco, qualServicoNecessita, telefone, email FROM cliente");
+            $sql = $this->con->conectar()->prepare("SELECT idCliente, nome, sobrenome, data_nasc, endereco, qualServicoNecessita, telefone, email, fotoPerfil FROM cliente");
             $sql->execute();
             return $sql->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $ex) {
@@ -85,6 +88,21 @@ class Cliente {
         }
     }
 
+    public function avaliarPrestador($idCliente, $idPrestador, $nota, $comentario) {
+        try {
+            $sql = $this->con->conectar()->prepare("INSERT INTO avaliacao (idCliente, idPrestador, nota, comentario) VALUES (:idCliente, :idPrestador, :nota, :comentario)");
+            $sql->bindParam(':idCliente', $idCliente, PDO::PARAM_INT);
+            $sql->bindParam(':idPrestador', $idPrestador, PDO::PARAM_INT);
+            $sql->bindParam(':nota', $nota, PDO::PARAM_INT);
+            $sql->bindParam(':comentario', $comentario, PDO::PARAM_STR);
+            $sql->execute();
+            return true;
+        } catch (PDOException $ex) {
+            error_log('ERRO: ' . $ex->getMessage());
+            return false;
+        }
+    }
+
     public function buscar($idCliente) {
         try {
             $sql = $this->con->conectar()->prepare("SELECT * FROM cliente WHERE idCliente = :idCliente");
@@ -97,7 +115,7 @@ class Cliente {
         }
     }
 
-    public function editar($nome, $sobrenome, $data_nasc, $endereco, $qualServicoNecessita, $telefone, $email, $senha, $idCliente) {
+    public function editar($nome, $sobrenome, $data_nasc, $endereco, $qualServicoNecessita, $telefone, $email, $senha, $fotoPerfil, $idCliente) {
         if ($this->existeEmail($email) && $this->buscar($idCliente)['email'] !== $email) {
             return false;
         }
@@ -105,7 +123,7 @@ class Cliente {
         try {
             $senhaHash = !empty($senha) ? password_hash($senha, PASSWORD_DEFAULT) : $this->buscar($idCliente)['senha'];
 
-            $sql = $this->con->conectar()->prepare("UPDATE cliente SET nome = :nome, sobrenome = :sobrenome, data_nasc = :data_nasc, endereco = :endereco, qualServicoNecessita = :qualServicoNecessita, telefone = :telefone, email = :email, senha = :senha WHERE idCliente = :idCliente");
+            $sql = $this->con->conectar()->prepare("UPDATE cliente SET nome = :nome, sobrenome = :sobrenome, data_nasc = :data_nasc, endereco = :endereco, qualServicoNecessita = :qualServicoNecessita, telefone = :telefone, email = :email, senha = :senha, fotoPerfil = :fotoPerfil WHERE idCliente = :idCliente");
             $sql->bindParam(':nome', $nome);
             $sql->bindParam(':sobrenome', $sobrenome);
             $sql->bindParam(':data_nasc', $data_nasc);
@@ -114,6 +132,7 @@ class Cliente {
             $sql->bindParam(':telefone', $telefone);
             $sql->bindParam(':email', $email);
             $sql->bindParam(':senha', $senhaHash);
+            $sql->bindParam(':fotoPerfil', $fotoPerfil);
             $sql->bindParam(':idCliente', $idCliente, PDO::PARAM_INT);
 
             $sql->execute();
@@ -151,13 +170,10 @@ class Cliente {
             return false;
         }
     }
+
     public function listarPrestadoresRecentes() {
         try {
-            // Ajuste a consulta para trazer os prestadores mais recentes com base na data de cadastro ou algum outro critério.
-            $sql = $this->con->conectar()->prepare("SELECT idPrestador, nome, sobrenome, endereco, foto 
-                                                     FROM prestador 
-                                                     WHERE status = 'disponivel' 
-                                                     ORDER BY data_cadastro DESC LIMIT 5"); // Exemplo: trazendo os 5 prestadores mais recentes
+            $sql = $this->con->conectar()->prepare("SELECT idPrestador, nome, sobrenome, endereco, foto FROM prestador WHERE status = 'disponivel' ORDER BY data_cadastro DESC LIMIT 5");
             $sql->execute();
             return $sql->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $ex) {
@@ -165,6 +181,5 @@ class Cliente {
             return array();
         }
     }
-    
 }
 ?>
