@@ -1,4 +1,4 @@
-<?php include 'inc/header.php' ?>
+<?php include 'inc/header.php'; ?>
 
 <!-- Incluir o novo CSS -->
 <link rel="stylesheet" href="css/style-cadastro.css">
@@ -14,56 +14,57 @@
 
 <!-- Formulário de cadastro -->
 <form method="POST" action="cadastroPrestadoresSubmit.php">
-    <div class="form-group row">
-        <label for="nome" class="col-sm-2 col-form-label"><h5>Nome: </h5></label>
+    <div class="form-group row mb-3">
+        <label for="nome" class="col-sm-2 col-form-label"><h5>Nome:</h5></label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="nome" placeholder="Nome" required>
+            <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required>
         </div>
     </div>
-    <div class="form-group row">
-        <label for="sobrenome" class="col-sm-2 col-form-label"><h5>Sobrenome: </h5></label>
+    <div class="form-group row mb-3">
+        <label for="sobrenome" class="col-sm-2 col-form-label"><h5>Sobrenome:</h5></label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="sobrenome" placeholder="Sobrenome" required>
+            <input type="text" class="form-control" id="sobrenome" name="sobrenome" placeholder="Sobrenome" required>
         </div>
     </div>
-    <div class="form-group row">
-        <label for="data_nasc" class="col-sm-2 col-form-label"><h5>Data de Nascimento: </h5></label>
+    <div class="form-group row mb-3">
+        <label for="data_nasc" class="col-sm-2 col-form-label"><h5>Data de Nascimento:</h5></label>
         <div class="col-sm-10">
-            <input type="date" class="form-control" name="data_nasc" required>
+            <input type="date" class="form-control" id="data_nasc" name="data_nasc" required>
         </div>
     </div>
-    <div class="form-group row">
-        <label for="endereco" class="col-sm-2 col-form-label"><h5>Endereço: </h5></label>
+    <div class="form-group row mb-3">
+        <label for="endereco" class="col-sm-2 col-form-label"><h5>Endereço:</h5></label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="endereco" placeholder="Endereço" required>
+            <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço" required>
         </div>
     </div>
-    <div class="form-group row">
-        <label for="cpf" class="col-sm-2 col-form-label"><h5>CPF: </h5></label>
+    <div class="form-group row mb-3">
+        <label for="cpf" class="col-sm-2 col-form-label"><h5>CPF:</h5></label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="cpf" placeholder="CPF" required>
+            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF" pattern="\d{11}" title="Digite um CPF válido (11 dígitos)" required>
         </div>
     </div>
-    <div class="form-group row">
-        <label for="telefone" class="col-sm-2 col-form-label"><h5>Telefone: </h5></label>
+    <div class="form-group row mb-3">
+        <label for="telefone" class="col-sm-2 col-form-label"><h5>Telefone:</h5></label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="telefone" placeholder="Telefone" required>
+            <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone" pattern="\d{10,11}" title="Digite um telefone válido (10 ou 11 dígitos)" required>
         </div>
     </div>
-    <div class="form-group row">
-        <label for="email" class="col-sm-2 col-form-label"><h5>Email: </h5></label>
+    <div class="form-group row mb-3">
+        <label for="email" class="col-sm-2 col-form-label"><h5>Email:</h5></label>
         <div class="col-sm-10">
-            <input type="email" class="form-control" name="email" placeholder="Email" required>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
         </div>
     </div>
-    <div class="form-group row">
-        <label for="senha" class="col-sm-2 col-form-label"><h5>Senha: </h5></label>
+    <div class="form-group row mb-3">
+        <label for="senha" class="col-sm-2 col-form-label"><h5>Senha:</h5></label>
         <div class="col-sm-10">
-            <input type="password" class="form-control" name="senha" placeholder="Senha" required>
+            <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" autocomplete="off" required>
         </div>
     </div>
-    <br><br>
-    <input type="submit" name="btCadastrar" class="btn btn-primary" value="Adicionar">
+    <div class="text-center">
+        <button type="submit" name="btCadastrar" class="btn btn-primary">Adicionar</button>
+    </div>
 </form>
 
 <?php include 'inc/footer.php'; ?>
