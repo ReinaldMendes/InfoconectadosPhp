@@ -151,5 +151,20 @@ class Cliente {
             return false;
         }
     }
+    public function listarPrestadoresRecentes() {
+        try {
+            // Ajuste a consulta para trazer os prestadores mais recentes com base na data de cadastro ou algum outro critério.
+            $sql = $this->con->conectar()->prepare("SELECT idPrestador, nome, sobrenome, endereco, foto 
+                                                     FROM prestador 
+                                                     WHERE status = 'disponivel' 
+                                                     ORDER BY data_cadastro DESC LIMIT 5"); // Exemplo: trazendo os 5 prestadores mais recentes
+            $sql->execute();
+            return $sql->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            error_log('ERRO: ' . $ex->getMessage());
+            return array();
+        }
+    }
+    
 }
 ?>
