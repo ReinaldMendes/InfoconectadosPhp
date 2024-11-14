@@ -23,8 +23,8 @@ session_start();
         <nav class="nav-buttons">
             <a href="index.php">INÍCIO</a>
             <a href="missaoValores.php">MISSÃO, VISÃO E VALORES</a>
-            <a href="#">SOBRE</a>
-            <a href="#">CONTATO</a>
+            <a href="sobre.php">SOBRE</a>
+            <a href="contato.php">CONTATO</a>
             
             <?php if (isset($_SESSION['tipo_usuario'])): ?>
                 <!-- Exibe o dashboard conforme o tipo de usuário logado -->
