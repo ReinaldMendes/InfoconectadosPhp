@@ -12,8 +12,20 @@ $mensagemEnviada = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $assunto = $_POST['assunto'];
     $mensagem = $_POST['mensagem'];
-    // Implementar lógica para enviar a mensagem ao suporte (ex.: salvar em banco de dados ou enviar por email)
-    $mensagemEnviada = 'Sua mensagem foi enviada com sucesso!';
+    $email = $_POST['email'];
+
+    // Configurações do e-mail
+    $to = 'reinald_30_2009@hotmail.com'; // Seu e-mail
+    $subject = 'Dúvida de ' . $assunto; // Assunto do e-mail
+    $body = "Mensagem de: $email\n\n$mensagem"; // Corpo do e-mail
+    $headers = "From: $email\r\n"; // Cabeçalho com o e-mail do usuário
+
+    // Enviar e-mail
+    if (mail($to, $subject, $body, $headers)) {
+        $mensagemEnviada = 'Sua mensagem foi enviada com sucesso!';
+    } else {
+        $mensagemEnviada = 'Ocorreu um erro ao enviar a mensagem. Tente novamente.';
+    }
 }
 ?>
 
@@ -24,6 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <p>Se precisar de ajuda, envie uma mensagem para nossa equipe de suporte.</p>
     
     <form method="POST" class="contact-form">
+        <label>Email:</label>
+        <input type="email" name="email" required>
+        
         <label>Assunto:</label>
         <input type="text" name="assunto" required>
         
