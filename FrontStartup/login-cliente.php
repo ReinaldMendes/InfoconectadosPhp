@@ -22,9 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $resultadoLogin = $cliente->fazerLogin($email, $senha);
         ob_end_clean(); // Limpa o buffer
 
-        // Verifica o resultado do login
+        // Verifica o resultado do login e define a sessão
         if ($resultadoLogin) {
-            header("Location: dashboardCliente.php"); // Redireciona para o dashboard do cliente
+            // Define as informações de sessão para o cliente
+            $_SESSION['tipo_usuario'] = 'cliente'; // Define como cliente
+            $_SESSION['usuario_id'] = $resultadoLogin['id']; // Armazena o ID do cliente retornado pelo método
+
+            // Redireciona para o dashboard do cliente
+            header("Location: dashboardCliente.php");
             exit;
         } else {
             $mensagemErro = 'Credenciais inválidas.'; // Mensagem de erro genérica

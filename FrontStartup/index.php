@@ -21,8 +21,7 @@ session_start();
             <p class="subtitle">CONECTANDO SOLUÇÕES PARA CLIENTES E PRESTADORES </p>
         </div>
         <nav class="nav-buttons">
-            <a href="#">INÍCIO</a>
-            <a href="servico.php">SERVIÇOS</a>
+            <a href="index.php">INÍCIO</a>
             <a href="missaoValores.php">MISSÃO, VISÃO E VALORES</a>
             <a href="#">SOBRE</a>
             <a href="#">CONTATO</a>
@@ -30,15 +29,15 @@ session_start();
             <?php if (isset($_SESSION['tipo_usuario'])): ?>
                 <!-- Exibe o dashboard conforme o tipo de usuário logado -->
                 <?php if ($_SESSION['tipo_usuario'] === 'prestador'): ?>
-                    <a href="dashboardPrestador.php">DASHBOARD PRESTADOR</a>
+                    <a href="dashboardPrestador.php">MEU DASHBOARD</a>
                 <?php elseif ($_SESSION['tipo_usuario'] === 'cliente'): ?>
-                    <a href="dashboardCliente.php">DASHBOARD CLIENTE</a>
+                    <a href="dashboardCliente.php">MEU DASHBOARD</a>
                 <?php endif; ?>
                 <!-- Opção de logout -->
                 <a href="logout.php">SAIR</a>
             <?php else: ?>
                 <!-- Opções de login e cadastro para visitantes -->
-                <a href="cadastroPrestador.php">CADASTRO</a>
+                <a href="servico.php">SERVIÇOS</a>
             <?php endif; ?>
         </nav>
     </section>

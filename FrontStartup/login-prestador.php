@@ -28,7 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Verifica se a decodificação foi bem-sucedida
         if (is_array($dadosLogin) && isset($dadosLogin['success'])) {
             if ($dadosLogin['success']) {
-                header("Location: dashboardPrestador.php"); // Redireciona para o dashboard do prestador
+                // Armazena as informações do usuário na sessão
+                $_SESSION['tipo_usuario'] = 'prestador'; // Define como prestador
+                $_SESSION['usuario_id'] = $dadosLogin['id']; // Armazena o ID do prestador
+
+                // Redireciona para o dashboard do prestador
+                header("Location: dashboardPrestador.php");
                 exit;
             } else {
                 $mensagemErro = $dadosLogin['message'];
