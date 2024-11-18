@@ -1,6 +1,10 @@
 <?php
 session_start();
 require_once 'inc/header.php';
+require 'vendor/autoload.php'; // Certifique-se de que o Composer está configurado corretamente
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 if (!isset($_SESSION["logado"])) {
     header("Location: login-prestador.php");
@@ -14,17 +18,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mensagem = $_POST['mensagem'];
     $email = $_POST['email'];
 
-    // Configurações do e-mail
-    $to = 'reinald_30_2009@hotmail.com'; // Seu e-mail
-    $subject = 'Dúvida de ' . $assunto; // Assunto do e-mail
-    $body = "Mensagem de: $email\n\n$mensagem"; // Corpo do e-mail
-    $headers = "From: $email\r\n"; // Cabeçalho com o e-mail do usuário
+    $mail = new PHPMailer(true);
 
-    // Enviar e-mail
-    if (mail($to, $subject, $body, $headers)) {
+    try {
+        // Configuração do servidor SMTP
+        $mail->isSMTP();
+        $mail->Host = 'smtp.office365.com'; // Substitua pelo servidor SMTP
+        $mail->SMTPAuth = true;
+        $mail->Username = 'reinald.2967@aluno.pr.senac.pr'; // Seu e-mail SMTP
+        $mail->Password = '08726262967'; // Sua senha SMTP
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Segurança TLS
+        $mail->Port = 587; // Porta SMTP
+
+        // Configurações do e-mail
+        $mail->setFrom($email, 'Contato do Usuário');
+        $mail->addAddress('reinald_30_2009@hotmail.com'); // Seu e-mail de destino
+        $mail->Subject = 'Dúvida de ' . $assunto;
+        $mail->Body = "Mensagem de: $email\n\n$mensagem";
+
+        $mail->send();
         $mensagemEnviada = 'Sua mensagem foi enviada com sucesso!';
-    } else {
-        $mensagemEnviada = 'Ocorreu um erro ao enviar a mensagem. Tente novamente.';
+    } catch (Exception $e) {
+        $mensagemEnviada = 'Ocorreu um erro ao enviar a mensagem. Erro: ' . $mail->ErrorInfo;
     }
 }
 ?>

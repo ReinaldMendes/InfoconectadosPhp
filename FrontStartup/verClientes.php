@@ -14,27 +14,43 @@ $idPrestador = $_SESSION["logado"];
 $clientesDisponiveis = $prestador->listarClientesDisponiveis($idPrestador);
 ?>
 
-<link rel="stylesheet" href="css/styleMenus.css">
+<link rel="stylesheet" href="css/style-pag.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
 
 <div class="page-container">
     <h1>Clientes Disponíveis</h1>
-    <div class="client-list-container">
+    <div class="client-carousel">
         <?php if (!empty($clientesDisponiveis)): ?>
-            <ul class="client-list">
-                <?php foreach ($clientesDisponiveis as $cliente): ?>
-                    <li class="client-item">
+            <?php foreach ($clientesDisponiveis as $cliente): ?>
+                <div class="client-item">
+                    <a href="detalhesCliente.php?id=<?php echo htmlspecialchars($cliente['idCliente']); ?>">
                         <img src="img/<?php echo !empty($cliente['foto']) ? htmlspecialchars($cliente['foto']) : 'avatar.png'; ?>" alt="Avatar do Cliente" class="client-avatar">
-                        <div>
-                            <h3><?php echo htmlspecialchars($cliente['nome'] . ' ' . $cliente['sobrenome']); ?></h3>
-                            <p>Serviço Necessário: <?php echo htmlspecialchars($cliente['qualServicoNecessita']); ?></p>
-                        </div>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
+                        <h3><?php echo htmlspecialchars($cliente['nome'] . ' ' . $cliente['sobrenome']); ?></h3>
+                        <p>Serviço Necessário: <?php echo htmlspecialchars($cliente['qualServicoNecessita']); ?></p>
+                    </a>
+                </div>
+            <?php endforeach; ?>
         <?php else: ?>
             <p>Nenhum cliente disponível no momento.</p>
         <?php endif; ?>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.client-carousel').slick({
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            arrows: true,
+            dots: true,
+            autoplay: true,
+            autoplaySpeed: 3000
+        });
+    });
+</script>
 
 <?php include 'inc/footer.php'; ?>

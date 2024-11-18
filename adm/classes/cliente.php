@@ -11,7 +11,7 @@ class Cliente {
     private $telefone;
     private $email;
     private $senha;
-    private $fotoPerfil; // Novo atributo para a foto de perfil do cliente
+    private $foto_perfil; // Novo atributo para a foto de perfil do cliente
     private $con;
 
     public function __construct() {
@@ -31,7 +31,7 @@ class Cliente {
         }
     }
 
-    public function adicionar($nome, $sobrenome, $data_nasc, $endereco, $qualServicoNecessita, $telefone, $email, $senha, $fotoPerfil) {
+    public function adicionar($nome, $sobrenome, $data_nasc, $endereco, $qualServicoNecessita, $telefone, $email, $senha, $foto_perfil) {
         if ($this->existeEmail($email)) {
             return false; // Email já existe
         }
@@ -45,9 +45,9 @@ class Cliente {
             $this->telefone = $telefone;
             $this->email = filter_var($email, FILTER_SANITIZE_EMAIL);
             $this->senha = password_hash($senha, PASSWORD_DEFAULT);
-            $this->fotoPerfil = $fotoPerfil; // Salva a foto de perfil
+            $this->foto_perfil = $foto_perfil; // Salva a foto de perfil
 
-            $sql = $this->con->conectar()->prepare("INSERT INTO cliente (nome, sobrenome, data_nasc, endereco, qualServicoNecessita, telefone, email, senha, fotoPerfil) VALUES (:nome, :sobrenome, :data_nasc, :endereco, :qualServicoNecessita, :telefone, :email, :senha, :fotoPerfil)");
+            $sql = $this->con->conectar()->prepare("INSERT INTO cliente (nome, sobrenome, data_nasc, endereco, qualServicoNecessita, telefone, email, senha, foto_perfil) VALUES (:nome, :sobrenome, :data_nasc, :endereco, :qualServicoNecessita, :telefone, :email, :senha, :foto_perfil)");
             $sql->bindParam(":nome", $this->nome);
             $sql->bindParam(":sobrenome", $this->sobrenome);
             $sql->bindParam(":data_nasc", $this->data_nasc);
@@ -56,7 +56,7 @@ class Cliente {
             $sql->bindParam(":telefone", $this->telefone);
             $sql->bindParam(":email", $this->email);
             $sql->bindParam(":senha", $this->senha);
-            $sql->bindParam(":fotoPerfil", $this->fotoPerfil);
+            $sql->bindParam(":foto_perfil", $this->foto_perfil);
 
             $sql->execute();
             return true;
@@ -68,7 +68,7 @@ class Cliente {
 
     public function listar() {
         try {
-            $sql = $this->con->conectar()->prepare("SELECT idCliente, nome, sobrenome, data_nasc, endereco, qualServicoNecessita, telefone, email, fotoPerfil FROM cliente");
+            $sql = $this->con->conectar()->prepare("SELECT idCliente, nome, sobrenome, data_nasc, endereco, qualServicoNecessita, telefone, email, foto_perfil FROM cliente");
             $sql->execute();
             return $sql->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $ex) {
@@ -79,7 +79,7 @@ class Cliente {
 
     public function listarPrestadoresDisponiveis() {
         try {
-            $sql = $this->con->conectar()->prepare("SELECT idPrestador, nome, sobrenome, endereco, foto FROM prestador WHERE status = 'disponivel'");
+            $sql = $this->con->conectar()->prepare("SELECT idPrestador, nome, sobrenome, endereco, foto FROM prestador");
             $sql->execute();
             return $sql->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $ex) {
@@ -87,6 +87,7 @@ class Cliente {
             return array();
         }
     }
+    
 
     public function avaliarPrestador($idCliente, $idPrestador, $nota, $comentario) {
         try {
@@ -115,7 +116,7 @@ class Cliente {
         }
     }
 
-    public function editar($nome, $sobrenome, $data_nasc, $endereco, $qualServicoNecessita, $telefone, $email, $senha, $fotoPerfil, $idCliente) {
+    public function editar($nome, $sobrenome, $data_nasc, $endereco, $qualServicoNecessita, $telefone, $email, $senha, $foto_perfil, $idCliente) {
         if ($this->existeEmail($email) && $this->buscar($idCliente)['email'] !== $email) {
             return false;
         }
@@ -123,7 +124,7 @@ class Cliente {
         try {
             $senhaHash = !empty($senha) ? password_hash($senha, PASSWORD_DEFAULT) : $this->buscar($idCliente)['senha'];
 
-            $sql = $this->con->conectar()->prepare("UPDATE cliente SET nome = :nome, sobrenome = :sobrenome, data_nasc = :data_nasc, endereco = :endereco, qualServicoNecessita = :qualServicoNecessita, telefone = :telefone, email = :email, senha = :senha, fotoPerfil = :fotoPerfil WHERE idCliente = :idCliente");
+            $sql = $this->con->conectar()->prepare("UPDATE cliente SET nome = :nome, sobrenome = :sobrenome, data_nasc = :data_nasc, endereco = :endereco, qualServicoNecessita = :qualServicoNecessita, telefone = :telefone, email = :email, senha = :senha, foto_perfil = :foto_perfil WHERE idCliente = :idCliente");
             $sql->bindParam(':nome', $nome);
             $sql->bindParam(':sobrenome', $sobrenome);
             $sql->bindParam(':data_nasc', $data_nasc);
@@ -132,7 +133,7 @@ class Cliente {
             $sql->bindParam(':telefone', $telefone);
             $sql->bindParam(':email', $email);
             $sql->bindParam(':senha', $senhaHash);
-            $sql->bindParam(':fotoPerfil', $fotoPerfil);
+            $sql->bindParam(':foto_perfil', $foto_perfil);
             $sql->bindParam(':idCliente', $idCliente, PDO::PARAM_INT);
 
             $sql->execute();
