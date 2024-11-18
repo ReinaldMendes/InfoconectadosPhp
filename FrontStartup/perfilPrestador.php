@@ -44,8 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <ul>
             <li><a href="index.php">Inicio</a></li>
             <li><a href="dashboardPrestador.php">Voltar ao Dasboard</a></li>
-            <li><a href="ver-clientes.php">Ver Clientes</a></li>
-            <li><a href="historico-servicos.php">Histórico de Serviços</a></li>
+            <li><a href="verClientes.php">Ver Clientes</a></li>
+            <li><a href="historicoServicos.php">Histórico de Serviços</a></li>
             <li><a href="contato.php">Contato</a></li>
         </ul>
     </div>
