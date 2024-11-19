@@ -62,6 +62,12 @@
             <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" autocomplete="off" required>
         </div>
     </div>
+    <div class="form-group row mb-3">
+        <label for="especialidade" class="col-sm-2 col-form-label"><h5>Especialidade:</h5></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="endereco" name="especialidade" placeholder="Especialidade" required>
+        </div>
+    </div>
     <div class="text-center">
         <button type="submit" name="btCadastrar" class="btn btn-primary">Adicionar</button>
     </div>

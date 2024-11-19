@@ -17,10 +17,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["searchService"])) {
     $searchService = trim($_POST["searchService"]);
     $prestadoresDisponiveis = $cliente->buscarPrestadoresPorServico($searchService);
 } else {
-    $prestadoresDisponiveis = $cliente->listarPrestadoresDisponiveis();
+    $prestadoresDisponiveis = $cliente->listarPrestadores();
 }
 
-$prestadoresRecentes = $cliente->listarPrestadoresRecentes();
+$prestadoresRecentes = $cliente->listarPrestadores();
 
 // Processar avaliação
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["avaliacao"])) {
@@ -30,10 +30,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["avaliacao"])) {
     $cliente->avaliarPrestador($idCliente, $idPrestador, $avaliacao, $comentario);
     echo "<script>alert('Avaliação enviada com sucesso!');</script>";
     // Atualizar a lista de prestadores para refletir a avaliação
-    $prestadoresDisponiveis = $cliente->listarPrestadoresDisponiveis();
+    $prestadoresDisponiveis = $cliente->listarPrestadores();
 }
 ?>
-
 <link rel="stylesheet" href="css/style-dashboard.css">
 
 <div class="dashboard-container d-flex">
@@ -67,10 +66,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["avaliacao"])) {
         <div class="slideshow-container">
             <?php foreach ($prestadoresRecentes as $prestador): ?>
                 <div class="mySlides">
-                    <img src="img/<?php echo htmlspecialchars($prestador['foto']); ?>" alt="Avatar do Prestador" class="client-image">
+                <img src="img/<?php echo !empty($prestador['foto']) ? htmlspecialchars($prestador['foto']) : 'avatar.png'; ?>" alt="Avatar do Prestador" class="client-image">
+
                     <div class="text"><?php echo htmlspecialchars($prestador['nome'] . ' ' . $prestador['sobrenome']); ?></div>
                 </div>
             <?php endforeach; ?>
+            <div class="slideshow-indicators">
+                <?php foreach ($prestadoresRecentes as $index => $prestador): ?>
+                    <span class="dot" onclick="currentSlide(<?php echo $index + 1; ?>)"></span>
+                <?php endforeach; ?>
+            </div>
         </div>
 
         <h2>Prestadores Disponíveis</h2>
@@ -87,15 +92,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["avaliacao"])) {
                                         <p>Especialidade: <?php echo htmlspecialchars($prestador['especialidade']); ?></p>
                                     </div>
                                 </div>
-                                <form method="POST" action="contatarPrestador.php">
+                                <form method="POST" action="contatarPrestador.php" class="contact-form">
                                     <input type="hidden" name="idPrestador" value="<?php echo $prestador['idPrestador']; ?>">
                                     <button type="submit" class="btn btn-success">Entrar em Contato</button>
                                 </form>
-                                <!-- Formulário de Avaliação -->
                                 <form method="POST" action="" class="avaliacao-form">
                                     <input type="hidden" name="idPrestador" value="<?php echo $prestador['idPrestador']; ?>">
                                     <label for="avaliacao">Avaliação:</label>
-                                    <select name="avaliacao" required>
+                                    <select name="avaliacao" required class="form-select">
                                         <option value="">Escolha uma nota</option>
                                         <option value="1">1 - Péssimo</option>
                                         <option value="2">2 - Ruim</option>
@@ -104,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["avaliacao"])) {
                                         <option value="5">5 - Excelente</option>
                                     </select>
                                     <label for="comentario">Comentário:</label>
-                                    <textarea name="comentario" rows="2" placeholder="Escreva seu comentário..."></textarea>
+                                    <textarea name="comentario" rows="2" placeholder="Escreva seu comentário..." class="form-control"></textarea>
                                     <button type="submit" class="btn btn-primary">Enviar Avaliação</button>
                                 </form>
                             </li>
@@ -120,17 +124,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["avaliacao"])) {
 
 <!-- Script do slideshow -->
 <script>
-    let slideIndex = 0;
-    showSlides();
+    let slideIndex = 1;
+    showSlides(slideIndex);
 
-    function showSlides() {
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
         const slides = document.getElementsByClassName("mySlides");
+        const dots = document.getElementsByClassName("dot");
+        if (n > slides.length) { slideIndex = 1; }
+        if (n < 1) { slideIndex = slides.length; }
         for (let i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
         }
-        slideIndex++;
-        if (slideIndex > slides.length) { slideIndex = 1; }
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
         slides[slideIndex - 1].style.display = "block";
-        setTimeout(showSlides, 3000);
+        dots[slideIndex - 1].className += " active";
     }
 </script>
+

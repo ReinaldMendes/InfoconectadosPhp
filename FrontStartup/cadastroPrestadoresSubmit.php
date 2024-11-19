@@ -1,11 +1,11 @@
 <?php
 session_start();
-include '../adm/classes/prestadores.class.php';
+include '../adm/classes/prestadores.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($_POST['nome']) && !empty($_POST['sobrenome']) && !empty($_POST['data_nasc']) &&
         !empty($_POST['endereco']) && !empty($_POST['cpf']) && !empty($_POST['telefone']) &&
-        !empty($_POST['email']) && !empty($_POST['senha'])) {
+        !empty($_POST['email']) && !empty($_POST['senha'])&& !empty($_POST['especialidade'])) {
 
         // Sanitização e validação dos inputs
         $nome = htmlspecialchars(trim($_POST['nome']));
@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $telefone = htmlspecialchars(trim($_POST['telefone']));
         $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
         $senha = htmlspecialchars(trim($_POST['senha']));
+        $especialidade = htmlspecialchars(trim($_POST['especialidade']));
 
         if (!$email) {
             echo '<script type="text/javascript">alert("E-mail inválido.");</script>';
@@ -25,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $prestador = new Prestador();
 
         // Chamar o método adicionar e verificar se foi bem-sucedido
-        if ($prestador->adicionar($nome, $sobrenome, $data_nasc, $endereco, $cpf, $telefone, $email, $senha)) {
+        if ($prestador->adicionar($nome, $sobrenome, $data_nasc, $endereco, $cpf, $telefone, $email, $senha,$especialidade)) {
             header("Location: login-prestador.php");
             exit();
         } else {

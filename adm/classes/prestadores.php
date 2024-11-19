@@ -11,6 +11,7 @@ class Prestador {
     private $telefone;
     private $email;
     private $senha;
+    private $especialidade;
     private $con;
 
     public function __construct() {
@@ -29,7 +30,44 @@ class Prestador {
             return false;
         }
     }
-
+    public function adicionar($nome, $sobrenome, $data_nasc, $endereco, $cpf, $telefone, $email, $senha, $especialidade) {
+        // Verificar se o e-mail já existe
+        if ($this->existeEmail($email)) {
+            echo json_encode(['error' => 'E-mail já está em uso']);
+            return false;
+        }
+    
+        try {
+            // Hash da senha
+            $senhaHash = password_hash($senha, PASSWORD_BCRYPT);
+    
+            // Query para inserir o prestador
+            $sql = $this->con->conectar()->prepare("INSERT INTO prestadores 
+                (nome, sobrenome, data_nasc, endereco, cpf, telefone, email, senha, especialidade) 
+                VALUES (:nome, :sobrenome, :data_nasc, :endereco, :cpf, :telefone, :email, :senha,  :especialidade)");
+    
+            // Bind dos parâmetros
+            $sql->bindParam(':nome', $nome, PDO::PARAM_STR);
+            $sql->bindParam(':sobrenome', $sobrenome, PDO::PARAM_STR);
+            $sql->bindParam(':data_nasc', $data_nasc, PDO::PARAM_STR);
+            $sql->bindParam(':endereco', $endereco, PDO::PARAM_STR);
+            $sql->bindParam(':cpf', $cpf, PDO::PARAM_STR);
+            $sql->bindParam(':telefone', $telefone, PDO::PARAM_STR);
+            $sql->bindParam(':email', $email, PDO::PARAM_STR);
+            $sql->bindParam(':senha', $senhaHash, PDO::PARAM_STR);
+            $sql->bindParam(':especialidade', $especialidade, PDO::PARAM_STR);
+    
+            // Executar a query
+            $sql->execute();
+    
+            echo json_encode(['success' => true, 'message' => 'Prestador cadastrado com sucesso']);
+            return true;
+        } catch (PDOException $ex) {
+            echo json_encode(['error' => 'ERRO: ' . $ex->getMessage()]);
+            return false;
+        }
+    }
+    
     public function obterDadosPrestador($idPrestador) {
         try {
             $sql = $this->con->conectar()->prepare("SELECT * FROM prestadores WHERE idPrestador = :idPrestador");
@@ -42,7 +80,7 @@ class Prestador {
         }
     }
 
-    public function editarPerfil($idPrestador, $nome, $sobrenome, $data_nasc, $endereco, $cpf, $telefone, $email, $senha) {
+    public function editarPerfil($idPrestador, $nome, $sobrenome, $data_nasc, $endereco, $cpf, $telefone, $email, $senha, $especialidade) {
         // Verificar se o e-mail já existe
         if ($this->existeEmail($email, $idPrestador)) {
             echo json_encode(['error' => 'Email já existe para outro prestador']);
@@ -67,7 +105,8 @@ class Prestador {
                 cpf = :cpf, 
                 telefone = :telefone, 
                 email = :email, 
-                senha = :senha
+                senha = :senha,
+               especialidade = :especialidade
                 WHERE idPrestador = :idPrestador");
 
             $sql->bindParam(':nome', $nome, PDO::PARAM_STR);
@@ -78,6 +117,7 @@ class Prestador {
             $sql->bindParam(':telefone', $telefone, PDO::PARAM_STR);
             $sql->bindParam(':email', $email, PDO::PARAM_STR);
             $sql->bindParam(':senha', $senha, PDO::PARAM_STR);
+            $sql->bindParam(':especialidade', $especialidade, PDO::PARAM_STR);
             $sql->bindParam(':idPrestador', $idPrestador, PDO::PARAM_INT);
 
             $sql->execute();
@@ -147,7 +187,7 @@ class Prestador {
 
         echo json_encode(['success' => false, 'message' => 'Credenciais inválidas']);
     }
-    public function atualizarPerfil($idPrestador, $nome, $sobrenome, $email, $telefone, $endereco, $nova_senha = null) {
+    public function atualizarPerfil($idPrestador, $nome, $sobrenome, $email, $telefone, $endereco, $especialidade, $nova_senha = null) {
         // Se a senha foi fornecida, faça o hash da nova senha
         if ($nova_senha) {
             $nova_senha = password_hash($nova_senha, PASSWORD_BCRYPT);
@@ -160,6 +200,7 @@ class Prestador {
                 sobrenome = :sobrenome, 
                 email = :email, 
                 telefone = :telefone, 
+                especialidade = :especialidade',
                 endereco = :endereco" . ($nova_senha ? ", senha = :senha" : "") . " 
                 WHERE idPrestador = :idPrestador");
     
@@ -169,6 +210,7 @@ class Prestador {
             $sql->bindParam(':email', $email, PDO::PARAM_STR);
             $sql->bindParam(':telefone', $telefone, PDO::PARAM_STR);
             $sql->bindParam(':endereco', $endereco, PDO::PARAM_STR);
+            $sql->bindParam(':especialidade', $especialidade, PDO::PARAM_STR);
     
             // Se houver uma nova senha, faça o bind do parâmetro
             if ($nova_senha) {

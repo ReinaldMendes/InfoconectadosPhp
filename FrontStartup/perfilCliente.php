@@ -3,88 +3,108 @@ session_start();
 require_once 'inc/header.php';
 require_once '../adm/classes/cliente.php';
 
-// Verificação de Sessão
+// Verifica se o cliente está logado
 if (!isset($_SESSION["logado"])) {
     header("Location: login-cliente.php");
     exit;
 }
 
+// Instancia a classe Cliente e obtém os dados do cliente logado
 $cliente = new Cliente();
 $idCliente = $_SESSION["logado"];
-$dadosCliente = $cliente->buscar($idCliente);
+$dadosCliente = $cliente->obterDadosCliente($idCliente);
 
-// Processar atualização de perfil
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $nome = trim($_POST['nome']);
-    $sobrenome = trim($_POST['sobrenome']);
-    $email = trim($_POST['email']);
-    $telefone = trim($_POST['telefone']);
-    $foto = $_FILES['foto'];
+// Verifica se o formulário foi submetido via POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Coleta os dados do formulário
+    $nome = $_POST['nome'];
+    $sobrenome = $_POST['sobrenome'];
+    $email = $_POST['email'];
+    $telefone = $_POST['telefone'];
+    $endereco = $_POST['endereco'];
+    $nova_senha = isset($_POST['nova_senha']) ? $_POST['nova_senha'] : null;
 
-    // Atualizar dados do cliente
-    $cliente->atualizarPerfil($idCliente, $nome, $sobrenome, $email, $telefone);
-
-    // Processar upload de foto de perfil, se houver
-    if (!empty($foto['name'])) {
-        $nomeFoto = $idCliente . "_" . basename($foto["name"]);
-        $caminhoFoto = "img/perfis/" . $nomeFoto;
-        
-        // Verifica se o upload é uma imagem
-        $tipoImagem = strtolower(pathinfo($caminhoFoto, PATHINFO_EXTENSION));
-        $tiposPermitidos = array('jpg', 'jpeg', 'png', 'gif');
-        
-        if (in_array($tipoImagem, $tiposPermitidos)) {
-            if (move_uploaded_file($foto["tmp_name"], $caminhoFoto)) {
-                $cliente->atualizarFotoPerfil($idCliente, $nomeFoto);
-                $dadosCliente['foto'] = $nomeFoto;
-                echo "<script>alert('Perfil atualizado com sucesso!');</script>";
-            } else {
-                echo "<script>alert('Erro ao fazer o upload da foto.');</script>";
-            }
-        } else {
-            echo "<script>alert('Formato de imagem inválido. Use jpg, jpeg, png ou gif.');</script>";
-        }
-    }
+    // Atualiza o perfil, incluindo a senha se for fornecida
+    $cliente->atualizarPerfil($idCliente, $nome, $sobrenome, $email, $telefone, $endereco, $nova_senha);
     
-    // Atualizar os dados do cliente após a edição
-    $dadosCliente = $cliente->buscarDadosCliente($idCliente);
+    // Mensagem de sucesso
+    $_SESSION['msg'] = "Alterações salvas com sucesso!";
+    
+    header("Location: perfilCliente.php");
+    exit;
 }
 ?>
 
-<link rel="stylesheet" href="css/style-perfil.css">
+<link rel="stylesheet" href="css/styleMenus.css">
 
-<div class="perfil-container">
-    <div class="header-profile">
-        <h2>Perfil do Cliente</h2>
+<div class="page-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="index.php">Inicio</a></li>
+            <li><a href="dashboardCliente.php">Voltar ao Dashboard</a></li>
+            <li><a href="verPrestadores.php">Ver Prestadores</a></li>
+            <li><a href="historicoServicosCliente.php">Histórico de Serviços</a></li>
+            <li><a href="contato.php">Contato</a></li>
+        </ul>
     </div>
-    <form method="POST" enctype="multipart/form-data" class="perfil-form">
-        <div class="perfil-info">
-            <!-- Foto do Cliente -->
-            <div class="foto-perfil">
-                <img src="img/perfis/<?php echo htmlspecialchars($dadosCliente['foto'] ?? 'default-avatar.png'); ?>" alt="Foto de Perfil" class="foto-avatar">
-                <input type="file" name="foto" accept="image/*" class="foto-upload">
+
+    <!-- Conteúdo principal -->
+    <div class="page-content">
+        <h1>Perfil do Cliente</h1>
+        
+        <?php
+        // Exibe mensagem de sucesso, se disponível
+        if (isset($_SESSION['msg'])) {
+            echo "<div class='alert alert-success'>" . $_SESSION['msg'] . "</div>";
+            unset($_SESSION['msg']);  // Remove a mensagem após exibição
+        }
+        ?>
+
+        <div class="profile-container">
+            <div class="profile-header">
+                <!-- Foto de perfil ou avatar padrão -->
+                <div class="profile-image">
+                    <?php
+                    // Verifica se o cliente tem uma foto de perfil
+                    $fotoPerfil = $dadosCliente['foto_perfil'] ? $dadosCliente['foto_perfil'] : 'img/avatar.png';  // Certifique-se de que o caminho esteja correto
+                    echo "<img src='$fotoPerfil' alt='Foto do Cliente' class='profile-avatar'>";  // Ajuste no caminho da imagem
+                    ?>
+                </div>
+
+                <div class="profile-info">
+                    <h2><?php echo htmlspecialchars($dadosCliente['nome']) . ' ' . htmlspecialchars($dadosCliente['sobrenome']); ?></h2>
+                    <p><strong>Email:</strong> <?php echo htmlspecialchars($dadosCliente['email']); ?></p>
+                    <p><strong>Telefone:</strong> <?php echo htmlspecialchars($dadosCliente['telefone']); ?></p>
+                    <p><strong>Endereço:</strong> <?php echo htmlspecialchars($dadosCliente['endereco']); ?></p>
+                </div>
             </div>
-            <!-- Detalhes do Cliente -->
-            <div class="dados-perfil">
-                <label for="nome">Nome:</label>
-                <input type="text" name="nome" id="nome" value="<?php echo htmlspecialchars($dadosCliente['nome']); ?>" required>
-                
-                <label for="sobrenome">Sobrenome:</label>
-                <input type="text" name="sobrenome" id="sobrenome" value="<?php echo htmlspecialchars($dadosCliente['sobrenome']); ?>" required>
-                
-                <label for="email">E-mail:</label>
-                <input type="email" name="email" id="email" value="<?php echo htmlspecialchars($dadosCliente['email']); ?>" required>
-                
-                <label for="telefone">Telefone:</label>
-                <input type="text" name="telefone" id="telefone" value="<?php echo htmlspecialchars($dadosCliente['telefone']); ?>">
-            </div>
+
+            <!-- Formulário de atualização do perfil -->
+            <form method="POST" class="profile-form">
+                <label>Nome:</label>
+                <input type="text" name="nome" value="<?php echo htmlspecialchars($dadosCliente['nome']); ?>" required>
+
+                <label>Sobrenome:</label>
+                <input type="text" name="sobrenome" value="<?php echo htmlspecialchars($dadosCliente['sobrenome']); ?>" required>
+
+                <label>Email:</label>
+                <input type="email" name="email" value="<?php echo htmlspecialchars($dadosCliente['email']); ?>" required>
+
+                <label>Telefone:</label>
+                <input type="text" name="telefone" value="<?php echo htmlspecialchars($dadosCliente['telefone']); ?>" required>
+
+                <label>Endereço:</label>
+                <input type="text" name="endereco" value="<?php echo htmlspecialchars($dadosCliente['endereco']); ?>" required>
+
+                <label>Nova Senha (opcional):</label>
+                <input type="password" name="nova_senha" placeholder="Digite sua nova senha (se desejar alterá-la)">
+
+                <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+            </form>
         </div>
-        <div class="profile-buttons">
-            <button type="submit" class="btn btn-edit">Salvar Alterações</button>
-        </div>
-    </form>
+    </div>
 </div>
 
-<footer>
-    <p>&copy; 2024 Infoconectados. Todos os direitos reservados.</p>
-</footer>
+<?php include 'inc/footer.php'; ?>
