@@ -249,6 +249,30 @@ class Cliente {
             return false; // Retorna falso se houver erro na execução da consulta
         }
     }
+    public function buscarDetalhesPrestador($idPrestador) {
+        try {
+            // Prepara a consulta para obter os detalhes do prestador
+            $sql = $this->con->conectar()->prepare("
+                SELECT nome, sobrenome, especialidade, foto_perfil, telefone 
+                FROM prestadores 
+                WHERE idPrestador = :idPrestador
+            ");
+            // Vincula o parâmetro idPrestador
+            $sql->bindParam(':idPrestador', $idPrestador, PDO::PARAM_INT);
+    
+            // Executa a consulta
+            $sql->execute();
+    
+            // Retorna os detalhes do prestador
+            return $sql->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            // Loga o erro e retorna false em caso de falha
+            $this->logErro($ex->getMessage());
+            return false;
+        }
+    }
+    
+    
     
     
 }
