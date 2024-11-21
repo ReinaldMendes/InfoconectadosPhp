@@ -39,7 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["idPrestador"])) {
                 <img src="img/<?php echo !empty($prestadorDetalhes['foto_perfil']) ? htmlspecialchars($prestadorDetalhes['foto_perfil']) : 'avatar.png'; ?>" alt="Avatar do Prestador" class="prestador-avatar">
                 <h2><?php echo htmlspecialchars($prestadorDetalhes['nome'] . ' ' . $prestadorDetalhes['sobrenome']); ?></h2>
                 <p><strong>Especialidade:</strong> <?php echo htmlspecialchars($prestadorDetalhes['especialidade']); ?></p>
-                
             </div>
 
             <div class="contact-button">
@@ -50,10 +49,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["idPrestador"])) {
             </div>
         </div>
 
+        <!-- Formulário de Avaliação -->
+        <div class="avaliacao">
+            <h3>Deixe sua Avaliação</h3>
+            <form method="POST" action="salvarAvaliacao.php">
+                <input type="hidden" name="idCliente" value="<?php echo $_SESSION['idCliente']; ?>">
+                <input type="hidden" name="idPrestador" value="<?php echo $idPrestador; ?>">
+                <label for="estrelas">Nota:</label>
+                <select name="estrelas" id="estrelas" required>
+                    <option value="1">1 estrela</option>
+                    <option value="2">2 estrelas</option>
+                    <option value="3">3 estrelas</option>
+                    <option value="4">4 estrelas</option>
+                    <option value="5">5 estrelas</option>
+                </select>
+                <label for="comentario">Comentário:</label>
+                <textarea name="comentario" id="comentario" rows="4" required></textarea>
+                <button type="submit" class="btn btn-primary">Enviar Avaliação</button>
+            </form>
+        </div>
+
         <div class="back-button">
             <a href="dashboardCliente.php" class="btn btn-secondary">Voltar</a>
         </div>
     </div>
 </div>
+
 
 <?php include 'inc/footer.php'; ?>

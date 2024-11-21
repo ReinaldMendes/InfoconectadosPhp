@@ -96,21 +96,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["avaliacao"])) {
                                     <input type="hidden" name="idPrestador" value="<?php echo $prestador['idPrestador']; ?>">
                                     <button type="submit" class="btn btn-success">Entrar em Contato</button>
                                 </form>
-                                <form method="POST" action="" class="avaliacao-form">
-                                    <input type="hidden" name="idPrestador" value="<?php echo $prestador['idPrestador']; ?>">
-                                    <label for="avaliacao">Avaliação:</label>
-                                    <select name="avaliacao" required class="form-select">
-                                        <option value="">Escolha uma nota</option>
-                                        <option value="1">1 - Péssimo</option>
-                                        <option value="2">2 - Ruim</option>
-                                        <option value="3">3 - Regular</option>
-                                        <option value="4">4 - Bom</option>
-                                        <option value="5">5 - Excelente</option>
-                                    </select>
-                                    <label for="comentario">Comentário:</label>
-                                    <textarea name="comentario" rows="2" placeholder="Escreva seu comentário..." class="form-control"></textarea>
-                                    <button type="submit" class="btn btn-primary">Enviar Avaliação</button>
-                                </form>
                             </li>
                         <?php endforeach; ?>
                     </ul>
