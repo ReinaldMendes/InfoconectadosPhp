@@ -1,0 +1,188 @@
+/* Estilo para a página contatarPrestador */
+
+
+.header h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.prestador-detalhes {
+    padding: 20px;
+    text-align: center;
+}
+
+.prestador-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.prestador-info h2 {
+    font-size: 20px;
+    color: #017f63;
+    margin-bottom: 10px;
+}
+
+.prestador-info p {
+    font-size: 16px;
+    color: #555;
+}
+
+.contact-button a,
+.back-button a {
+    display: inline-block;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    transition: background 0.3s;
+    margin: 10px 5px;
+}
+
+.contact-button a {
+    background-color: #28a745;
+}
+
+.contact-button a:hover {
+    background-color: #218838;
+}
+
+.back-button a {
+    background-color: #6c757d;
+}
+
+.back-button a:hover {
+    background-color: #5a6268;
+}
+/* Ajustes gerais do body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Garante que o footer fique no rodapé */
+}
+
+/* Estilo do header */
+header {
+    background-color: #017f63; /* Cor do fundo do header */
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para o container principal */
+.dashboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 80px; /* Para não sobrepor o header */
+    flex-grow: 1; /* Permite que o conteúdo cresça para ocupar o espaço disponível */
+}
+
+/* Estilo para o footer */
+footer {
+    background-color: #017f63;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #f0f0f0;
+}
+
+/* Ajuste para o botão de voltar */
+.back-button a {
+    display: inline-block;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    background-color: #6c757d;
+    transition: background 0.3s;
+}
+
+.back-button a:hover {
+    background-color: #5a6268;
+}
+
+/* Ajuste do conteúdo da página */
+.content {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+/* Estilo de responsive */
+@media (max-width: 768px) {
+    .content {
+        padding: 15px;
+        width: 90%;
+    }
+}
+footer {
+    font-size: 14px;
+    color: #ffffff;
+    background-color: #017f63;
+    padding: 20px;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}
+
+.social {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social li {
+    display: inline-block;
+}
+
+.social li img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.social li img:hover {
+    transform: scale(1.2);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}

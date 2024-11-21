@@ -1,3 +1,4 @@
+/* Estilos gerais */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -40,6 +41,7 @@ body {
     background-color: #043d04;
 }
 
+/* Hero Section */
 .hero {
     display: flex;
     flex-direction: column;
@@ -64,7 +66,7 @@ body {
 
 .logo-container {
     text-align: center;
-    z-index: 2; /* Para que o conteúdo fique acima da transparência */
+    z-index: 2;
 }
 
 .logo-container img {
@@ -114,6 +116,7 @@ p.subtitle {
     color: #ffffff;
 }
 
+/* Footer */
 footer {
     font-size: 14px;
     color: #ffffff;
@@ -148,4 +151,79 @@ footer p {
 .social li img:hover {
     transform: scale(1.2);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Media Queries para dispositivos móveis e tablets */
+@media (max-width: 768px) {
+    /* Ajustes no Hero */
+    .hero {
+        height: 60vh; /* Menor altura para dispositivos móveis */
+    }
+
+    .logo-container img {
+        width: 40%; /* Ajusta o tamanho do logo */
+        max-width: 200px;
+    }
+
+    h1 {
+        font-size: 32px; /* Reduz o tamanho do título */
+    }
+
+    p.subtitle {
+        font-size: 16px; /* Ajusta o tamanho do subtítulo */
+    }
+
+    /* Botões de navegação */
+    .nav-buttons {
+        flex-direction: column; /* Coloca os botões em coluna */
+        margin-top: 20px;
+        gap: 15px;
+    }
+
+    .nav-buttons a {
+        padding: 12px 20px; /* Ajusta o tamanho dos botões */
+        font-size: 14px; /* Diminui o texto */
+    }
+
+    /* Footer */
+    footer {
+        padding: 15px; /* Ajusta o padding do footer */
+    }
+
+    /* Ajustes no header */
+    .header {
+        flex-direction: column; /* Coloca os itens do header em coluna */
+        align-items: center;
+        padding: 20px;
+    }
+
+    .login-buttons {
+        flex-direction: column; /* Alinha os botões em coluna */
+        gap: 5px;
+    }
+
+    .login-buttons a {
+        padding: 8px 15px; /* Ajusta o tamanho dos botões de login */
+        font-size: 14px;
+    }
+}
+
+/* Media Query para telas pequenas (smartphones em modo retrato) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 28px; /* Ajusta ainda mais o tamanho do título */
+    }
+
+    .hero {
+        height: 50vh; /* Ajusta altura para telas muito pequenas */
+    }
+
+    .logo-container img {
+        width: 50%; /* Ajusta o tamanho do logo */
+    }
+
+    .nav-buttons a {
+        font-size: 12px; /* Diminui o tamanho da fonte dos botões */
+        padding: 10px 15px; /* Diminui o tamanho dos botões */
+    }
 }
