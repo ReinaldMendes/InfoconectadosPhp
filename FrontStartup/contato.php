@@ -1,10 +1,6 @@
 <?php
 session_start();
-require_once 'inc/header.php';
-require 'vendor/autoload.php'; // Certifique-se de que o Composer está configurado corretamente
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+require_once 'inc/header.php'; // Inclui o cabeçalho (ajuste conforme necessário)
 
 if (!isset($_SESSION["logado"])) {
     header("Location: login-prestador.php");
@@ -14,32 +10,60 @@ if (!isset($_SESSION["logado"])) {
 $mensagemEnviada = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
     $assunto = $_POST['assunto'];
     $mensagem = $_POST['mensagem'];
-    $email = $_POST['email'];
 
-    $mail = new PHPMailer(true);
+    // Validação dos campos
+    if (empty($nome)) {
+        $mensagemEnviada = 'Por favor, preencha seu nome';
+    } elseif (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $mensagemEnviada = 'Por favor, insira um email válido';
+    } elseif (empty($mensagem)) {
+        $mensagemEnviada = 'Por favor, escreva uma mensagem';
+    } else {
+        // Inicializa o EmailJS
+        $serviceId = 'service_2mlvym3';  // Substitua pelo seu SERVICE_ID
+        $templateId = 'template_nwmvuvi'; // Substitua pelo seu TEMPLATE_ID
 
-    try {
-        // Configuração do servidor SMTP
-        $mail->isSMTP();
-        $mail->Host = 'smtp.office365.com'; // Substitua pelo servidor SMTP
-        $mail->SMTPAuth = true;
-        $mail->Username = 'reinald.2967@aluno.pr.senac.pr'; // Seu e-mail SMTP
-        $mail->Password = '08726262967'; // Sua senha SMTP
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Segurança TLS
-        $mail->Port = 587; // Porta SMTP
+        // Dados para enviar o email
+        $emailData = [
+            'from_name' => $nome,
+            'from_email' => $email,
+            'to_name' => 'Reinald', // Destinatário
+            'subject' => 'Dúvida: ' . $assunto,
+            'message' => $mensagem,
+            // reply_to pode ser o mesmo e-mail ou outro, caso necessário
+            'reply_to' => $email // Para responder ao mesmo e-mail
+        ];
 
-        // Configurações do e-mail
-        $mail->setFrom($email, 'Contato do Usuário');
-        $mail->addAddress('reinald_30_2009@hotmail.com'); // Seu e-mail de destino
-        $mail->Subject = 'Dúvida de ' . $assunto;
-        $mail->Body = "Mensagem de: $email\n\n$mensagem";
+        // Configuração para enviar email via EmailJS
+        $url = 'https://api.emailjs.com/api/v1.0/email/send';
+        $data = [
+            'service_id' => $serviceId,
+            'template_id' => $templateId,
+            'template_params' => $emailData
+        ];
 
-        $mail->send();
-        $mensagemEnviada = 'Sua mensagem foi enviada com sucesso!';
-    } catch (Exception $e) {
-        $mensagemEnviada = 'Ocorreu um erro ao enviar a mensagem. Erro: ' . $mail->ErrorInfo;
+        // Usando cURL para enviar a requisição POST
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json'
+        ]);
+
+        $result = curl_exec($ch);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($result) {
+            $mensagemEnviada = 'Sua mensagem foi enviada com sucesso!';
+        } else {
+            $mensagemEnviada = 'Ocorreu um erro ao enviar a mensagem. Tente novamente. Erro: ' . $error;
+        }
     }
 }
 ?>
@@ -49,20 +73,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="page-container">
     <h1>Contato e Ajuda</h1>
     <p>Se precisar de ajuda, envie uma mensagem para nossa equipe de suporte.</p>
-    
+
     <form method="POST" class="contact-form">
+        <label>Nome:</label>
+        <input type="text" name="nome" value="<?php echo isset($nome) ? $nome : ''; ?>" required>
+
         <label>Email:</label>
-        <input type="email" name="email" required>
-        
+        <input type="email" name="email" value="<?php echo isset($email) ? $email : ''; ?>" required>
+
         <label>Assunto:</label>
-        <input type="text" name="assunto" required>
-        
+        <input type="text" name="assunto" value="<?php echo isset($assunto) ? $assunto : ''; ?>" required>
+
         <label>Mensagem:</label>
-        <textarea name="mensagem" required></textarea>
-        
+        <textarea name="mensagem" required><?php echo isset($mensagem) ? $mensagem : ''; ?></textarea>
+
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
-    
+
     <?php if (!empty($mensagemEnviada)): ?>
         <p class="success-message"><?php echo $mensagemEnviada; ?></p>
     <?php endif; ?>
