@@ -1,0 +1,134 @@
+/* style-contato.css */
+
+/* Formulário de Contato */
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    background-color: #f5f5f5;
+    border: 5px solid #017f63;
+}
+
+.container h2 {
+    color: #017f63;
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.container p {
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+form label {
+    font-size: 1.1em;
+    color: #495057;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 15px;
+    font-size: 1em;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border 0.3s ease;
+}
+
+form input:focus,
+form textarea:focus {
+    border-color: #80bdff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+form button {
+    background-color: #017f63;
+    color: white;
+    padding: 12px 30px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    align-self: center;
+}
+
+form button:hover {
+    background-color: #043d04;
+    transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+    font-size: 14px;
+    color: #ffffff;
+    background-color: #017f63;
+    padding: 20px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+footer p {
+    margin: 0;
+}
+
+.social {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social li {
+    display: inline-block;
+}
+
+.social li img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.social li img:hover {
+    transform: scale(1.2);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .container h2 {
+        font-size: 1.5em;
+    }
+
+    form input,
+    form textarea {
+        padding: 12px;
+    }
+
+    form button {
+        padding: 10px 25px;
+    }
+}
