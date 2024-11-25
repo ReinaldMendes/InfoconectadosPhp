@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["idPrestador"])) {
         <div class="avaliacao">
             <h3>Deixe sua Avaliação</h3>
             <form method="POST" action="salvarAvaliacao.php">
-                <input type="hidden" name="idCliente" value="<?php echo $_SESSION['idCliente']; ?>">
+                <input type="hidden" name="idCliente" value="<?php echo $_SESSION['logado']; ?>">
                 <input type="hidden" name="idPrestador" value="<?php echo $idPrestador; ?>">
                 <label for="estrelas">Nota:</label>
                 <select name="estrelas" id="estrelas" required>

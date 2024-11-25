@@ -1,0 +1,16 @@
+Considerando que uma determinada organização tenha processos de gerenciamento bem caracterizados, descritos por padrões, além de utilizar ferramentas e métodos bem estabelecidos, acerca dessas informações essa organização se encontra em qual nível de maturidade do CMMI? Somer Ville - Engenharia de software. Inicial, definido, gerenciado, em otimização, e gerenciado quantitativamente.
+
+Pesquise e responda sobre Pmbok 6 edição, exemplo 1 combinação única de um ou mais produtos serviços ou resultados, pode representar um possível projeto ?
+
+A criação de um produto único ou um item do produto, pode representar um possível projeto?
+
+A operação de um software, mesmo que repetidas vezes, pode representar um possível projeto?
+
+Compare CMMI Dev com MPS-SW : Os dois modelos são organizados em níveis de maturidade, caracterize quais são os níveis de maturidade de cada modelo.
+
+Me informe se ambos os modelos, eles levam em conta a engenharia de software para implementar processos em todos os níveis, sem as necessidade de alinhamento com o planejamento estratégico da empresa.
+
+Defina com o máximo de detalhes, quais são os aspectos de cada nível de maturidade do CMMI?
+A maturidade do processo de software implica em melhorias continuas do processo de software, com base em etapas evolutivas que se caracterizam pela capacidade de inovação e absorção de novas tecnologias?
+A maturidade do CMMI implica na sua institucionalização por meio de politicas e padrões organizacionais levando a uma cultura corporativa de métodos, praticas e procedimentos com efetividade plena reconhecida?
+Se cada nível do CMMI implica na satisfação de um conjunto de metas de processo que estabilizam um componente importante do processo de software?

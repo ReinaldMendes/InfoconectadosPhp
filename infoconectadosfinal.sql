@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 12/11/2024 às 18:13
+-- Tempo de geração: 25/11/2024 às 23:55
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -93,22 +93,24 @@ CREATE TABLE `prestadores` (
   `telefone` varchar(20) NOT NULL,
   `email` varchar(100) NOT NULL,
   `senha` varchar(300) NOT NULL,
-  `foto_perfil` varchar(255) DEFAULT NULL
+  `foto_perfil` varchar(255) DEFAULT NULL,
+  `idCliente` int(11) DEFAULT NULL,
+  `especialidade` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `prestadores`
 --
 
-INSERT INTO `prestadores` (`idPrestador`, `nome`, `sobrenome`, `data_nasc`, `endereco`, `cpf`, `telefone`, `email`, `senha`, `foto_perfil`) VALUES
-(3, 'Reinald', 'Mendes Dos Santos', '1994-02-10', '2024-06-20', '08726262967', '42991562594', 'reinald_30_20092@hotmail.com', '14e1b600b1fd579f47433b88e8d85291', NULL),
-(5, 'REINALD', 'DOS SANTOS', '1994-02-10', 'Rua Prudentópolis, 229', '08726262967', '42991562593', 'reinald_30_2009@hotmail.com', '14e1b600b1fd579f47433b88e8d85291', NULL),
-(6, 'REINALD', 'Da silva', '1994-02-10', 'Rua Prudentópolis, 229', '08726262967', '42991562593', 'reinald_30_200009@hotmail.com', '70873e8580c9900986939611618d7b1e', NULL),
-(7, 'REINALD', 'DOS SANTOS da silva', '0000-00-00', 'Rua Prudentópolis, 229', '08726262967', '42991562593', 'reeh_mendes33@yahoo.com.br', '70873e8580c9900986939611618d7b1e', NULL),
-(8, 'REINALD', 'DOS SANTOS', '2024-10-10', 'Rua Prudentópolis, 229', '08726262967', '42991562593', 'reinald_3_2009@hotmail.com', '14e1b600b1fd579f47433b88e8d85291', NULL),
-(9, 'REINALD', 'DOS SANTOS', '1994-02-10', 'Rua Prudentópolis, 229', '08726262967', '42991562593', 'reeh_mendees@yahoo.com.br', '14e1b600b1fd579f47433b88e8d85291', NULL),
-(10, 'REINALD', 'DOS SANTOS', '1994-02-10', 'Rua Prudentópolis, 229', '08726262967', '42991562593', 'reinald_30_20009@hotmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL),
-(11, 'REINALD', 'DOS SANTOS', '1994-02-10', 'Rua Prudentópolis, 229', '08726262967', '42991562593', 'reinald_30_29@hotmail.com', '$2y$10$g9pjE2Olkp6DDWC3/tD7newCkcpQKlBLnYXShWKgavKy/vIbFTRfW', NULL);
+INSERT INTO `prestadores` (`idPrestador`, `nome`, `sobrenome`, `data_nasc`, `endereco`, `cpf`, `telefone`, `email`, `senha`, `foto_perfil`, `idCliente`, `especialidade`) VALUES
+(3, 'Reinald', 'Mendes Dos Santos', '1994-02-10', '2024-06-20', '08726262967', '42991562594', 'reinald_30_20092@hotmail.com', '14e1b600b1fd579f47433b88e8d85291', NULL, NULL, NULL),
+(5, 'REINALD', 'DOS SANTOS', '1994-02-10', 'Rua Prudentópolis, 229', '08726262967', '42991562593', 'reinald_30_2009@hotmail.com', '14e1b600b1fd579f47433b88e8d85291', NULL, NULL, NULL),
+(6, 'REINALD', 'Da silva', '1994-02-10', 'Rua Prudentópolis, 229', '08726262967', '42991562593', 'reinald_30_200009@hotmail.com', '70873e8580c9900986939611618d7b1e', NULL, NULL, NULL),
+(7, 'REINALD', 'DOS SANTOS da silva', '0000-00-00', 'Rua Prudentópolis, 229', '08726262967', '42991562593', 'reeh_mendes33@yahoo.com.br', '70873e8580c9900986939611618d7b1e', NULL, NULL, NULL),
+(8, 'REINALD', 'DOS SANTOS', '2024-10-10', 'Rua Prudentópolis, 229', '08726262967', '42991562593', 'reinald_3_2009@hotmail.com', '14e1b600b1fd579f47433b88e8d85291', NULL, NULL, NULL),
+(9, 'REINALD', 'DOS SANTOS', '1994-02-10', 'Rua Prudentópolis, 229', '08726262967', '42991562593', 'reeh_mendees@yahoo.com.br', '14e1b600b1fd579f47433b88e8d85291', NULL, NULL, NULL),
+(10, 'REINALD', 'DOS SANTOS', '1994-02-10', 'Rua Prudentópolis, 229', '08726262967', '42991562593', 'reinald_30_20009@hotmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL),
+(11, 'REINALD', 'DOS SANTOS', '1994-02-10', 'Rua Prudentópolis, 229', '08726262967', '42991562593', 'reinald_30_29@hotmail.com', '$2y$10$g9pjE2Olkp6DDWC3/tD7newCkcpQKlBLnYXShWKgavKy/vIbFTRfW', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
