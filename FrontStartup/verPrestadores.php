@@ -12,15 +12,13 @@ if (!isset($_SESSION["logado"])) {
 $cliente = new Cliente();
 $idCliente = $_SESSION["logado"];
 
-// Lógica de busca e listagem
+// Lógica de busca e listagem de prestadores
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["searchService"])) {
     $searchService = trim($_POST["searchService"]);
     $prestadoresDisponiveis = $cliente->buscarPrestadoresPorServico($searchService);
 } else {
     $prestadoresDisponiveis = $cliente->listarPrestadores();
 }
-
-$prestadoresRecentes = $cliente->listarPrestadores();
 
 // Processar avaliação
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["avaliacao"])) {
@@ -33,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["avaliacao"])) {
     $prestadoresDisponiveis = $cliente->listarPrestadores();
 }
 ?>
-<link rel="stylesheet" href="css/style-dashboard.css">
+<link rel="stylesheet" href="css/style-verPrestador.css">
 
 <div class="dashboard-container d-flex">
     <!-- Menu Lateral -->
@@ -41,6 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["avaliacao"])) {
         <h2>Menu</h2>
         <ul>
             <li><a href="index.php">Início</a></li>
+            <li><a href="verPrestadores.php">Prestadores</a></li>
+            <li><a href="historicoServicos.php">Serviços</a></li>
             <li><a href="perfilCliente.php">Perfil</a></li>
             <li><a href="contato.php">Ajuda</a></li>
             <li><a href="logout.php">Logout</a></li>
@@ -60,43 +60,62 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["avaliacao"])) {
             </form>
         </div>
 
-        <h2>Prestadores Recentes</h2>
-        <div class="slideshow-container">
-            <?php foreach ($prestadoresRecentes as $prestador): ?>
-                <div class="mySlides">
-                <img src="img/<?php echo !empty($prestador['foto']) ? htmlspecialchars($prestador['foto']) : 'avatar.png'; ?>" alt="Avatar do Prestador" class="client-image">
-                    <div class="text"><?php echo htmlspecialchars($prestador['nome'] . ' ' . $prestador['sobrenome']); ?></div>
-                </div>
-            <?php endforeach; ?>
-            <div class="slideshow-indicators">
-                <?php foreach ($prestadoresRecentes as $index => $prestador): ?>
-                    <span class="dot" onclick="currentSlide(<?php echo $index + 1; ?>)"></span>
-                <?php endforeach; ?>
-            </div>
-        </div>
-
         <h2>Prestadores Disponíveis</h2>
         <div class="client-list-container">
             <div class="container">
                 <?php if (!empty($prestadoresDisponiveis)): ?>
                     <ul class="client-list">
-                        <?php foreach ($prestadoresDisponiveis as $prestador): 
-                            // Calcular média das avaliações
-                            $avaliacoes = $cliente->listarAvaliacoes($prestador['idPrestador']);
-                            $mediaAvaliacao = !empty($avaliacoes) ? array_sum(array_column($avaliacoes, 'avaliacao')) / count($avaliacoes) : 'Sem avaliação';
-                        ?>
+                        <?php foreach ($prestadoresDisponiveis as $prestador): ?>
                             <li class="client-item">
                                 <div class="client-info d-flex align-items-center">
                                     <img src="img/<?php echo !empty($prestador['foto']) ? htmlspecialchars($prestador['foto']) : 'avatar.png'; ?>" alt="Avatar do Prestador" class="client-avatar">
                                     <div>
                                         <h3><?php echo htmlspecialchars($prestador['nome'] . ' ' . $prestador['sobrenome']); ?></h3>
                                         <p>Especialidade: <?php echo htmlspecialchars($prestador['especialidade']); ?></p>
-                                        <p>Avaliação: <?php echo ($mediaAvaliacao === 'Sem avaliação') ? $mediaAvaliacao : number_format($mediaAvaliacao, 1); ?> / 5</p>
                                     </div>
                                 </div>
+                                
+                                <!-- Exibir Avaliações -->
+                                <div class="avaliacoes-container">
+                                    <h4>Avaliações:</h4>
+                                    <ul class="avaliacoes-list">
+                                        <?php 
+                                            // Aqui você poderia adicionar a lógica para buscar avaliações associadas ao prestador
+                                            $avaliacoes = $cliente->buscarAvaliacoesPrestador($prestador['idPrestador']);
+                                            if (!empty($avaliacoes)):
+                                                foreach ($avaliacoes as $avaliacao):
+                                        ?>
+                                            <li class="avaliacao-item">
+                                                <strong><?php echo htmlspecialchars($avaliacao['nomeCliente']); ?></strong>: 
+                                                <span class="rating"><?php echo str_repeat("★", $avaliacao['avaliacao']); ?></span>
+                                                <p><?php echo htmlspecialchars($avaliacao['comentario']); ?></p>
+                                            </li>
+                                        <?php endforeach; else: ?>
+                                            <li>Este prestador ainda não tem avaliações.</li>
+                                        <?php endif; ?>
+                                    </ul>
+                                </div>
+
+                                <!-- Formulário de Avaliação -->
+                                <div class="avaliar-prestador">
+                                    <form method="POST" action="" class="d-flex flex-column">
+                                        <input type="hidden" name="idPrestador" value="<?php echo $prestador['idPrestador']; ?>">
+                                        <label for="avaliacao">Avalie este prestador:</label>
+                                        <select name="avaliacao" id="avaliacao" class="form-control">
+                                            <option value="1">1 estrela</option>
+                                            <option value="2">2 estrelas</option>
+                                            <option value="3">3 estrelas</option>
+                                            <option value="4">4 estrelas</option>
+                                            <option value="5">5 estrelas</option>
+                                        </select>
+                                        <textarea name="comentario" placeholder="Escreva seu comentário..." class="form-control" required></textarea>
+                                        <button type="submit" class="btn btn-success">Enviar Avaliação</button>
+                                    </form>
+                                </div>
+
                                 <form method="POST" action="contatarPrestador.php" class="contact-form">
                                     <input type="hidden" name="idPrestador" value="<?php echo $prestador['idPrestador']; ?>">
-                                    <button type="submit" class="btn btn-success">Entrar em Contato</button>
+                                    <button type="submit" class="btn btn-primary">Entrar em Contato</button>
                                 </form>
                             </li>
                         <?php endforeach; ?>
@@ -108,28 +127,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["avaliacao"])) {
         </div>
     </div>
 </div>
-
-<!-- Script do slideshow -->
-<script>
-    let slideIndex = 1;
-    showSlides(slideIndex);
-
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
-    }
-
-    function showSlides(n) {
-        const slides = document.getElementsByClassName("mySlides");
-        const dots = document.getElementsByClassName("dot");
-        if (n > slides.length) { slideIndex = 1; }
-        if (n < 1) { slideIndex = slides.length; }
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        for (let i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
-    }
-</script>

@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../adm/classes/avaliacao.php';
+require_once '../adm/classes/conexao.class.php'; // Certifique-se de incluir a conexão corretamente
 
 if (!isset($_SESSION["logado"])) {
     header("Location: login-cliente.php");
@@ -19,9 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
-    // Salvar avaliação
+    // Conectar ao banco e salvar avaliação
     try {
-        $avaliacao = new Avaliacao();
+        $conexao = new Conexao();
+        $avaliacao = new Avaliacao($conexao); // Passando a conexão à classe
         $resultado = $avaliacao->salvarAvaliacao($idCliente, $idPrestador, $nota, $comentario);
 
         if ($resultado) {

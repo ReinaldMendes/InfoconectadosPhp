@@ -24,15 +24,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $endereco = $_POST['endereco'];
     $nova_senha = isset($_POST['nova_senha']) ? $_POST['nova_senha'] : null;
 
-    // Atualiza o perfil, incluindo a senha se for fornecida
+    // Atualiza o perfil do cliente, incluindo a senha se for fornecida
     $cliente->atualizarPerfil($idCliente, $nome, $sobrenome, $email, $telefone, $endereco, $nova_senha);
-    
+
     // Mensagem de sucesso
     $_SESSION['msg'] = "Alterações salvas com sucesso!";
     
+    // Redireciona para a página de perfil do cliente
     header("Location: perfilCliente.php");
     exit;
 }
+
+// Verifique se os dados estão sendo passados corretamente
+
 ?>
 
 <link rel="stylesheet" href="css/styleMenus.css">
@@ -44,8 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <ul>
             <li><a href="index.php">Inicio</a></li>
             <li><a href="dashboardCliente.php">Voltar ao Dashboard</a></li>
-            <li><a href="verPrestadores.php">Ver Prestadores</a></li>
-            <li><a href="historicoServicosCliente.php">Histórico de Serviços</a></li>
             <li><a href="contato.php">Contato</a></li>
         </ul>
     </div>

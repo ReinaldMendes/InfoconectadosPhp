@@ -205,50 +205,52 @@ class Cliente {
         }
     }
     
-    public function atualizarPerfil($idCliente, $dados) {
-        // Verifica se o novo email já está em uso por outro cliente, mas ignorando o email do próprio cliente
-        $clienteAtual = $this->buscar($idCliente);
-        if (!$clienteAtual) {
-            return false; // Caso o cliente não seja encontrado
-        }
-    
-        if ($this->existeEmail($dados['email']) && $clienteAtual['email'] !== $dados['email']) {
-            return false; // Retorna falso se o email já existir e não for o mesmo do cliente
+
+    public function atualizarPerfil($idCliente, $nome, $sobrenome, $email, $telefone, $endereco, $nova_senha = null) {
+        // Se a senha foi fornecida, faça o hash da nova senha
+        if ($nova_senha) {
+            $nova_senha = password_hash($nova_senha, PASSWORD_BCRYPT);
         }
     
         try {
-            // Se a senha foi fornecida, realiza a atualização com a senha criptografada
-            if (!empty($dados['senha'])) {
-                $dados['senha'] = password_hash($dados['senha'], PASSWORD_DEFAULT);
-            } else {
-                unset($dados['senha']); // Se não foi fornecida senha, remove o campo da atualização
+            // SQL para atualizar o perfil
+            $sql = $this->con->conectar()->prepare("UPDATE cliente SET 
+                nome = :nome, 
+                sobrenome = :sobrenome, 
+                email = :email, 
+                telefone = :telefone, 
+                endereco = :endereco" . ($nova_senha ? ", senha = :senha" : "") . " 
+                WHERE idCliente = :idCliente");
+    
+            // Bind dos parâmetros
+            $sql->bindParam(':nome', $nome, PDO::PARAM_STR);
+            $sql->bindParam(':sobrenome', $sobrenome, PDO::PARAM_STR);
+            $sql->bindParam(':email', $email, PDO::PARAM_STR);
+            $sql->bindParam(':telefone', $telefone, PDO::PARAM_STR);
+            $sql->bindParam(':endereco', $endereco, PDO::PARAM_STR);
+    
+            // Se houver uma nova senha, faça o bind do parâmetro
+            if ($nova_senha) {
+                $sql->bindParam(':senha', $nova_senha, PDO::PARAM_STR);
             }
     
-            // Criação da string de campos a serem atualizados
-            $sets = [];
-            foreach ($dados as $key => $value) {
-                $sets[] = "$key = :$key";
-            }
-            $setString = implode(", ", $sets);
+            // Bind do ID do cliente
+            $sql->bindParam(':idCliente', $idCliente, PDO::PARAM_INT);
     
-            // Prepara a consulta SQL para atualizar os dados do cliente
-            $sql = $this->con->conectar()->prepare("UPDATE cliente SET $setString WHERE idCliente = :idCliente");
-    
-            // Vincula todos os parâmetros de dados, incluindo o idCliente
-            $dados['idCliente'] = $idCliente;
-            foreach ($dados as $key => $value) {
-                $sql->bindValue(":$key", $value);
-            }
-    
-            // Executa a atualização
+            // Execute a query
             $sql->execute();
     
-            return true; // Retorna verdadeiro se a atualização for bem-sucedida
+            // Se tudo ocorreu bem, retorne sucesso
+            echo json_encode(['success' => true, 'message' => 'Perfil atualizado com sucesso']);
+            return true;
         } catch (PDOException $ex) {
-            $this->logErro($ex->getMessage()); // Log do erro
-            return false; // Retorna falso se houver erro na execução da consulta
+            // Se houver erro, capture e mostre o erro
+            echo json_encode(['error' => 'ERRO: ' . $ex->getMessage()]);
+            return false;
         }
     }
+    
+    
     public function buscarDetalhesPrestador($idPrestador) {
         try {
             // Prepara a consulta para obter os detalhes do prestador
@@ -269,6 +271,18 @@ class Cliente {
             // Loga o erro e retorna false em caso de falha
             $this->logErro($ex->getMessage());
             return false;
+        }
+    }
+    public function listarAvaliacoes($idPrestador) {
+        try {
+            $query = "SELECT * FROM avaliacao WHERE idPrestador = :idPrestador";
+            $stmt = $this->con->conectar()->prepare($query);
+            $stmt->bindParam(':idPrestador', $idPrestador, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            $this->logErro($ex->getMessage());
+            return [];
         }
     }
     

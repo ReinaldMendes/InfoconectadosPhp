@@ -1,6 +1,7 @@
 <?php require_once 'inc/header.php'; ?>
 <link rel="stylesheet" href="css/style-contato.css">
 
+<section class="hero">
 <div class="container">
 <h2>Entre em Contato Conosco</h2>
 <p>Este é o formulário para entrar em contato conosco. Preencha os campos abaixo com as informações solicitadas, e nossa equipe responderá o mais breve possível. Fique à vontade para enviar dúvidas ou sugestões!</p>
@@ -17,6 +18,7 @@
         <button type="submit">Enviar</button>
     </form>
 </div>
+</section>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>

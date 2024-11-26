@@ -24,6 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["idPrestador"])) {
     header("Location: dashboardCliente.php");
     exit;
 }
+
+// Exibição de mensagem de sucesso na avaliação
+if (isset($_GET['sucesso']) && $_GET['sucesso'] == 1) {
+    echo "<div class='alert alert-success'>Obrigado por sua avaliação!</div>";
+}
 ?>
 
 <link rel="stylesheet" href="css/style-contatarPrestador.css">
@@ -53,10 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["idPrestador"])) {
         <div class="avaliacao">
             <h3>Deixe sua Avaliação</h3>
             <form method="POST" action="salvarAvaliacao.php">
-                <input type="hidden" name="idCliente" value="<?php echo $_SESSION['logado']; ?>">
-                <input type="hidden" name="idPrestador" value="<?php echo $idPrestador; ?>">
-                <label for="estrelas">Nota:</label>
-                <select name="estrelas" id="estrelas" required>
+                <input type="hidden" name="idCliente" value="<?php echo htmlspecialchars($_SESSION['logado']); ?>">
+                <input type="hidden" name="idPrestador" value="<?php echo htmlspecialchars($idPrestador); ?>">
+                <label for="nota">Nota:</label>
+                <select name="nota" id="nota" required>
                     <option value="1">1 estrela</option>
                     <option value="2">2 estrelas</option>
                     <option value="3">3 estrelas</option>
@@ -74,6 +79,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["idPrestador"])) {
         </div>
     </div>
 </div>
-
 
 <?php include 'inc/footer.php'; ?>
