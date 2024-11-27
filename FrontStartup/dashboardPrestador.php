@@ -32,7 +32,6 @@ $clientesRecentes = $prestador->listarClientesRecentes($idPrestador);
         <ul>
             <li><a href="index.php">Início</a></li>
             <li><a href="verClientes.php">Clientes</a></li>
-            <li><a href="historicoServicos.php">Serviços</a></li>
             <li><a href="perfilPrestador.php">Perfil</a></li>
             <li><a href="contato.php">Ajuda</a></li>
             <li><a href="logout.php">Logout</a></li>

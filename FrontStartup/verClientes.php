@@ -17,14 +17,14 @@ $clientesDisponiveis = $prestador->listarClientesDisponiveis($idPrestador);
 <link rel="stylesheet" href="css/style-pag.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+<br> <br>
 <div class="dashboard-container d-flex">
     <!-- Menu Lateral -->
     <nav class="sidebar">
         <h2>Menu</h2>
         <ul>
             <li><a href="index.php">Início</a></li>
-            <li><a href="verClientes.php">Clientes</a></li>
-            <li><a href="historicoServicos.php">Serviços</a></li>
+            <li><a href="dashboardPrestador.php">Voltar ao Dashboard</a></li>
             <li><a href="perfilPrestador.php">Perfil</a></li>
             <li><a href="contato.php">Ajuda</a></li>
             <li><a href="logout.php">Logout</a></li>
@@ -65,5 +65,5 @@ $clientesDisponiveis = $prestador->listarClientesDisponiveis($idPrestador);
         });
     });
 </script>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<?php include 'inc/footer.php'; ?>
+
+
