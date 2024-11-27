@@ -345,3 +345,16 @@ footer p {
 .sidebar ul li a:hover {
     background-color: #017f63;
 }
+.page-container p {
+    font-size: 18px; /* Tamanho da fonte legível */
+    color: #6c757d; /* Tom cinza suave para um visual elegante */
+    background-color: #f8f9fa; /* Fundo leve para destaque */
+    padding: 15px 20px; /* Espaçamento interno para conforto visual */
+    border-radius: 8px; /* Cantos arredondados */
+    border: 1px solid #dee2e6; /* Borda sutil */
+    margin-bottom: 20px; /* Espaçamento inferior */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra leve para destaque */
+    line-height: 1.6; /* Boa espaçagem entre as linhas */
+    text-align: center; /* Alinhamento centralizado */
+    font-style: italic; /* Adiciona um toque sofisticado */
+}

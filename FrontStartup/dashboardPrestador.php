@@ -75,10 +75,11 @@ $clientesRecentes = $prestador->listarClientesRecentes($idPrestador);
                                         <p>Serviço Necessário: <?php echo htmlspecialchars($cliente['qualServicoNecessita']); ?></p>
                                     </div>
                                 </div>
-                                <form method="POST" action="contatarCliente.php">
-                                    <input type="hidden" name="idCliente" value="<?php echo $cliente['idCliente']; ?>">
-                                    <button type="submit" class="btn btn-success">Entrar em Contato</button>
+                                <form method="GET" action="contatarCliente.php">
+                                 <input type="hidden" name="id" value="<?php echo $cliente['idCliente']; ?>">
+                                 <button type="submit" class="btn btn-success">Entrar em Contato</button>
                                 </form>
+
                             </li>
                         <?php endforeach; ?>
                     </ul>

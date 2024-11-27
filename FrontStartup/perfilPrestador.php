@@ -22,10 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
     $endereco = $_POST['endereco'];
+    $especialidade = $_POST['especialidade'];
     $nova_senha = isset($_POST['nova_senha']) ? $_POST['nova_senha'] : null;
 
     // Atualiza o perfil, incluindo a senha se for fornecida
-    $prestador->atualizarPerfil($idPrestador, $nome, $sobrenome, $email, $telefone, $endereco, $nova_senha);
+    $prestador->atualizarPerfil($idPrestador, $nome, $sobrenome, $email, $telefone, $endereco, $nova_senha, $especialidade);
     
     // Mensagem de sucesso
     $_SESSION['msg'] = "Alterações salvas com sucesso!";
@@ -77,6 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <p><strong>Email:</strong> <?php echo htmlspecialchars($dadosPrestador['email']); ?></p>
                     <p><strong>Telefone:</strong> <?php echo htmlspecialchars($dadosPrestador['telefone']); ?></p>
                     <p><strong>Endereço:</strong> <?php echo htmlspecialchars($dadosPrestador['endereco']); ?></p>
+                    <p><strong>Especialidade:</strong> <?php echo htmlspecialchars($dadosPrestador['especialidade']); ?></p>
                 </div>
             </div>
 
@@ -96,6 +98,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <label>Endereço:</label>
                 <input type="text" name="endereco" value="<?php echo htmlspecialchars($dadosPrestador['endereco']); ?>" required>
+                <label>Especialidade:</label>
+                <input type="text" name="endereco" value="<?php echo htmlspecialchars($dadosPrestador['especialidade']); ?>" required>
 
                 <label>Nova Senha (opcional):</label>
                 <input type="password" name="nova_senha" placeholder="Digite sua nova senha (se desejar alterá-la)">

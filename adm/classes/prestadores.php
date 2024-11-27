@@ -67,6 +67,17 @@ class Prestador {
             return false;
         }
     }
+    public function buscarDetalhesCliente($idCliente) {
+        try {
+            $sql = $this->con->conectar()->prepare("SELECT * FROM cliente WHERE idCliente = :idCliente");
+            $sql->bindParam(':idCliente', $idCliente, PDO::PARAM_INT);
+            $sql->execute();
+            return $sql->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            echo json_encode(['error' => 'ERRO: ' . $ex->getMessage()]);
+            return null;
+        }
+    }
     
     public function obterDadosPrestador($idPrestador) {
         try {

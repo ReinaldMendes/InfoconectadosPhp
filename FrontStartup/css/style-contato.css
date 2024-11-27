@@ -32,12 +32,13 @@
 form {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px; /* Reduzido o gap para espaçamento mais ajustado */
 }
 
 form label {
     font-size: 1.1em;
     color: #495057;
+    margin-bottom: 5px; /* Ajustado o espaçamento abaixo do label */
 }
 
 form input,
@@ -112,6 +113,8 @@ footer p {
     transform: scale(1.2);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
+
+/* Hero Section */
 .hero {
     display: flex;
     flex-direction: column;
@@ -133,6 +136,7 @@ footer p {
     background-color: rgba(255, 255, 255, 0.7); /* Efeito de transparência */
     z-index: 1;
 }
+
 /* Responsividade */
 @media (max-width: 768px) {
     .container {

@@ -1,20 +1,20 @@
 <?php
 session_start();
 require_once 'inc/header.php';
-require_once '../adm/classes/cliente.php';
+require_once '../adm/classes/prestadores.php';
 
 // Verificação de Sessão
 if (!isset($_SESSION["logado"])) {
-    header("Location: login-cliente.php");
+    header("Location: login-prestador.php");
     exit;
 }
 
-$cliente = new Cliente();
+$prestador = new Prestador();
 
-// Verifica se o ID do cliente foi enviado
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["idCliente"])) {
-    $idCliente = intval($_POST["idCliente"]);
-    $clienteDetalhes = $cliente->buscarDetalhesCliente($idCliente);
+// Verifica se o ID do cliente foi enviado via GET
+if (isset($_GET["id"])) {
+    $idCliente = intval($_GET["id"]);  // Captura o ID do cliente da URL
+    $clienteDetalhes = $prestador->buscarDetalhesCliente($idCliente);
 
     if (!$clienteDetalhes) {
         echo "<p>Cliente não encontrado.</p>";
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["idCliente"])) {
 }
 ?>
 
-<link rel="stylesheet" href="css/style-contatarCliente.css">
+<link rel="stylesheet" href="css/style-contatarPrestador.css">
 
 <div class="dashboard-container">
     <div class="content">
@@ -34,15 +34,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["idCliente"])) {
             <h1>Detalhes do Cliente</h1>
         </div>
 
-        <div class="cliente-detalhes">
-            <div class="cliente-info">
-                <img src="img/<?php echo !empty($clienteDetalhes['foto_perfil']) ? htmlspecialchars($clienteDetalhes['foto_perfil']) : 'avatar.png'; ?>" alt="Avatar do Cliente" class="cliente-avatar">
+        <div class="prestador-detalhes">
+            <div class="prestador-info">
+                <img src="img/<?php echo !empty($clienteDetalhes['foto_perfil']) ? htmlspecialchars($clienteDetalhes['foto_perfil']) : 'avatar.png'; ?>" alt="Avatar do Cliente" class="prestador-avatar">
                 <h2><?php echo htmlspecialchars($clienteDetalhes['nome'] . ' ' . $clienteDetalhes['sobrenome']); ?></h2>
-                <p><strong>Serviço Necessário:</strong> <?php echo htmlspecialchars($clienteDetalhes['servicoNecessario']); ?></p>
+                <p><strong>Serviço Necessário:</strong> <?php echo htmlspecialchars($clienteDetalhes['qualServicoNecessita']); ?></p>
+                <p><strong>Endereço:</strong> <?php echo htmlspecialchars($clienteDetalhes['endereco']); ?></p>
             </div>
 
             <div class="contact-button">
-                <a href="https://wa.me/<?php echo htmlspecialchars($clienteDetalhes['telefone']); ?>?text=Olá,%20gostaria%20de%20entrar%20em%20contato%20com%20você!" 
+                <a href="https://wa.me/<?php echo htmlspecialchars($clienteDetalhes['telefone']); ?>?text=Olá,%20sou%20um%20prestador%20interessado%20em%20ajudar%20você!" 
                    class="btn btn-success" target="_blank">
                    Contatar no WhatsApp
                 </a>

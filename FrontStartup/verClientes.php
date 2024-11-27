@@ -31,22 +31,25 @@ $clientesDisponiveis = $prestador->listarClientesDisponiveis($idPrestador);
         </ul>
     </nav>
 
-<div class="page-container">
-    <h1>Clientes Disponíveis</h1>
-    <div class="client-carousel">
-        <?php if (!empty($clientesDisponiveis)): ?>
-            <?php foreach ($clientesDisponiveis as $cliente): ?>
-                <div class="client-item">
-                    <a href="detalhesCliente.php?id=<?php echo htmlspecialchars($cliente['idCliente']); ?>">
-                        <img src="img/<?php echo !empty($cliente['foto']) ? htmlspecialchars($cliente['foto']) : 'avatar.png'; ?>" alt="Avatar do Cliente" class="client-avatar">
-                        <h3><?php echo htmlspecialchars($cliente['nome'] . ' ' . $cliente['sobrenome']); ?></h3>
-                        <p>Serviço Necessário: <?php echo htmlspecialchars($cliente['qualServicoNecessita']); ?></p>
-                    </a>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p>Nenhum cliente disponível no momento.</p>
-        <?php endif; ?>
+    <div class="page-container">
+        <h1>Clientes Disponíveis</h1>
+        <p>Estes são os clientes que precisam dos seus serviços. Clique em um cliente para visualizar mais detalhes e entrar em contato. Aproveite para oferecer o melhor atendimento!</p>
+        <div class="client-carousel">
+            <?php if (!empty($clientesDisponiveis)): ?>
+                <?php foreach ($clientesDisponiveis as $cliente): ?>
+                    <div class="client-item">
+                        <!-- Certifique-se de que a URL está correta -->
+                        <a href="contatarCliente.php?id=<?php echo urlencode($cliente['idCliente']); ?>">
+                            <img src="img/<?php echo !empty($cliente['foto_perfil']) ? htmlspecialchars($cliente['foto_perfil']) : 'avatar.png'; ?>" alt="Avatar do Cliente" class="client-avatar">
+                            <h3><?php echo htmlspecialchars($cliente['nome'] . ' ' . $cliente['sobrenome']); ?></h3>
+                            <p>Serviço Necessário: <?php echo htmlspecialchars($cliente['qualServicoNecessita']); ?></p>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No momento, não há clientes disponíveis. Volte mais tarde ou explore outras áreas do nosso dashboard.</p>
+            <?php endif; ?>
+        </div>
     </div>
 </div>
 
@@ -65,5 +68,3 @@ $clientesDisponiveis = $prestador->listarClientesDisponiveis($idPrestador);
         });
     });
 </script>
-
-
