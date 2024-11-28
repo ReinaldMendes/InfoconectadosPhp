@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre Nós - Infoconectados</title>
-    <link rel="stylesheet" href="css/style-sobre.css">
+    <link rel="stylesheet" href="css/style-missao.css">
 </head>
 <body>
     <!-- Importando o Header -->
     <?php include 'inc/header.php'; ?>
-
+    <br> <br>  <br> <br>
+    <section class="hero">
     <section class="mission-vision-values">
         <header>
             <h1>SOBRE NÓS</h1>
         </header>
         <div class="section-content">
-            <div class="about">
+        <div class="mission">
                 <div class="image-text">
                     <img src="img/logo.png" alt="Infoconectados">
                     <p>Olá, somos o Infoconectados</p>
@@ -27,7 +28,7 @@
                     </p>
                 </div>
             </div>
-            <div class="goal">
+            <div class="vision">
                 <div class="text-content">
                     <h2>Nosso objetivo</h2>
                     <p>
@@ -35,7 +36,7 @@
                     </p>
                 </div>
             </div>
-            <div class="team">
+            <div class="values">
                 <div class="text-content">
                     <h2>Nosso time</h2>
                     <p>
@@ -44,8 +45,9 @@
                 </div>
             </div>
         </div>
+        </section>
     </section>
-
+    <br> <br>  <br> <br>
     <!-- Importando o Footer -->
     <?php include 'inc/footer.php'; ?>
 </body>

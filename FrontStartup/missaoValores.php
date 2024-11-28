@@ -9,7 +9,8 @@
 <body>
     <!-- Importando o Header -->
     <?php include 'inc/header.php'; ?>
-
+    <br> <br>  <br> <br>
+    <section class="hero">
     <section class="mission-vision-values">
         <header>
             <h1>MISSÃO, VISÃO E VALORES</h1>
@@ -44,7 +45,8 @@
             </div>
         </div>
     </section>
-
+    </section>
+    <br> <br>  <br> <br>
     <!-- Importando o Footer -->
     <?php include 'inc/footer.php'; ?>
 </body>

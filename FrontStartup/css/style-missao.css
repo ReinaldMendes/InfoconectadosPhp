@@ -44,16 +44,18 @@ body {
     max-width: 1200px;
     margin: 20px auto;
     padding: 40px;
-    background-color: #1f9235; /* Verde para consistência com o tema */
+    background-color: #ffffff; /* Alterado para branco para melhor contraste */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border: 5px solid #017f63; /* Borda similar à da seção hero da index */
+    border: 5px solid #017f63;
+    position: relative; /* Garante que o conteúdo fique acima do fundo */
+    z-index: 2;
 }
 
 .mission-vision-values header h1 {
     text-align: center;
     font-size: 36px;
-    color: #ffffff;
+    color: #017f63;
     letter-spacing: 2px;
     margin-bottom: 40px;
 }
@@ -62,14 +64,15 @@ body {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    padding: 20px;
 }
 
 .mission, .vision, .values {
-    background-color: #2d8a39;
+    background-color: #ffffff; /* Fundo branco para contraste */
     padding: 30px;
     border-radius: 8px;
     position: relative;
-    color: #ffffff;
+    color: #017f63; /* Mudando para verde para dar destaque */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -95,7 +98,7 @@ body {
 .mission .text-content h2, .vision .text-content h2, .values .text-content h2 {
     margin: 0 0 15px;
     font-size: 28px;
-    color: #ffffff;
+    color: #017f63; /* Cor ajustada para combinar com o tema */
 }
 
 .mission .text-content p, .vision .text-content p, .values .text-content p {
@@ -195,30 +198,106 @@ footer p {
     transform: scale(1.2);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
-/* Background for 'Serviços' and 'Missão, Visão e Valores' */
-.background-image-section {
-    background-image: url('../img/fundo.jpg'); /* Insira o caminho correto da imagem */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+
+/* Background for 'Missão, Visão e Valores' */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    background: url('../img/fundo.jpg') no-repeat center center/cover;
     position: relative;
-    padding: 50px 0;
-    color: #fff; /* Cor do texto */
+    background-size: cover;
 }
 
-.background-image-section::before {
-    content: "";
+.hero::before {
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Ajuste a opacidade conforme desejar */
+    background-color: rgba(255, 255, 255, 0.7); /* Efeito de transparência */
     z-index: 1;
 }
 
-.background-image-section .content {
+.mission-vision-values {
     position: relative;
-    z-index: 2;
+    z-index: 2; /* Garantir que o conteúdo da seção fique acima do efeito de fundo */
+    padding: 10px;
     text-align: center;
+}
+
+.mission-vision-values header h1 {
+    color: #017f63;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.section-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+}
+
+.mission, .vision, .values {
+    background-color: #ffffff; /* Fundo branco para garantir bom contraste */
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mission h2, .vision h2, .values h2 {
+    color: #017f63;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+.mission p, .vision p, .values p {
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.mission ol, .vision ol, .values ol {
+    padding-left: 20px;
+}
+
+.mission img {
+    max-width: 150px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.mission .image-text {
+    display: flex;
+    align-items: center;
+}
+
+.mission .text-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .mission-vision-values {
+        padding: 20px;
+    }
+
+    .section-content {
+        flex-direction: column;
+    }
+
+    .mission, .vision, .values {
+        padding: 15px;
+    }
+
+    .mission h2, .vision h2, .values h2 {
+        font-size: 1.5em;
+    }
 }

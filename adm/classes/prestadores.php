@@ -198,51 +198,51 @@ class Prestador {
 
         echo json_encode(['success' => false, 'message' => 'Credenciais inválidas']);
     }
-    public function atualizarPerfil($idPrestador, $nome, $sobrenome, $email, $telefone, $endereco, $especialidade, $nova_senha = null) {
-        // Se a senha foi fornecida, faça o hash da nova senha
-        if ($nova_senha) {
-            $nova_senha = password_hash($nova_senha, PASSWORD_BCRYPT);
-        }
-    
-        try {
-            // SQL para atualizar o perfil
-            $sql = $this->con->conectar()->prepare("UPDATE prestadores SET 
-                nome = :nome, 
-                sobrenome = :sobrenome, 
-                email = :email, 
-                telefone = :telefone, 
-                especialidade = :especialidade',
-                endereco = :endereco" . ($nova_senha ? ", senha = :senha" : "") . " 
-                WHERE idPrestador = :idPrestador");
-    
-            // Bind dos parâmetros
-            $sql->bindParam(':nome', $nome, PDO::PARAM_STR);
-            $sql->bindParam(':sobrenome', $sobrenome, PDO::PARAM_STR);
-            $sql->bindParam(':email', $email, PDO::PARAM_STR);
-            $sql->bindParam(':telefone', $telefone, PDO::PARAM_STR);
-            $sql->bindParam(':endereco', $endereco, PDO::PARAM_STR);
-            $sql->bindParam(':especialidade', $especialidade, PDO::PARAM_STR);
-    
-            // Se houver uma nova senha, faça o bind do parâmetro
-            if ($nova_senha) {
-                $sql->bindParam(':senha', $nova_senha, PDO::PARAM_STR);
-            }
-    
-            // Bind do ID do prestador
-            $sql->bindParam(':idPrestador', $idPrestador, PDO::PARAM_INT);
-    
-            // Execute a query
-            $sql->execute();
-    
-            // Se tudo ocorreu bem, retorne sucesso
-            echo json_encode(['success' => true, 'message' => 'Perfil atualizado com sucesso']);
-            return true;
-        } catch (PDOException $ex) {
-            // Se houver erro, capture e mostre o erro
-            echo json_encode(['error' => 'ERRO: ' . $ex->getMessage()]);
-            return false;
-        }
+
+public function atualizarPerfil($idPrestador, $nome, $sobrenome, $email, $telefone, $endereco, $nova_senha = null, $especialidade) {
+    // Se a senha foi fornecida, faça o hash da nova senha
+    if ($nova_senha) {
+        $nova_senha = password_hash($nova_senha, PASSWORD_BCRYPT);
     }
+
+    try {
+        // SQL para atualizar o perfil
+        $sql = $this->con->conectar()->prepare("UPDATE prestadores SET 
+            nome = :nome, 
+            sobrenome = :sobrenome, 
+            email = :email, 
+            telefone = :telefone,
+            especialidade = :especialidade,
+            endereco = :endereco" . ($nova_senha ? ", senha = :senha" : "") . " 
+            WHERE idPrestador = :idPrestador");
+
+        // Bind dos parâmetros
+        $sql->bindParam(':nome', $nome, PDO::PARAM_STR);
+        $sql->bindParam(':sobrenome', $sobrenome, PDO::PARAM_STR);
+        $sql->bindParam(':email', $email, PDO::PARAM_STR);
+        $sql->bindParam(':telefone', $telefone, PDO::PARAM_STR);
+        $sql->bindParam(':endereco', $endereco, PDO::PARAM_STR);
+        $sql->bindParam(':especialidade', $especialidade, PDO::PARAM_STR);
+
+        // Se houver uma nova senha, faça o bind do parâmetro
+        if ($nova_senha) {
+            $sql->bindParam(':senha', $nova_senha, PDO::PARAM_STR);
+        }
+
+        // Bind do ID do prestador
+        $sql->bindParam(':idPrestador', $idPrestador, PDO::PARAM_INT);
+
+        // Execute a query
+        $sql->execute();
+
+        // Se tudo ocorreu bem, retorne sucesso
+        return ['success' => true, 'message' => 'Perfil atualizado com sucesso'];
+    } catch (PDOException $ex) {
+        // Se houver erro, capture e retorne o erro
+        return ['error' => 'ERRO: ' . $ex->getMessage()];
+    }
+}
+
     
     
 }
